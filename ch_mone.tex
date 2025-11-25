@@ -1,0 +1,403 @@
+% Copyright (c) 2025 Carl Martin Ludvig Sinander.
+
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+% GNU General Public License for more details.
+
+% You should have received a copy of the GNU General Public License
+% along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+In this chapter, we continue our study of risk, specialising to the economically important case in which the alternatives are monetary. (Mathematically, what matters is that they are real numbers.)
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The monetary Pratt theorem}
+\label{mone:pratt_money}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\emph{This section is drawn pretty much verbatim from one of my papers \parencite{oo}.}
+
+If the alternatives are monetary prizes (i.e. $X \subseteq \R$ with strictly increasing utility $u : X \to \R$), then given some smoothness, `less risk-averse than' is characterised by a differential inequality:
+
+\begin{namedthm}[Pratt's theorem, part~2.]
+	%
+	\label{theorem:pratt_diff}
+	%
+	For a non-empty open convex subset $X$ of $\R$ and twice continuously differentiable functions $u,v : X \to \R$ satisfying $u' > 0 < v'$, $u$ is less risk-averse than $v$ if and only if $u''/u' \geq v''/v'$.
+	%
+\end{namedthm}
+
+The ratio $u''/u'$ is a measure of `how convex' the function $u$ is. More precisely, it is a measure of \emph{local} curvature: $u''(x)/u'(x)$ quantifies `how convex' $u$ is near $x \in X$. This measure has the advantage that it is invariant under positive affine transformations of $u$: if $u = av+b$ for some $a>0$ and $b \in \R$, then $u''/u' = v''/v'$. Economists often work with $-u''/u'$ rather than $u''/u'$, and call it the `Arrow--Pratt index (or coefficient)' of (absolute) risk-aversion, after \textcite{Arrow1965,Pratt1964}.
+
+\begin{proof}
+	%
+	By \hyperref[theorem:pratt]{part~1 of Pratt's theorem} (\cpageref{theorem:pratt}), it suffices to show that property~\ref{item:pratt:curv} holds if and only if $u''/u' \geq v''/v'$. Note that property~\ref{item:pratt:curv}\ref{item:pratt:curv:ordequiv} holds since $u$ and $v$ are strictly increasing (as $u' > 0 < v'$). Hence by \hyperref[theorem:pratt]{Pratt's theorem (part~1}, \cpageref{theorem:pratt}), what must be shown is that property~\ref{item:pratt:curv}\ref{item:pratt:curv:compress} holds if and only if $u''/u' \geq v''/v'$.
+
+	Suppose that property~\ref{item:pratt:curv}\ref{item:pratt:curv:compress} holds. Then for any $x<y<z<w$ in $X$,
+	%
+	\begin{align*}
+		\frac{u(w)-u(z)}{u(y)-u(x)}
+		&= \frac{u(w)-u(z)}{u(z)-u(y)}
+		\times \frac{u(z)-u(y)}{u(y)-u(x)}
+		\\
+		&\geq \frac{v(w)-v(z)}{v(z)-v(y)}
+		\times \frac{v(z)-v(y)}{v(y)-v(x)}
+		= \frac{v(w)-v(z)}{v(y)-v(x)} .
+	\end{align*}
+	%
+	Hence for each $x \in X$,
+	%
+	\begin{align*}
+		\frac{u''(x)}{u'(x)}
+		&= \left. \frac{\dd}{\dd y} \ln( u'(y) ) \right|_{y=x}
+		= \lim_{\eps \searrow 0} \frac{1}{\eps}
+		\ln\left( \frac{u'(x+\eps)}{u'(x)} \right)
+		\\
+		&= \lim_{\eps \searrow 0}
+		\frac{1}{\eps} \ln\left( \frac
+		{ \lim_{\delta \searrow 0} \frac{1}{\delta}
+		\left[ u(x+\eps+\delta) - u(x+\eps) \right] }
+		{ \lim_{\delta \searrow 0} \frac{1}{\delta}
+		\left[ u(x+\delta) - u(x) \right] }
+		\right)
+		\\
+		&= \lim_{\eps \searrow 0}
+		\lim_{\delta \searrow 0} 
+		\frac{1}{\eps} \ln\left( \frac
+		{ u(x+\eps+\delta) - u(x+\eps) }
+		{ u(x+\delta) - u(x) }
+		\right) 
+		\\
+		&\geq \lim_{\eps \searrow 0}
+		\lim_{\delta \searrow 0} 
+		\frac{1}{\eps} \ln\left( \frac
+		{ v(x+\eps+\delta) - v(x+\eps) }
+		{ v(x+\delta) - v(x) }
+		\right)
+		= \frac{v''(x)}{v'(x)} .
+	\end{align*}
+
+	Conversely, suppose that $u''/u' \geq v''/v'$. Since $u' > 0 < v'$, we have
+	%
+	\begin{equation*}
+		u'(w)
+		= u'\left( y \right)
+		\exp\left( \int_y^w \frac{u''}{u'} \right) 
+		\quad \text{and} \quad
+		v'(w)
+		= v'\left( y \right)
+		\exp\left( \int_y^w \frac{v''}{v'} \right) 
+	\end{equation*}
+	%
+	for any $y,w \in X$. Hence by the fundamental theorem of calculus, it holds for any $x<y<z$ in $X$ that
+	%
+	\begin{equation*}
+		\frac{ u(z) - u(y) }{ u(y) - u(x) }
+		= \frac
+		{ \int_y^z
+		\exp\left( \int_y^w \frac{u''}{u'} \right)
+		\dd w }
+		{ \int_x^y
+		\exp\left( - \int_w^y \frac{u''}{u'} \right)
+		\dd w } 
+		\geq \frac
+		{ \int_y^z
+		\exp\left( \int_y^w \frac{v''}{v'} \right)
+		\dd w }
+		{ \int_x^y
+		\exp\left( - \int_w^y \frac{v''}{v'} \right)
+		\dd w } 
+		= \frac{ v(z) - v(y) }{ v(y) - v(x) } .
+	\end{equation*}
+	%
+\end{proof}
+
+\begin{namedthm}[Pratt's theorem, part~3.]
+	%
+	\label{theorem:pratt_ce}
+	%
+	For a non-empty convex subset $X$ of $\R$ and continuous strictly increasing $u,v : X \to \R$, $u$ is less risk-averse than $v$ if and only if for every simple lottery $p \in \Delta^0(X)$, $u^{-1}\left( \int u \dd p \right) \geq v^{-1}\left( \int v \dd p \right)$.%
+		\footnote{The equivalence of this condition with property~\ref{item:pratt:trans} in \hyperref[theorem:pratt]{part~1 of Pratt's theorem} was shown already by \textcite[][Theorem~92]{HardyLittlewoodPolya1934}, though without the expected-utility interpretation.}
+	%
+\end{namedthm}
+
+\begin{exercise}[easy]
+	%
+	\label{exercise:pratt_ce_pf}
+	%
+	Prove it!
+	%
+\end{exercise}
+
+The quantity $u^{-1}\left( \int u \dd p \right)$ is called the \emph{certainty equivalent} of the simple lottery $p \in \Delta^0(X)$. By construction, the decision-maker is indifferent between any lottery $p$ and its certainty equivalent.
+
+\begin{exercise}
+	%
+	\label{exercise:background_risk}
+	%
+	Consider a decision-maker with expected-utility preferences over simple monetary lotteries $\Delta^0(\R)$, and let $v : \R \to \R$ denote her risk attitude. Suppose that the chosen lottery does not capture all risks borne by the decision-maker: her total take-home wealth is the sum of two random variables, namely the random draw from her chosen lottery and a second random variable capturing so-called \emph{background risk.} We assume that these two random variables are statistically independent. The decision-maker's valuation of any given lottery $p \in \Delta^0(\R)$ is then
+	%
+	\begin{equation*}
+		\int \left[ \int v(x+w) \overline{p}(\dd w) \right] p(\dd x) ,
+	\end{equation*}
+	%
+	where $\overline{p} \in \Delta^0(\R)$ is the distribution of the `background risk' random variable. That is, for any simple lotteries $p,q \in \Delta^0(\R)$, $p \succsim q$ if and only if 
+	%
+	\begin{equation*}
+		\int \left[ \int v(x+w) \overline{p}(\dd w) \right] p(\dd x)
+		\geq \int \left[ \int v(x+w) \overline{p}(\dd w) \right] q(\dd x) .
+	\end{equation*}
+
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item Show that $\succsim$ is expected-utility. What is its risk attitude $u$?
+
+		\item Find an example of simple lotteries $\overline{p},p,q \in \Delta^0(\R)$ and a risk attitude $v : \R \to \R$ such that $\int v \dd p < \int v \dd q$ but
+		%
+		\begin{equation*}
+			\int \left[ \int v(x+w) \overline{p}(\dd w) \right] p(\dd x)
+			> \int \left[ \int v(x+w) \overline{p}(\dd w) \right] q(\dd x) .
+		\end{equation*}
+		%
+		(That is, the introduction of background risk leads to a choice reversal.)
+
+		\item (hard) Find an example of simple lotteries $\overline{p},p \in \Delta^0(\R)$, an alternative $x \in \R$ and risk attitudes $v_1,v_2 : \R \to \R$ such that $v_1$ is strictly less risk-averse than $v_2$,%
+			\footnote{That is, $v_1$ is less risk averse than $v_2$, and $v_2$ is not less risk-averse than $v_1$.}
+		and yet there exist $p \in \Delta^0(\R)$ and $x \in \R$ such that
+		%
+		\begin{align*}
+			\int v_1(x+w) \overline{p}(\dd w)
+			&> \int \left[ \int v_1(y+w) \overline{p}(\dd w) \right] p(\dd y) 
+			\quad \text{and}
+			\\
+			\int v_2(x+w) \overline{p}(\dd w)
+			&< \int \left[ \int v_2(y+w) \overline{p}(\dd w) \right] p(\dd y) .
+		\end{align*}
+		%
+		(That is, after the introduction of background risk, the behaviour of the decision-maker with risk attitude $v_1$ is no longer less risk-averse than that of the decision-maker with risk attitude $v_2$.)%
+			\footnote{Solution: see \textcite{KihlstromRomerWilliams1981}.}
+	
+	\end{enumerate}
+	%
+\end{exercise}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{(Local) risk-neutrality}
+\label{mone:abs}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+When alternatives are monetary, there is a natural benchmark risk attitude: \emph{risk-neutrality,} meaning evaluating every lottery at its expectation.
+
+\begin{definition}
+	%
+	\label{definition:risk_neutr}
+	%
+	Let $X$ be a non-empty subset of $\R$. A preference $\succsim$ on $\Delta^0(X)$ is called \emph{risk-neutral} iff for every simple lottery $p \in \Delta^0(X)$, $p \sim \int x p(\dd x)$.
+	%
+\end{definition}
+
+In other words, a risk-neutral decision-maker is one who is always indifferent between receiving a lottery $p$ and receiving a sure payment equal to the expectation of $p$. Note that this definition makes sense (only) because $X \subseteq \R$; if $X$ were are arbitrary set (as in the previous chapter), then the expectation `$\int x p(\dd x)$' would be meaningless.
+
+\begin{exercise}[easy]
+	%
+	\label{exercise:risk_neutr_eu}
+	%
+	Show the following.
+
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item There is only one risk-neutral preference: that is, if $\succsim$ and $\succsim'$ are both risk-neutral, then $\mathord{\succsim} = \mathord{\succsim'}$.
+
+		\item The risk-neutral preference is expected-utility, with affine risk attitude.%
+			\footnote{Don't get confused. A preference $\succsim$ is expected-utility iff it admits a utility representation $U : \Delta^0(X) \to \R$ that is affine, and this is equivalent to the existence of a risk attitude, i.e. a $u : X \to \R$ such that $U(p) = \int u \dd p$ for every $p \in \Delta^0(X)$. Expected utility does not restrict the shape of $u$. But risk-neutrality does: for a risk-neutral preference $\succsim$, the risk attitude $u$ is itself an affine function.}
+	
+	\end{enumerate}
+	%
+\end{exercise}
+
+\begin{definition}
+	%
+	\label{definition:risk_av}
+	%
+	A preference $\succsim$ on $X \subseteq \R$ is called \emph{risk-averse (risk-seeking)} iff it is more (less) risk-averse than the risk-neutral preference.
+	%
+\end{definition}
+
+Note that a risk-averse preference need not be expected-utility. For expected-utility preferences, \hyperref[theorem:pratt]{Pratt's theorem} delivers a characterisation of risk-aversion (and of risk-seeking, though we omit this):
+
+\begin{corollary}
+	%
+	\label{corollary:pratt_abs}
+	%
+	For a non-empty convex subset $X$ of $\R$ and a function $u : X \to \R$, $u$ is risk-averse (i.e. $\int u \dd p \leq u\left( \int x p(\dd x) \right)$ for every $p \in \Delta^0(X)$) if and only if $u$ is concave and strictly increasing. If in addition $X$ is open and $u$ is twice continuously differentiable with $u'>0$, then $u$ is risk-averse if and only if $u''/u' \leq 0$.
+	%
+\end{corollary}
+
+\begin{exercise}
+	%
+	\label{exercise:pratt_abs_pf}
+	%
+	Prove it!
+	%
+\end{exercise}
+
+\begin{exercise}
+	%
+	\label{exercise:time}
+	%
+	Consider a decision-maker with a preference $\succsim$ over $\Delta^0(\R_+)$, where alternatives $x \in \R_+$ are interpreted as \emph{dates} rather than monetary amounts. In other words, each $p \in \Delta^0(X)$ is a probability distribution describing \emph{when} something will happen. Assume that $\succsim$ has the standard form assumed e.g. in macroeconomics: there is an $r>0$ such that for all simple lotteries $p,q \in \Delta^0(\R_+)$, $p \succsim q$ if and only if $\int e^{-rt} p(\dd t) \geq \int e^{-rt} q(\dd t)$. The interpretation is that the decision-maker earns a positive payoff (normalised to one) when the event takes place, and that these payoffs are discounted at rate $r$.
+
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item Is $\succsim$ expected-utility?
+
+		\item Is $\succsim$ risk-averse? Risk-neutral? Risk-seeking?
+	
+	\end{enumerate}
+	%
+\end{exercise}
+
+\begin{namedthm}[\Cref*{exercise:eu_choice} {\normalfont (continued from \cpageref{exercise:eu_choice,exercise:eu_choice_axioms})}.]
+	%
+	\label{exercise:eu_choice_riskseeking}
+	%
+	Let $X$ be a non-empty subset of $\R$, and fix a non-empty set $A$ and a collection $(u_a)_{a \in A}$ of maps $X \to \R$. Let $\succsim$ be the preference represented by $U^{(A,(u_a)_{a \in A})}$.
+
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item Remind yourself from earlier in this exercise (\cpageref{exercise:eu_choice}) that $\succsim$ is not generally expected-utility.
+
+		\item Show that if for each $a \in A$, $u_a$ is convex, then $\succsim$ is risk-seeking.
+
+		\item Show by example that it is possible for $u_a$ to be concave for each $a \in A$ without $\succsim$ being risk-averse.
+	
+	\end{enumerate}
+	%
+\end{namedthm}
+
+Given a non-empty convex subset $X$ of $\R$, a simple lottery $p \in \Delta^0(X)$, an alternative $x \in X$ and a scalar $\lambda \in [0,1]$, let $p^\lambda x \in \Delta^0(X)$ denote the distribution of the random variable $\lambda \boldsymbol{X} + (1-\lambda) x$ when the random variable $\boldsymbol{X}$ is drawn from $p$, i.e.
+%
+\begin{multline*}
+	\left( p^\lambda x \right)(y)
+	= \PP\left( \lambda \boldsymbol{X} + (1-\lambda) x = y \right)
+	\\
+	= \PP\left( \boldsymbol{X} = \frac{ y - (1-\lambda) x }{ \lambda } \right)
+	= p\left( \frac{ y - (1-\lambda) x }{ \lambda } \right) 
+	\quad \text{for each $y \in X$.}
+\end{multline*}
+%
+It's a mouthful, but all it says is that $p^\lambda x$ is the lottery which delivers $\lambda$ exposure to the lottery $p$ and $1-\lambda$ exposure to the sure thing $x$.
+
+\begin{definition}
+	%
+	\label{definition:local_rn}
+	%
+	Fix a non-empty convex subset $X$ of $\R$. A preference $\succsim$ on $\Delta^0(X)$ is \emph{locally risk-neutral} iff for any simple lottery $p \in \Delta^0(X)$ and alternative $x \in X$ such that $\int y p(\dd y) > x$, it holds that $p^\lambda x \succ x$ for all sufficiently small $\lambda \in (0,1]$.
+	%
+\end{definition}
+
+In words, a locally risk-neutral decision-maker is one who evaluates any risk $p \in \Delta^0(X)$ according to its expected value $\int y p(\dd y)$, so long as her exposure $\lambda \in (0,1]$ to this risk is small enough. In particular, whenever the expected value of $p$ exceeds $x$, she strictly prefers to move away from pure exposure to $x$ toward at least a little exposure to $p$.
+
+The following result says, basically, that an expected-utility preference whose risk attitude is strictly increasing (she likes money) and differentiable must be locally risk-neutral. (I say `basically' because we strengthen `strictly increasing' to `strictly positive derivative'.)
+
+\begin{proposition}[\cite{Arrow1965}]
+	%
+	\label{proposition:local_rn}
+	%
+	Let $X$ be a non-empty open convex subset of $\R$, and let $\succsim$ be a preference on $\Delta^0(X)$. If $\succsim$ is expected-utility with risk attitude that is differentiable with strictly positive derivative, then $\succsim$ is locally risk-neutral.
+	%
+\end{proposition}
+
+The idea behind the proof is simply to recollect that a differentiable function is (by definition) precisely one which is everywhere `locally affine': precisely, $u : X \to \R$ is differentiable at $x \in X$ if and only if there exists an affine function $y \mapsto ay+b$ such that $u(y) - (ay+b) = o(y-x)$ for all $y \in X$.%
+	\footnote{`Little o' notation works as follows: $f(\eps)=o(1)$ if and only if $f(\eps) \to 0$ as $\eps \to 0$, and $g(\eps)=o(h(\eps))$ if and only if $g(\eps)/h(\eps) = o(1)$.}
+In particular, $a=u'(x)$ and $b=u(x)-u'(x)x$.
+
+\begin{proof}
+	%
+	Let $X \subseteq \R$ be non-empty, open and convex, and let $\succsim$ be an expected-utility preference on $\Delta^0(X)$ with risk attitude $u : X \to \R$ which is continuously differentiable with $u'>0$. Fix a simple lottery $p \in \Delta^0(X)$ and an alternative $x \in X$ such that $\int y p(\dd y) > x$, and define $V : [0,1] \to \R$ by
+	%
+	\begin{equation*}
+		V(\lambda)
+		\coloneqq \int u \dd \left( p^\lambda x \right)
+		= \int u( \lambda y + (1-\lambda) x ) p(\dd y) ;
+	\end{equation*}
+	%
+	we will show that
+	%
+	\begin{equation*}
+		\lim_{\lambda \searrow 0} \frac{V(\lambda)-V(0)}{\lambda} 
+	\end{equation*}
+	%
+	(exists and) is strictly positive. This suffices since it implies that $\int u \dd \bigl( p^\lambda x \bigr) = V(\lambda) > V(0) = u(x)$ for all sufficiently small $\lambda>0$.
+
+	To that end, note that for all $y \in X \setminus \{x\}$ and $\lambda \in (0,1]$,
+	%
+	\begin{equation*}
+		\frac{ u( \lambda y + (1-\lambda) x ) - u(x) }{\lambda}
+		= \frac{ u( \lambda y + (1-\lambda) x ) - u(x) }{ [ \lambda y + (1-\lambda) x ] - x } (y-x) .
+	\end{equation*}
+	%
+	Since $u$ is differentiable, it follows that
+	%
+	\begin{equation*}
+		\lim_{\lambda \searrow 0} \frac{ u( \lambda y + (1-\lambda) x ) - u(x) }{\lambda}
+		= u'(x) (y-x) 
+		\quad \text{for every $y \in X$.}
+	\end{equation*}
+	%
+	Hence
+	%
+	\begin{multline*}
+		\lim_{\lambda \searrow 0} \frac{V(\lambda)-V(0)}{\lambda}
+		= \lim_{\lambda \searrow 0} \int \frac{ u( \lambda y + (1-\lambda) x ) - u(x) }{\lambda} p( \dd y )
+		\\
+		= \int u'(x) (y-x) p(\dd y)
+		= u'(x) \left( \int y p(\dd y) - x \right)
+		> 0 ,
+	\end{multline*}
+	%
+	where the inequality holds since $u'>0$ and $\int y p(\dd y) > x$.
+	%
+\end{proof}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[Notions of `better' \emph{(not yet written)}]{Notions of `better'}
+\label{mone:stoch_high}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\emph{See sections~4.1 and 4.2 in \textcite{Sarver2023}, and chapter~3 in \textcite{Liang2023}. For (encyclopædic) further reading, see chapter~1 (especially sections~1.A and 1.C) in \textcite{ShakedShanthikumar2007}. First-order stochastic dominance and its characterisations were introduced to economics by \textcite{HadarRussell1969,HanochLevy1969}, but are presumably older. Similarly for the likelihood ratio order, which I believe was introduced into economics by \textcite{Milgrom1981}.}
+
+% {\color{blue}FOSD (equiv of utility-based, pointwise, embedding; see Sarver 4.2); MLRP (equiv of def'n, conditional FOSD on intervals)}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[Notions of `riskier' \emph{(not yet written)}]{Notions of `riskier'}
+\label{mone:stoch_risk}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\emph{See section~4.3 in \textcite{Sarver2023}. For (encyclopædic) further reading, see chapter~3 (especially section~3.A) in \textcite{ShakedShanthikumar2007}. The convex order and some characterisations of it were introduced to economics by \textcite{RotschildStiglitz1970}, but can be traced back at least to \textcite{HardyLittlewoodPolya1934}.}
+
+% {\color{blue}weak notion from before: less dispersed iff constant; convex order (equiv of convex order, pointwise integrals, embedding; see Sarver 4.3); Rotschild--Stiglitz 1976 / Ross 1981 / Diamond--Stiglitz; maybe Aumann--Serrano, Hart}

@@ -1,0 +1,402 @@
+% Copyright (c) 2025 Carl Martin Ludvig Sinander.
+
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+% GNU General Public License for more details.
+
+% You should have received a copy of the GNU General Public License
+% along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this chapter, we study quantifiable or `objective' uncertainty: \emph{risk.} To be more precise, we study the case in which each uncertain prospect is associated with a lottery, meaning a probability distribution over alternatives, and these probabilities are known both to the decision-maker and to us (the economic modellers). Under these assumptions (and given that the decision-maker cares only about which alternative arises, by definition `alternatives'), we can identify each prospect with its associated lottery, reducing choice among uncertain prospects to choice among (or preferences over) lotteries.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Preferences over lotteries}
+\label{risk:lotteries}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\emph{This section is drawn pretty much verbatim from one of my papers \parencite{oo}.}
+
+There is a non-empty set $X$ of alternatives, with generic elements $x,y,z,w \in X$. We consider simple lotteries, meaning (probability mass functions of) finitely supported probability distributions over $X$. Formally, a \emph{simple lottery} is a function $p : X \to [0,1]$ such that $\supp(p) \coloneqq \{ x \in X : p(x) > 0 \}$ is finite and $\sum_{x \in \supp(p)} p(x) = 1$. We write $\Delta^0(X)$ for the set of all simple lotteries, with generic elements $p,q,r \in \Delta^0(X)$. By a standard abuse, the lottery in $\Delta^0(X)$ that is degenerate at $x \in X$ is denoted simply `$x$'.
+
+A \emph{preference} is a complete and transitive binary relation on $\Delta^0(X)$. A decision-maker's preference is, at least in principle, an empirical object: it can be recovered from (sufficiently rich) choice data.
+
+Comparative risk-aversion is defined as follows.
+
+\begin{definition}[\cite{Yaari1969}]
+	%
+	\label{definition:lra}
+	%
+	For any two preferences $\succsim$ and $\succsim'$, $\succsim$ is called \emph{less risk-averse than} $\succsim'$ if and only if for each alternative $x \in X$ and each simple lottery $p \in \Delta^0(X)$, $x \succsim \mathrel{(\succ)} p$ implies $x \succsim' \mathrel{(\succ')} p$.
+	%
+\end{definition}
+
+`Expected-utility' preferences are those which can be viewed as arising from maximisation of the expectation (under the lottery at hand) of some function $u : X \to \R$.
+
+\begin{definition}[\cite{Bernoulli1738}]
+	%
+	\label{definition:eu}
+	%
+	A preference $\succsim$ is called \emph{expected-utility} if and only if there exists a function $u : X \to \R$ such that for any simple lotteries $p,q \in \Delta^0(X)$, $p \succsim q$ if and only if $\int u \dd p \geq \int u \dd q$. (Here `$\int u \dd p$' is shorthand for $\sum_{x \in \supp(p)} p(x) u(x)$.)
+	%
+\end{definition}
+
+The function $u : X \to \R$ is called a \emph{risk attitude} (or `vNM utility function', or `Bernoulli utility function'), and is said to \emph{represent} $\succsim$.
+
+Non-expected-utility preferences arise naturally in many contexts. Psychological reasons for this are often emphasised, e.g. the \textcite{Allais1953} thought experiment. But squarely economic forces can also easily produce non-expected-utility behaviours. There are many examples of this; perhaps the most economically fundamental is the following.
+
+\begin{exercise}
+	%
+	\label{exercise:eu_choice}
+	%
+	Consider a decision-maker who must not only choose a lottery, but must also choose an action. Imagine, for example, a manager who chooses among projects (risky prospects, modelled as lotteries) and, after choosing her project, chooses how to operate the project, e.g. what staff to employ on her team and how to organise them. The operational options are modelled as a non-empty set $A$ of actions. Suppose that for each given action $a \in A$, the decision-maker has expected-utility preferences: she evaluates each simple lottery $p \in \Delta^0(X)$ at $\int u_a \dd p$, for some risk attitude $u_a : X \to \R$. Then taking into account optimal action choice, she evaluates each lottery $p \in \Delta^0(X)$ at $U^{(A,(u_a)_{a \in A})}(p) \coloneqq \max_{a \in A} \int u_a \dd p$. (That is: her preference $\succsim$ is such that for any simple lotteries $p,q \in \Delta^0(X)$, $p \succsim q$ holds if and only if $U^{(A,(u_a)_{a \in A})}(p) \geq U^{(A,(u_a)_{a \in A})}(q)$.)
+
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item Remind yourself of \hyperref[exercise:mix_lottsimple_affine]{\Cref*{exercise:mix_lottsimple}} (\cref{ch_mix}, \cpageref{exercise:mix_lottsimple_affine}), which a preference is expected-utility if and only if it admits a representation $U : \Delta^0(X) \to \R$ that is affine.
+
+		\item Show that $U^{(A,(u_a)_{a \in A})}$ is convex.%
+			\footnote{\label{footnote:convex_max}There is a converse: any continuous convex function $\Delta^0(X) \to \R$ may be approximated arbitrarily well by $U^{(A,(u_a)_{a \in A})}$ for some non-empty set $A$ and family $(u_a)_{a \in A}$ of functions $X \to \R$. See the proof of \hyperref[theorem:blackwell]{Blackwell's theorem} in \cref{info:blackwell} below.}
+
+		\item Under what conditions is $U^{(A,(u_a)_{a \in A})}$ affine?
+	
+	\end{enumerate}
+	%
+\end{exercise}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The von Neumann--Morgenstern theorem}
+\label{risk:vnm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+For any simple lotteries $p,q \in \Delta^0(X)$ and a constant $\alpha \in [0,1]$, we write $\alpha p + (1-\alpha) q$ for the simple lottery defined by
+%
+\begin{equation*}
+	(\alpha p + (1-\alpha) q)(x) \coloneqq \alpha p(x) + (1-\alpha) q(x)
+	\quad \text{for each $x \in X$.}
+\end{equation*}
+%
+This can, but needn't, be interpreted as the compound lottery obtained by first flipping an $\alpha$-biased coin, then drawing an alternative from $p$ in case of heads and from $q$ in case of tails.
+
+\begin{definition}
+	%
+	\label{definition:vnm_indep}
+	%
+	Given a non-empty set $X$, a preference $\succsim$ on $\Delta^0(X)$ satisfies \emph{independence} iff for all $p,r,q \in \Delta^0(X)$ and $\alpha \in [0,1]$, $p \sim q$ implies $\alpha p + (1-\alpha) r \sim \alpha q + (1-\alpha) r$.
+	%
+\end{definition}
+
+\begin{definition}
+	%
+	\label{definition:vnm_continuity}
+	%
+	Given a non-empty set $X$, a preference $\succsim$ on $\Delta^0(X)$ satisfies \emph{mixture continuity} iff for all $p,q,r \in \Delta^0(X)$ such that $p \succsim q \succsim r$, the sets $\{ \alpha \in [0,1] : \alpha p + (1-\alpha) r \succsim q \}$ and $\{ \alpha \in [0,1] : \alpha p + (1-\alpha) r \precsim q \}$ are closed in $[0,1]$.
+	%
+\end{definition}
+
+These are exactly the independence and mixture continuity concepts from the general mixture-space context of \cref{ch_mix}, specialised to the particular mixture space $\Delta^0(X)$ equipped with the operation $(p,\alpha,q) \mapsto \alpha p + (1-\alpha) q$.
+
+The following result characterises the behavioural content and identification properties of the expected-utility model.
+
+\begin{namedthm}[von Neumann--Morgenstern theorem {\normalfont\parencite{VonneumannMorgenstern1947}}.]
+	%
+	\label{theorem:vNM}
+	%
+	A preference is expected-utility if and only if it satisfies independence and mixture continuity. Furthermore, if two risk attitudes $u,v : X \to \R$ represent the same expected-utility preference, then there exist $a>0$ and $b \in \R$ such that $u = a v + b$.
+	%
+\end{namedthm}
+
+\begin{exercise}
+	%
+	\label{exercise:vNM_proof}
+	%
+	Prove it! (Use \cref{ch_mix}.)
+	%
+\end{exercise}
+
+As in the \hyperref[theorem:mix]{mixture-space theorem} (\cpageref{theorem:mix}, \cref{ch_mix}), there are many variations on the theorem in which either independence or mixture continuity is replaced by another (qualitatively similar) property.
+
+\begin{exercise}
+	%
+	\label{exercise:vNM_indp}
+	%
+	Give examples of the following.
+
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item A preference that satisfies mixture continuity but not independence.
+
+		\item A preference that satisfies independence but not mixture continuity.
+	
+	\end{enumerate}
+	%
+\end{exercise}
+
+\begin{namedthm}[\Cref*{exercise:eu_choice} {\normalfont (continued)}.]
+	%
+	\label{exercise:eu_choice_axioms}
+	%
+	Read \textcite{CerreiavioglioDillenbergerOrtoleva2015}. Characterise the behavioural content of the expected-utility-with-choice model: that is, identify a set of properties such that a preference $\succsim$ satisfies these properties if and only if there exists a non-empty set $A$ and a collection $(u_a)_{a \in A}$ of maps $X \to \R$ such that $U^{(A,(u_a)_{a \in A})}$ represents $\succsim$ (that is, for any simple lotteries $p,q \in \Delta^0(X)$, $p \succsim q$ holds if and only if $U^{(A,(u_a)_{a \in A})}(p) \geq U^{(A,(u_a)_{a \in A})}(q)$).
+	%
+\end{namedthm}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Pratt's theorem}
+\label{risk:pratt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\emph{This section is drawn pretty much verbatim from one of my papers \parencite{oo}.}
+
+The following theorem characterises `less risk-averse than' (defined on \cpageref{definition:lra} above) for expected-utility preferences:
+
+\begin{namedthm}[Pratt's theorem, part~1 {\normalfont\parencite{Pratt1964}}.]
+	%
+	\label{theorem:pratt}
+	%
+	For a non-empty set $X$ and functions $u,v : X \to \R$, the following are equivalent:
+
+	\begin{enumerate}[label=(\Alph*)]
+	
+		\item \label{item:pratt:lra} $u$ is less risk-averse than $v$, i.e. for any alternative $x \in X$ and simple lottery $p \in \Delta^0(X)$, $u(x) \geq \mathrel{(>)} \int u \dd p$ implies $v(x) \geq \mathrel{(>)} \int v \dd p$.
+
+		\item \label{item:pratt:trans} There exists an increasing convex function $\phi : \co(v(X)) \to \R$ that is strictly increasing on $v(X)$ and satisfies $u = \phi \circ v$.
+
+		\item \label{item:pratt:curv} The following two properties hold:
+		%
+		\begin{enumerate}[label=(\Roman*),topsep=0em]
+		
+			\item \label{item:pratt:curv:ordequiv} For any $x,y \in X$, $u(x) \geq \mathrel{(>)} u(y)$ implies $v(x) \geq \mathrel{(>)} v(y)$.
+
+			\item \label{item:pratt:curv:compress} For any alternatives $x,y,z \in X$, if $u(x) < u(y) < u(z)$, then
+			%
+			\begin{equation*}
+				\frac{u(z)-u(y)}{u(y)-u(x)}
+				\geq \frac{v(z)-v(y)}{v(y)-v(x)} .
+			\end{equation*}
+		
+		\end{enumerate}
+	
+	\end{enumerate}
+	%
+\end{namedthm}
+
+Property~\ref{item:pratt:trans} asserts strict monotonicity of $\phi$ only on $v(X)$. It need not be possible to choose $\phi$ to be strictly increasing on its full domain $\co(v(X))$, nor need it be possible to choose $\phi$ to be continuous. To see why, consider the following two examples.
+
+\begin{example}
+	%
+	\label{example:pratt_disc}
+	%
+	Consider $X \coloneqq [0,1]$ and $u,v : X \to \R$, where $v$ is the identity, $u=v$ on $[0,1)$, and $u(1)=2$. Then $u$ is less risk-averse than $v$, but the only $\phi : \co(v(X)) \to \R$ that satisfies $u = \phi \circ v$ is discontinuous at $\max v(X) = 1$.
+	%
+\end{example}
+
+\begin{example}
+	%
+	\label{example:pratt_str}
+	%
+	Consider $X \coloneqq [1,2]$ and $u,v : X \to \R$, where $u$ is the identity, $v(1)=0$, and $v=u$ on $(1,2]$. Then $u$ is less risk-averse than $v$, but the only increasing $\phi : \co(v(X)) \to \R$ that satisfies $u = \phi \circ v$ is constant on $[0,1]$.
+	%
+\end{example}
+
+\Cref{example:pratt_str} shows that the strict monotonicity of $\phi$ on $v(X)$ in property~\ref{item:pratt:trans} in \hyperref[theorem:pratt]{Pratt's theorem} cannot be strengthened to strict monotonicity on $\co(v(X))$. It can, however, be strengthened to strict monotonicity on a large subset of $\co(v(X))$, as the next result shows.
+
+\begin{definition}
+	%
+	\label{definition:cotwo}
+	%
+	For any set $A \subseteq \R$, define $\cotwo(A) \subseteq A$ and $\inftwo A \in \cl(A)$ by
+	%
+	\begin{align*}
+		&\begin{aligned}
+			\cotwo(A) &\coloneqq \co( A \setminus \{\inf A\} ) \cup \{\inf A\}
+			\\
+			\inftwo A &\coloneqq \inf ( A \setminus \{\inf A\} )
+		\end{aligned}
+		&&\Biggr\} \quad \text{if $\inf A < \inf( A \setminus \{\inf A\} ) \notin A$}
+		\\
+		&\begin{aligned}
+			\cotwo(A) &\coloneqq \co(A)
+			\\
+			\inftwo A &\coloneqq \inf A
+		\end{aligned}
+		&&\Biggr\} \quad \text{otherwise.}
+	\end{align*}
+	%
+\end{definition}
+
+Evidently $A \subseteq \cotwo(A) \subseteq \co(A)$ and $\co(A) \setminus \cotwo(A) = (\inf A,\inftwo A]$. If $A$ is convex, then $A = \cotwo(A) = \co(A)$.
+
+\begin{lemma}[\cite{oo}]
+	%
+	\label{lemma:greatest_phi}
+	%
+	Fix a non-empty set $X$ and functions $u,v : X \to \R$, and let $\Phi$ be the set of all increasing convex functions $\phi : \co(v(X)) \to \R$ that are strictly increasing on $v(X)$ and satisfy $u = \phi \circ v$. If $\Phi$ is not empty, then it has a pointwise greatest element, which is strictly increasing on $\cotwo(v(X))$ and affine on each maximal interval of $\co(v(X)) \setminus v(X)$.
+	%
+\end{lemma}
+
+\begin{proof}
+	%
+	Assume that $\Phi$ is non-empty. Note that there is exactly one function $\phi_0 : v(X) \to \R$ such that $u = \phi_0 \circ v$, and that this $\phi_0$ is strictly increasing. Define $\phi : \co(v(X)) \to \R$ by $\phi(k) \coloneqq \sup_{\psi \in \Phi} \psi(k)$ for each $k \in \co(v(X))$. By inspection, $\phi$ is increasing and convex, and is strictly increasing on $v(X)$ since $\phi=\phi_0$ on $v(X)$; thus $\phi \in \Phi$. Obviously $\phi \geq \psi$ for every $\psi \in \Phi$. Since each $\psi \in \Phi$ is convex and satisfies $\psi = \phi_0$ on $v(X)$, $\phi$ is affine on each maximal interval of $\co(v(X)) \setminus v(X)$.
+
+	To show that $\phi$ is strictly increasing on $\cotwo(v(X))$, fix any $k'<\ell'$ in $\cotwo(v(X))$; we must show that $\phi(k') < \phi(\ell')$. It suffices to find $k<\ell$ in $\co(v(X))$ such that $k \leq k'$, $\ell \leq \ell'$, and $\phi(k)<\phi(\ell)$, since then
+	%
+	\begin{equation*}
+		\phi(\ell') - \phi(k')
+		\geq (\ell'-k') \frac{\phi(\ell) - \phi(k)}{\ell-k}
+		> 0 ,
+	\end{equation*}
+	%
+	where the weak inequality holds since $\phi$ is convex. Write $m_1 \coloneqq \inf v(X)$ and $m_2 \coloneqq \inf( v(X) \setminus \{m_1\} )$, and note that $k' \geq m_1 < \ell' \geq m_2$.
+
+	We consider four cases. In the first three, we find $k<\ell$ in $v(X)$ such that $k \leq k'$ and $\ell \leq \ell'$; then $\phi(k)<\phi(\ell)$ since $\phi$ is strictly increasing on $v(X)$. In the final case, we directly choose $k<\ell$ in $\co(v(X))$ to satisfy $\phi(k)<\phi(\ell)$.
+
+	\smallskip
+
+	\noindent
+	\emph{Case~1: $m_1 \notin v(X)$.} Here $k' > m_1$ and $\ell' > m_1 = m_2$, so choosing $k<\ell$ in $v(X)$ sufficiently close to $m_1$ ensures that $k \leq k'$ and $\ell \leq \ell'$.
+
+	\smallskip
+
+	\noindent
+	\emph{Case~2: $v(X) \ni m_1 = m_2$.} 
+	Here $m_1 \in \cl( v(X) \setminus \{m_1\} )$, so choosing $k \coloneqq m_1$ and $\ell \in v(X) \setminus \{m_1\}$ sufficiently close to $m_1$ ensures that $k \leq k'$ and $\ell \leq \ell'$.
+
+	\smallskip
+
+	\noindent
+	\emph{Case~3: $m_1 < m_2 \notin v(X)$.}
+	Here $\varnothing \neq \co(v(X)) \setminus \cotwo(v(X)) = (m_1,m_2]$, whence $m_1 \in v(X)$ and $\ell'>m_2$, so choosing $k \coloneqq m_1$ and $\ell \in v(X) \setminus [m_1,m_2]$ sufficiently close to $m_2$ ensures that $k \leq k'$ and $\ell \leq \ell'$.
+
+	\smallskip
+
+	\noindent
+	\emph{Case~4: $m_1 < m_2 \in v(X)$.}
+	Here $m_1 \in v(X)$, so $\phi(m_1)<\phi(m_2)$, which since $\phi$ is affine on $[m_1,m_2]$ implies that $\phi$ is strictly increasing on $[m_1,m_2]$, so that $k \coloneqq m_1$ and $\ell \coloneqq \min\{\ell',m_2\}$ satisfy $\phi(k)<\phi(\ell)$.
+	%
+\end{proof}
+
+
+\begin{proof}[Proof of {\hyperref[theorem:pratt]{Pratt's theorem (part~1)}}]
+	%
+	We shall prove that \ref{item:pratt:trans} implies \ref{item:pratt:lra} implies \ref{item:pratt:curv} implies \ref{item:pratt:trans}.
+
+	To prove that \ref{item:pratt:trans} implies \ref{item:pratt:lra}, suppose there exists an increasing convex function $\psi : \co(v(X)) \to \R$ that is strictly increasing on $v(X)$ and satisfies $u = \psi \circ v$. Then by \Cref{lemma:greatest_phi}, there exists an increasing convex function $\phi : \co(v(X)) \to \R$ that is strictly increasing on $\cotwo(v(X))$ and satisfies $u = \phi \circ v$. Fix an alternative $x \in X$ and a simple lottery $p \in \Delta^0(X)$, and suppose that $\int v \dd p \geq \mathrel{(>)} v(x)$; we must show that $\int u \dd p \geq \mathrel{(>)} u(x)$. If $\int v \dd p \in \cotwo(v(X))$, then
+	%
+	\begin{equation*}
+		\int u \dd p
+		= \int (\phi \circ v) \dd p
+		\geq \phi\left( \int v \dd p \right)
+		\geq \mathrel{(>)} \phi(v(x))
+		= u(x) ,
+	\end{equation*}
+	%
+	where the first inequality holds (by Jensen's inequality) since $\phi$ is convex, and the second holds since $\phi$ is strictly increasing on $\cotwo(v(X)) \supseteq v(X) \ni v(x)$. If instead $\int v \dd p \notin \cotwo(v(X))$, then
+	%
+	\begin{equation*}
+		\int v \dd p
+		\in \co(v(X)) \setminus \cotwo(v(X))
+		= \bigl( \inf v(X), \inf\bigl( v(X) \setminus \{\inf v(X)\} \bigr) \bigr] ,
+	\end{equation*}
+	%
+	so writing $Y \coloneqq \{ y \in X : v(y) = \inf v(X) \}$, we see that $\int v \dd p \geq \mathrel{(>)} v(x)$ implies $x \in Y$ (and $p(X \setminus Y)>0$), whence
+	%
+	\begin{align*}
+		\int u \dd p
+		={}& p(Y) \phi(v(x)) 
+		+ \int_{X \setminus Y} (\phi \circ v) \dd p
+		\\
+		\geq \mathrel{(>)}{}& p(Y) \phi(v(x))
+		+ p(X \setminus Y) \phi(v(x))
+		= u(x) 
+	\end{align*}
+	%
+	since $\phi$ is strictly increasing on $v(X)$.
+
+	To prove that \ref{item:pratt:lra} implies \ref{item:pratt:curv}, suppose that $u$ is less risk-averse than $v$. It follows immediately (by considering degenerate lotteries $p \in \Delta^0(X)$) that property~\ref{item:pratt:curv}\ref{item:pratt:curv:ordequiv} holds.
+	To show that property~\ref{item:pratt:curv}\ref{item:pratt:curv:compress} holds, suppose toward a contradiction that it does not: there are $x,y,z \in X$ such that $u(x) < u(y) < u(z)$ and
+	%
+	\begin{equation*}
+		\frac{u(z)-u(y)}{u(y)-u(x)}
+		< \frac{v(z)-v(y)}{v(y)-v(x)} .
+	\end{equation*}
+	%
+	By replacing $u$ with $a u + b$ for some $a > 0$ and $b \in \R$ if necessary, we may assume without loss of generality that $u(x) = v(x)$ and $u(y) = v(y)$, so that $u(z) < v(z)$.
+	Define a simple lottery $p \in \Delta^0(X)$ by $p(x) \coloneqq [ u(z) - u(y) ] / [ u(z) - u(x) ]$, $p(z) \coloneqq 1-p(x)$, and $p(w) \coloneqq 0$ for every $w \in X \setminus \{x,z\}$.
+	Then $u(y) = \int u \dd p$ and
+	%
+	\begin{equation*}
+		v(y)
+		= u(y)
+		= p(x) u(x) + p(z) u(z)
+		< p(x) v(x) + p(z) v(z)
+		= \int v \dd p ,
+	\end{equation*}
+	%
+	a contradiction with the fact that $u$ is less risk-averse than $v$.
+
+	To prove that \ref{item:pratt:curv} implies \ref{item:pratt:trans}, suppose that $u$ satisfies properties~\ref{item:pratt:curv}\ref{item:pratt:curv:ordequiv} and \ref{item:pratt:curv}\ref{item:pratt:curv:compress}; we must identify an increasing convex function $\phi : \co(v(X)) \to \R$ that is strictly increasing on $v(X)$ and satisfies $u = \phi \circ v$. By property~\ref{item:pratt:curv}\ref{item:pratt:curv:ordequiv}, there exists a strictly increasing $\psi : v(X) \to \R$ such that $u = \psi \circ v$.
+	Define $\overline{\psi} : \cl(v(X)) \cap \co(v(X)) \to \R$ by
+	%
+	\begin{equation*}
+		\overline{\psi}(k)
+		\coloneqq
+		\begin{cases}
+			\psi(k) & \text{if $k \in v(X)$} \\
+			\lim_{\ell \to k} \psi(\ell) & \text{if $k \in [ \cl(v(X)) \cap \co(v(X)) ] \setminus v(X)$,} 
+		\end{cases}
+	\end{equation*}
+	%
+	where the limit exists (in $\R$) by the monotonicity of $\psi$ and property~\ref{item:pratt:curv}\ref{item:pratt:curv:compress}.%
+		\footnote{Fix any $k \in [ \cl(v(X)) \cap \co(v(X)) ] \setminus v(X)$. Since $k \in \cl(v(X))$, there is a monotone sequence in $v(X)$ that converges to $k$, which since $\psi$ is increasing implies that either the left-hand limit $\psi(k-)$ or the right-hand limit $\psi(k+)$ must exist in $\R \cup \{-\infty,+\infty\}$. Since $k \in \co(v(X))$, there are $m_0,m_1 \in v(X)$ such that $m_0 \leq k \leq m_1$. Since $\psi$ is increasing, it is bounded on $[m_0,m_1] \intersect v(X)$. Hence $\psi(k-)$ is finite if it exists, and likewise for $\psi(k+)$.
+
+		It remains only to show that if $\psi(k-)$ and $\psi(k+)$ both exist, then they are equal. We have $\psi(k-) \leq \psi(k+)$ since $\psi$ is increasing. To show that $\psi(k-) \geq \psi(k+)$, suppose toward a contradiction that $\psi(k-) < \psi(k+)$, and fix an $m \in v(X)$ such that $k<m$. Then we can choose $\ell,k' \in v(X)$ arbitrarily close to $k$ and satisfying $\ell<k<k'<m$, and by doing so we may make $[ \psi(k') - \psi(\ell) ] / [k'-\ell]$ arbitrarily large. Since $\psi$ is increasing, it is bounded on a neighbourhood of $k$, so $\ell,k' \in v(X)$ can be chosen so that $[ \psi(m) - \psi(k') ] / [m-k']$ is bounded. Hence $\ell,k' \in v(X)$ can be chosen so that $[ \psi(k') - \psi(\ell) ] / [k'-\ell] > [ \psi(m) - \psi(k') ] / [m-k']$, a contradiction with property~\ref{item:pratt:curv}\ref{item:pratt:curv:compress}.}
+	Let $\phi$ be the (unique) function $\co(v(X)) \to \R$ that matches $\overline{\psi}$ on $\cl(v(X)) \cap \co(v(X))$ and is affine on the closure of each maximal interval of $\co(v(X)) \setminus v(X)$.
+	Evidently $\phi$ is increasing, and $\phi$ is convex since by property~\ref{item:pratt:curv}\ref{item:pratt:curv:compress},
+	%
+	\begin{equation*}
+		\frac{\phi(\ell)-\phi(k)}{\ell-k}
+		\leq \frac{\phi(m)-\phi(\ell)}{m-\ell}
+		\quad \text{for all $k < \ell < m$ in $\co(v(X))$.}
+	\end{equation*}
+	%
+	Since $\phi=\psi$ on $v(X)$, $\phi$ is strictly increasing on $v(X)$, and $u = \phi \circ v$.
+	%
+\end{proof}
+
+\begin{exercise}[\cite{oo}]
+	%
+	\label{exercise:oo}
+	%
+	Let $X$ be a non-empty finite set of alternatives. Consider a decision-maker who has expected-utility preferences over lotteries $\Delta(X)$, with risk attitude $v : X \to \R$. Suppose that she additionally has access to a possibly uncertain outside option, with full-support distribution $\overline{p} \in \Delta(X)$. The decision-maker decides ex post whether to exercise her outside option: that is, after choosing (ex ante) a lottery $p \in \Delta(X)$, an alternative (`the inside option') is drawn from $p$, an alternative is independently drawn from $\overline{p}$ (`the outside option'), and the decision-maker takes home whichever of the two she prefers. Write $\succsim$ for the decision-maker's preference (a complete and transitive binary relation on $\Delta(X)$).
+
+	\begin{enumerate}[label=(\alph*)]
+
+		\item Write down a utility representation of $\succsim$.
+
+		\item Show that $\succsim$ is expected-utility. Write down an explicit expression for its risk attitude $u$ in terms of the model's primitives (namely, $v$ and $\overline{p}$).
+
+		\item Let $\succsim^\star$ be the expected-utility preference with risk attitude $v$ (that is, for any lotteries $p,q \in \Delta(X)$, $p \succsim^\star q$ if and only if $\int v \dd p \geq \int v \dd q$). We can think of $\succsim^\star$ as the decision-maker's `true' risk attitude, before economic influences in the environment (in particular, the presence of the outside option) are taken into account. Prove that (whatever the true risk attitude $v$ and outside-option distribution $\overline{p}$,) $\succsim$ is less risk-averse than $\succsim^\star$.
+
+	\end{enumerate}
+	%
+\end{exercise}
+

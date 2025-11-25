@@ -1,0 +1,589 @@
+% Copyright (c) 2025 Carl Martin Ludvig Sinander.
+
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+% GNU General Public License for more details.
+
+% You should have received a copy of the GNU General Public License
+% along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+%                                   _     _
+%    _ __  _ __ ___  __ _ _ __ ___ | |__ | | ___
+%   | '_ \| '__/ _ \/ _` | '_ ` _ \| '_ \| |/ _ \
+%   | |_) | | |  __/ (_| | |  | | | | |_) | |  __/
+%   | .__/|_|  \___|\__,_|_| |_| |_|_.__/|_|\___|
+%   |_|
+
+
+%%% bug catcher
+\RequirePackage[l2tabu,orthodox]{nag}
+
+%%% document class
+\documentclass[11pt,letterpaper,reqno,oneside]{book}
+
+%%% settings
+\input{preamble.tex}
+
+%%% for \widthof
+\usepackage{calc}
+
+%%% break DOIs in bibliography
+\setcounter{biburlnumpenalty}{100}
+
+%%% raise hypertargets above baseline
+\makeatletter
+	\newcommand{\hyperdest}[1]{\Hy@raisedlink{\hypertarget{#1}{}}}
+\makeatother
+
+%%% custom commands
+\DeclareMathOperator*{\cotwo}{\underline{co}}
+\DeclareMathOperator*{\inftwo}{\underline{inf}}
+
+% watermark on every page (for version control)
+% \usepackage[anchor=ll,pos={0.1cm,0.5cm},fontsize=0.2cm,angle=0,alignment=l]{draftwatermark}
+% \SetWatermarkText{\normalfont\hspace{0.37em}version:\\\normalfont {\datestyle\today}\\\normalfont\hspace{0.37em}at {\currenttime}}
+
+
+%%% bibliography
+\addbibresource{bibl.bib}
+
+
+%______________________________________________________________________________
+
+
+
+
+%    _____ _ _   _
+%   |_   _(_) |_| | ___
+%     | | | | __| |/ _ \
+%     | | | | |_| |  __/
+%     |_| |_|\__|_|\___|
+
+
+\title{\scshape Uncertainty}
+
+\author{Ludvig Sinander \\
+University of Oxford}
+
+\date{\small This version: 25 November 2025}
+
+% \date{\emph{version:} {\datestyle\today} at {\currenttime} \\ \hspace{0pt} \\ \hspace{0pt} \\ \bfseries please report typos!}
+
+\makeatletter
+	\AtBeginDocument{ \hypersetup{
+		pdftitle = {Uncertainty},
+		pdfauthor = {Ludvig Sinander}
+		} }
+\makeatother
+
+
+
+%______________________________________________________________________________
+
+
+
+
+%    ____                                        _
+%   |  _ \  ___   ___ _   _ _ __ ___   ___ _ __ | |_
+%   | | | |/ _ \ / __| | | | '_ ` _ \ / _ \ '_ \| __|
+%   | |_| | (_) | (__| |_| | | | | | |  __/ | | | |_
+%   |____/ \___/ \___|\__,_|_| |_| |_|\___|_| |_|\__|
+
+
+\begin{document}
+
+\maketitle
+
+\pagebreak
+\hspace{1pt}\vfill
+\noindent
+Copyright \copyright{} 2025 Carl Martin Ludvig Sinander.
+
+\begin{quotation}
+\noindent
+Permission is granted to copy, distribute and/or modify this document under the terms of the \href{https://www.gnu.org/licenses/fdl}{GNU Free Documentation License}, Version 1.3 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is included in the section entitled `GNU
+Free Documentation License'.
+\end{quotation}
+
+\noindent
+This is a `copyleft' licence.
+Visit \href{https://www.gnu.org/licenses/copyleft}{gnu.org/licenses/copyleft} to learn more.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Preface}
+\label{preface}
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+These are the notes for the uncertainty component of the first-year graduate microeconomics sequence at Oxford, which I first taught in autumn 2025. A few parts of these notes are drawn pretty much verbatim from \textcite{oo}; thanks to my co-authors acquiescing to this. Thanks to Malayvardhan Prajapati for expert proofreading, and to Oscar Calvert, Pakorn Nunta-aree, Augustus Smith and Kiisa Uusitalo for reporting typos.
+
+
+
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+% Table of contents
+\pagebreak
+\microtypesetup{protrusion=false}
+\setcounter{tocdepth}{1}
+\tableofcontents
+\microtypesetup{protrusion=true}
+%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%
+
+
+
+\setcounter{chapter}{-1}
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introduction}
+\label{ch0}
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+These notes cover some of the essentials of choice and learning under uncertainty, at the graduate level. The focus is on economic questions. (Rather than on psychological experiments, whether in thought, lab, or field. Or functional analysis.) The topics are risk (e.g. expected utility, risk attitude, stochastic orders), ambiguity (in particular, subjective expected utility), and information (in especially its value). These topics are introduced in \cref{ch0:overview} below.
+
+The mathematical prerequisites are relatively slight: some basic real analysis (limits, continuity, integrals) is presumed, as well as the separating hyperplane theorem. Some useful mathematical background is reviewed in \cref{math}.
+
+Some basic choice theory is assumed, e.g. the meaning of terms like `transitive', `preference' and `utility representation'. We briefly review this background in \cref{ch0:review} below.
+
+For supplementary/alternative reading, I particularly recommend \textcite{Kreps1988,Strzalecki2023} on risk and ambiguity (\cref{ch_risk,ch_mone,ch_ambi} of these notes) and \textcite{Liang2023} on information (\cref{ch_info} of these notes). Many other excellent texts cover aspects of risk and ambiguity, e.g. \textcite{MascolellWhinstonGreen1995,Gollier2001,Gilboa2009,Rubinstein2012,Kreps2013,Sarver2023}. For a deeper dive into risk, ambiguity, and choice more broadly, see \textcite{Fishburn1979}.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Risk, ambiguity, and information}
+\label{ch0:overview}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Most economic decisions are made under uncertainty. For example, when choosing between projects in an organisation, a manager can rarely predict with certainty what the return on each project would be, if chosen. Economists describe such uncertainty by drawing a conceptual distinction between \emph{alternatives} (also called `prizes', `consequences' or `outcomes') and \emph{prospects.}
+
+An alternative is a complete description of whatever the decision-maker ultimately cares about (in the stylised economic model at hand). Often, each alternative is a real number, interpreted as a monetary amount; this captures a decision-maker who cares (only) about money, or more generally a decision-maker whose preferences are additively separable between money and everything else of interest to her (which can therefore be ignored for our purposes). In consumer-choice contexts, alternatives are bundles of commodities; in matching, alternatives are potential match partners; in public finance, alternatives might be income or wealth distributions.
+
+\emph{Prospects} are the actual objects of choice, which the decision-maker must compare and ultimately choose between. Examples of prospects include projects, insurance policies, portfolios, spouses, occupations, and locations. Each prospect, if chosen, produces a certain alternative, and what the decision-maker ultimately cares about is not which prospect was chosen per se, but rather which alternative was produced.%
+	\footnote{\label{footnote:consequentialism}This property of `caring only about which alternative was produced' is sometimes called \emph{consequentialism} by decision theorists. The way I've introduced things, consequentialism holds by definition of the alternatives: the whole point (to an economist) of introducing the concept of `alternatives' in the first place (as distinct from the prospects) is to guarantee consequentialism. Decision theorists often think of consequentialism more like an assumption; rather than letting the alternatives be whatever the decision-maker cares about as here, a decision theorist may fix the alternatives to be something or other (monetary prizes, say) and then assume, or not assume, that consequentialism is satisfied. From the perspective of economic modelling, this is conceptually confused and unhelpful. However, decision theorists are often in the business of \emph{psychological} modelling (studying behavioural quirks motivated by experiments), and for this it is arguably desirable to allow for conceptual confusion (`violating consequentialism' is one kind of quirk).}
+
+The key point is that the map from prospects to alternatives it not known to the decision-maker. This may be due to the decision-maker's ignorance, or due to inherent randomness/uncertainty in which alternative will ultimately arise if a given prospect is chosen, or a combination of the two; since the decision-maker cannot distinguish between the two, this distinction will be irrelevant for our purposes.
+
+The simple way of modelling the decision-maker's uncertainty about how prospects map into alternatives is to assume that each prospect is associated with a \emph{lottery,} meaning a probability distribution over alternatives (if prospect $p$ is chosen, then alternative $x$ arises with probability $p(x)$, alternative $y$ arises with probability $p(y)$, and so on), and to further assume that these probabilities are known both to the decision-maker and to us (the economic modellers).%
+	\footnote{It is common to describe this assumption as meaning that the probabilities are `objective', but that is misleading: they can be `subjective' assessments by the decision-maker. What matters is, rather, that we (the economic modellers) know which lottery corresponds (in the decision-maker's opinion) to which prospect.}
+In practice, we identify each prospect with its associated lottery, thereby reducing choice among prospects to choice among lotteries. When uncertainty is modelled in this way, it is conventionally called \emph{risk.} (We could equally well call it `quantifiable uncertainty'.) This formalism is the subject of \cref{ch_risk,ch_mone}. (The former chapter studies risk in general, while the latter focusses on the special case in which the alternatives are monetary.)
+
+A more general way of modelling uncertainty eschews the assumptions of the risk formalism. Here we postulate (without any real loss of generality) a set of `states of the world', each of which is an exhaustive description of how all relevant events might turn out. Each prospect is associated with an \emph{act,} meaning a map from states to alternatives; the idea is that if this prospect is chosen, then which alternative is produced will depend on how events turn out (i.e. which state of the world is realised), and the act (mapping states to alternatives) specifies exactly \emph{how} it depends. To put it another way, knowing the `state of the world' amounts to knowing, for each prospect, which alternative it produces (by definition of the `state of the world'---recall they \emph{exhaustively} describe how all \emph{relevant} events turn out).
+
+In practice, this more general modelling approach identifies each prospect with its associated act, reducing choice among prospects to choice among acts. This implicitly assumes that the decision-maker correctly understands which prospect corresponds to which act, of course, and that we (the economic modellers) also correctly understand this. It does not require any assumptions about agreement on probabilities, however; the decision-maker may or may not have a probabilistic belief (`prior') about the state of the world, and if she does then we (the economic modellers) need not know what it is.%
+	\footnote{In the special case in which the decision-maker does have a probabilistic belief \emph{and} we as economic modellers know what it is, we recover the simple `risk' formalism from above; in this case, we and the decision-maker can each compute, for each act, the implied lottery (probability distribution over alternatives), and by definition of `alternative', this lottery is all that matters. (Here we are again leaning on consequentialism---see \cref{footnote:consequentialism} above.)}
+When uncertainty is modelled in this way, it is conventionally called \emph{ambiguity} or \emph{`Knightian uncertainty'.}%
+	\footnote{`Knightian' refers to \textcite{Knight1921}, though one could equally call it `Keynesian' after \textcite{Keynes1921}, who also distinguished between risk and ambiguity. It is not uncommon for decision theorists to refer to ambiguity simply as `uncertainty', but in these notes I use `uncertainty' in its ordinary English sense, rather than as a term of art.}
+(Another name is `unquantifiable uncertainty'.)
+We study this formalism in \cref{ch_ambi}.
+
+One of the advantages of the more general `acts/ambiguity' formalism is that it permits us to talk about learning, i.e. the acquisition of information by the decision-maker about the unknown mapping from prospects to alternatives. In particular, we model learning as the decision-maker acquiring information about which state of the world prevails. She may acquire deterministic information (excluding certain states of the world, for example), but more generally she may observe the outcome of a noisy signal that is correlated with the state of the world, and thus provides statistical information about it. Such learning (to inform a choice between acts) is the subject of \cref{ch_info}.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Review of preference and utility}
+\label{ch0:review}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Let $A$ be a non-empty set. Recall that a \emph{binary relation} $\succsim$ on $A$ is formally a subset of $A \times A$, with `$a \succsim b$' (for $a,b \in A$) being shorthand for $(a,b) \in \mathord{\succsim}$. The \emph{strict part} of a binary relation $\succsim$ on $A$ is the binary relation $\succ$ on $A$ such that for all $a,b \in A$, $a \succ b$ holds if and only if $a \succsim b \not\succsim a$. The \emph{symmetric part} of a binary relation $\succsim$ on $A$ is the binary relation $\sim$ on $A$ such that for all $a,b \in A$, $a \sim b$ holds if and only if $a \succsim b \succsim a$.
+
+A binary relation $\succsim$ on $A$ is called \emph{complete} iff for all $a,b \in A$, either $a \succsim b$ or $b \succsim a$, and is called \emph{transitive} iff for all $a,b,c \in A$, $a \succsim b \succsim c$ implies $a \succsim c$. For any $a,b \in A$, `$a \not\succsim b$' is shorthand for `it is not the case that $a \succsim b$', and `$a \precsim b$' means $b \succsim a$.
+
+A \emph{preference} on $A$ is a complete and transitive binary relation on $A$. (It would perhaps be better to say `rational preference' or some such, since it is perfectly possible to imagine a decision-maker who is indecisive or exhibits cyclic choice patterns.) Given a preference $\succsim$ on $A$ and alternatives $a,b, \in A$, we interpret $a \succsim b$ as `the decision-maker weakly prefers $a$ to $b$', $a \succ b$ as `the decision-maker strictly prefers $a$ to $b$', and $a \sim b$ as `the decision-maker is indifferent between $a$ and $b$'.
+
+The orthodox economist's interpretation of $\succsim$ is that it is not some psychological thing, but rather a description how a decision-maker actually \emph{chooses.}%
+	\footnote{This is the party line. However, economists do frequently rely on `thicker' concepts of preference, often unwittingly. In utilitarian calculations, for example.}
+We ought really to say `hypothetical' instead of `actual', since to learn the entire binary relation $\succsim$ from observing choices, one would need to observe the decision-maker's choice from every possible binary menu $\{a,b\} \subseteq A$, which is a lot of data except if $A$ is small.%
+	\footnote{A further difficulty is that it is not obvious how indifference $a \sim b$ should be interpreted in choice terms.}
+
+The `decision-maker' whose choices are captured by $\succsim$ may be an individual, but in economic models is it frequently an organisation, such as a firm or a committee.
+
+\begin{exercise}
+	%
+	\label{exercise:condorcet}
+	%
+	Assume that $\abs*{A} \geq 3$. There is a committee comprised of three voters. Each voter $i \in \{1,2,3\}$ has a preference $\succsim_i$ with no indifferences (that is, $a \nsim_i b$ for all $a \neq b$ in $A$). Let $\succsim$ denote the majority relation: that is, for any alternatives $a,b \in A$, we have $a \succsim b$ if and only $\abs*{ 
+	\{ i \in \{1,2,3\} : a \succ_i b \} } \geq 2$.
+
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item Prove or disprove: whatever the voters' preferences $(\mathord{\succsim_1},\mathord{\succsim_2},\mathord{\succsim_3})$, the majority relation $\succsim$ is complete.
+
+		\item Prove or disprove: whatever the voters' preferences $(\mathord{\succsim_1},\mathord{\succsim_2},\mathord{\succsim_3})$, the majority relation $\succsim$ is transitive.
+	
+	\end{enumerate}
+	%
+\end{exercise}
+
+\begin{definition}
+	%
+	\label{definition:utility}
+	%
+	Let $A$ be a non-empty set, let $\succsim$ be a binary relation on $A$. A function $U : A \to \R$ is said to \emph{represent} $\succsim$ if and only if for all $a,b \in A$, $a \succsim b$ iff $U(a) \geq U(b)$.
+	%
+\end{definition}
+
+Such a function $U$ is called a \emph{utility function,} or \emph{utility representation of $\succsim$.} A decision-maker with preference $\succsim$ with utility representation $U$ behaves, when making decisions, as if she were maximising $U$: her choice from any non-empty menu $M \subseteq A$ will be (an element of) $\argmax_{a \in M} U(a)$. In principle, there is nothing that we (as analysts) can do with a utility function that cannot be done using the the `primitive' binary relation $\succsim$, but in practice maximising a real-valued function is mathematically more tractable than working with a binary relation. This tractability is the (only) reason why we typically work with utility functions.
+
+\begin{exercise}
+	%
+	\label{exercise:utility}
+	%
+	Let $A$ be a non-empty set, and let $\succsim$ be a binary relation on $A$. Show that if $\succsim$ admits a utility representation, then $\succsim$ must be a preference.
+	%
+\end{exercise}
+
+Intuitively, we can always move back and forth between preferences and utility functions. This intuition isn't actually quite right in general, but it is correct in simple cases:
+
+\begin{proposition}
+	%
+	\label{prop:U_exist_countable}
+	%
+	Let $A$ be a non-empty set. If $A$ is finite or countable, then a binary relation on $A$ admits a utility representation iff it is a preference.
+	%
+\end{proposition}
+
+The `only if' part of \Cref{prop:U_exist_countable} follows from \Cref{exercise:utility} above. For a proof of the `if' part, see \textcite[pp.~23--4]{Kreps1988}.
+
+When the set $A$ is uncountable, a preference may admit no utility representation. This simply means that $\R$ is not large enough to represent the range of feelings that the decision-maker has about the (very many) alternatives in $A$. (Recall that by definition, a utility function carries $A$ into $\R$.) It is no more mysterious than that. You might find this slightly mind-bending because $\R$ is after all a very large set---but there are plenty of sets of yet greater cardinality (for example, the set of all functions $\R \to \R$). (The study of cardinality is a classic topic in set theory. Fun, but far removed from economics.)
+
+The classic example of a preference which does not admit a utility representation is the lexicographic preference $\succsim$ on $A=\R^2$, which for any $a \equiv (a_1,a_2) \in A$ and $b \equiv (b_1,b_2) \in A$ satisfies $a \succsim b$ if and only if either (i)~$a_1 > b_1$ or (ii)~$a_1=b_1$ and $a_2>b_2$. To learn more (including a proof that the lexicographic preference admits no utility representation), see chapter~3 of \textcite{Kreps1988}.
+
+In practice, the usual way of ensuring the existence of a utility representation is to impose topological assumptions; in particular, assuming that $A$ is a suitable topological space and that the preference $\succsim$ is continuous in a suitable sense. For example:
+
+\begin{theorem}[\cite{Debreu1954}]
+	%
+	\label{theorem:debreu}
+	%
+	Let $A$ be a non-empty set, and $\succsim$ a preference on $A$. Suppose that $A$ is a convex subset of $\R^n$ (where $n \in \N$) and that for every $a \in A$, the upper and lower contour sets $\{ b \in A : b \precsim a \}$ and $\{ b \in A : b \succsim a \}$ are closed. Then $\succsim$ admits a utility representation.
+	%
+\end{theorem}
+
+For a proof, see \textcite[chapter~2]{Rubinstein2012}.
+
+Utility is \emph{ordinal,} in the sense that no information is lost if a strictly increasing transformation is applied to the utility function. Formally:
+
+\begin{observation}
+	%
+	\label{observation:U_uniqueness}
+	%
+	Let $A$ be a non-empty set, and $\succsim$ a preference on $A$. Let $U$ and $V$ be functions $A \to \R$, and suppose that $U$ represents $\succsim$. Then $V$ represents $\succsim$ if and only if there exists a strictly increasing function $\phi : U(A) \to \R$ such that $V = \phi \circ U$.
+	%
+\end{observation}
+
+\begin{exercise}
+	%
+	\label{exercise:pf_U_uniqueness}
+	%
+	Prove it!
+	%
+\end{exercise}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Affineness}
+\label{ch_mix}
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+\input{ch_mix}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Risk}
+\label{ch_risk}
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+\input{ch_risk}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Monetary risk}
+\label{ch_mone}
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+\input{ch_mone}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Ambiguity}
+\label{ch_ambi}
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+\input{ch_ambi}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Information}
+\label{ch_info}
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+\input{ch_info}
+
+
+
+%______________________________________________________________________________
+
+
+
+
+%       _                               _ _
+%      / \   _ __  _ __   ___ _ __   __| (_) ___ ___  ___
+%     / _ \ | '_ \| '_ \ / _ \ '_ \ / _` | |/ __/ _ \/ __|
+%    / ___ \| |_) | |_) |  __/ | | | (_| | | (_|  __/\__ \
+%   /_/   \_\ .__/| .__/ \___|_| |_|\__,_|_|\___\___||___/
+%           |_|   |_|
+
+
+\begin{appendices}
+
+\crefalias{chapter}{appsec}
+\crefalias{section}{appsec}
+\crefalias{subsection}{appsec}
+\crefalias{subsubsection}{appsec}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Mathematical background}
+\label{math}
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%
+
+In this appendix chapter, I review some mathematical concepts that are useful for understanding the main text.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Sets and functions}
+\label{math:set}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$\N = \{1,2,3,\dots\}$ denotes the natural numbers, $\R$ denotes the real numbers, and for $n \in \N$, $\R^n$ denotes the set of all length-$n$ vectors of real numbers. $\R_+$ denotes the set of non-negative real numbers, $\R_{++}$ those that are strictly positive, i.e. $\R_{++} \coloneqq \R_+ \setminus \{0\}$, and similarly $\R_-$ ($\R_{--}$) denotes the non-positive (strictly negative) reals.
+
+Given non-empty sets $X$, $Y$ and $Z$ and functions $f : X \to Y$ and $g : Y \to Z$, the \emph{composition} of $f$ and $g$ is the function $g \circ f : X \to Z$ defined by $(g \circ f)(x) \coloneqq g(f(x))$ for each $x \in X$. Given non-empty sets $X$, $Y$ and $Z$ such that $X \supseteq Y$ and a function $f : X \to Z$, the \emph{restriction of $f$ to $Y$,} often denoted by `$f|_Y$', is the function $g : Y \to Z$ defined by $g(y) \coloneqq f(y)$ for every $y \in Y$.
+
+For any set $S$, $2^S$ denotes the set of all subsets of $S$ (including the empty set $\varnothing$). For any nested sets $S \subseteq X$, the indicator function $\1_S : X \to \R$ is defined by $\1_S(x) \coloneqq 1$ if $x \in S$ and $\1_S(x) \coloneqq 0$ otherwise.
+
+The \emph{Cartesian product} of two sets $S$ and $R$, denoted $S \times R$, is the set of all pairs $(s,r)$ such that $s \in S$ and $r \in R$. By extension, the Cartesian product of a collection $(S_\iota)_{\iota \in \mathcal{I}}$ of sets (where $\mathcal{I}$ is a non-empty [`index'] set), is defined
+%
+\begin{equation*}
+	\prod_{\iota \in \mathcal{I}} S_\iota
+	\coloneqq \left\{
+	(s_\iota)_{\iota \in \mathcal{I}} : 
+	\text{$s_\iota \in S_\iota$ for each $\iota \in \mathcal{I}$}
+	\right\} .
+\end{equation*}
+%
+A set $S$ that may be written as a Cartesian product, i.e. $S = \prod_{\iota \in \mathcal{I}} S_\iota$ where $\abs*{\mathcal{I}} \geq 2$, is called a \emph{product set.}
+
+If $S_\iota = R$ for every $\iota \in \mathcal{I}$ and $\mathcal{I}$ is finite or countable, then we use the simpler notation $R^{\abs*{\mathcal{I}}} \equiv \prod_{\iota \in \mathcal{I}} S_\iota$.
+(An example is $\R^n$, the set of real vectors of length $n$; it is exactly the $n$-fold Cartesian product of the real line $\R$.)
+A more general notation, which is used also when $\mathcal{I}$ is uncountable, is $R^\mathcal{I} \equiv \prod_{\iota \in \mathcal{I}} S_\iota$.%
+	\footnote{This explains why we write `$2^S$' for the set of all subsets of a set $S$. Any subset $R \subseteq S$ may be identified with the \emph{inclusion map} $f : S \to \{\text{in},\text{out}\}$ where $f(s)=\text{in}$ iff $s \in R$, for each $s \in S$. Hence the set of all subsets of $S$ may be identified with the set of all such inclusion maps, i.e. all maps $S \to \{\text{in},\text{out}\}$; this is the set $\{\text{in},\text{out}\}^S$. Of course what matters about the set $\{\text{in},\text{out}\}$ is not the labels `in' and `out', but merely the fact that the set has two elements; so we shorten `$\{\text{in},\text{out}\}^S$' to `$2^S$'.}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Proofs}
+\label{math:pf}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+`Iff' is shorthand for `if and only if'. `$x \coloneqq y$' means `I hereby define $x$: it is equal to $y$'.
+
+For any entailment claim, i.e. a claim of the form `$A$ implies $B$', the \emph{contra-positive} claim is `{``}not $B$'' implies ``not $A${''}'. Every entailment claim is logically equivalent to its contra-positive. It is common, when wishing to prove a claim, to instead prove its contra-positive.
+
+Any claim that is implied by a collection of true claims must itself be true. Thus if we can show that a certain collection of claims entails a falsehood (a claim which \emph{contradicts} things we know to be true, such as the fact that $2+2=4$ or that $\R$ is uncountable), then we may conclude that at least one claim in the collection is false. This principle is also frequently used in proofs: to show that a claim $A$ is true, I show that the claim `not $A$' together with other known facts (e.g. facts proved earlier, or well-known facts like $2+2=4$) implies a falsehood---more specifically, that they entail a claim which contradicts claims known to be true (like the fact that $\R$ is uncountable). This proof technique is called \emph{proof by contradiction.}
+
+\emph{Mathematical induction} is the following logical principle. Suppose we are interested in a collection $(C_t)_{t=0}^\infty$ of claims; that is, for each $t \in \{0,1,2,\dots\}$, $C_t$ has the form `such-and-such is true when $T=t$'. The principle of mathematical induction is this: in order to prove that $C_t$ is true for every $t \in \{0,1,2,\dots\}$, it suffices to prove both of the following:
+
+\begin{itemize}
+
+	\item The `base case': $C_0$ is true.
+
+	\item The `induction step': for any $t \in \N$, if $C_{t-1}$ is true, then $C_t$ is true.
+
+\end{itemize}
+%
+In the induction step, the hypothesis `$C_{t-1}$ is true' is called the \emph{induction hypothesis.}
+A slightly stronger principle of induction (sometimes called `complete' or `strong' induction) is this: in order to prove that $C_t$ is true for every $t \in \{0,1,2,\dots\}$, it suffices to prove both of the following:
+
+\begin{itemize}
+
+	\item The `base case': $C_0$ is true.
+
+	\item The `(strong) induction step': for any $t \in \N$, if $C_{s-1}$ is true for every $s \in \{1,2,\dots,t\}$, then $C_t$ is true.
+
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Measure and integral}
+\label{math:meas}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The theory of measure and (Lebesgue) integration are the foundation of modern real analysis, which is in turn the backbone of economic theory.
+You do not need to know it to take this course.
+But it helps to know some of the basic \emph{language} of measure theory; that's what I'll cover here.
+
+(If you'd like to pursue research in economic theory, then I would advise you to learn basic measure theory.
+I taught myself from \textcite{Rosenthal2006}; this book is very accessible, except that chapter~2 is harder than it needs to be, so don't get stuck there! I now prefer the first few chapters of \textcite{Folland1999}, a very beautiful book for first-year graduate students in maths. There are lots of other standard books. Efe Ok has a `measure and probability' manuscript on his website that is specifically aimed at economists.)
+
+
+Let $X$ be a non-empty set.
+A \emph{$\sigma$-algebra} on $X$ is a collection of subsets of $X$ satisfying certain properties.%
+	\footnote{The properties are closedness under complement and closedness under countable union.}
+If $\mathcal{X}$ is a $\sigma$-algebra, we call $(X,\mathcal{X})$ a \emph{measurable space,} and call the elements of $\mathcal{X}$ the \emph{measurable subsets} of $X$.
+Often the $\sigma$-algebra $\mathcal{X}$ is left partly or entirely implicit, by the way.
+
+A \emph{measure} on a measurable space $(X,\mathcal{X})$ is a map $\mu : \mathcal{X} \to [0,\infty]$ that is countably additive:
+for any countable collection $A_1,A_2,\dots$ of pairwise disjoint measurable subsets of $X$,
+we have $\mu\left( \Union_{n \in \N} A_n \right) = \sum_{n \in \N} \mu(A_n)$.
+The triple $(X,\mathcal{X},\mu)$ is called a \emph{measure space.}
+
+A measurable set $A \subseteq X$ is called \emph{$\mu$-null} iff $\mu(A)=0$. If a property holds at every $x \in X$, except possibly for $x$ belonging to a null set $A$, then that property is said to hold \emph{($\mu$-)almost everywhere,} or `($\mu$-)a.e.'.
+
+\begin{example}
+	%
+	\label{example:lebesgue_measure}
+	%
+	The most commonly-used measure on $X=\R$ is the \emph{Lebesgue measure,}
+	which is the unique measure $\lambda$ with the property that
+	$\lambda([a,b]) = b-a$ for all $a<b$.
+	That is, it captures the common-sense notion of \emph{length.}
+
+	Analogously, there's Lebesgue measure on $\R^2$, which captures \emph{area,} and Lebesgue measure on $\R^3$, which captures \emph{volume,} and so on.
+
+	The Lebesgue measure is conventionally defined on the \emph{Lebesgue $\sigma$-algebra} (whose elements are called \emph{Lebesgue sets}).
+	It is often easier to work with the coarser \emph{Borel $\sigma$-algebra} (or \emph{Borel sets}); this is the smallest $\sigma$-algebra containing every open subset of $\R$.
+	%
+\end{example}
+
+If $\mu$ has the further property that $\mu(X)=1$, then it is a \emph{probability measure,}
+and $(X,\mathcal{X},\mu)$ is a \emph{probability space.}
+In the probability context, `almost everywhere' is usually replaced with `almost sure(ly)' or `a.s.'.
+
+Now consider a function $f : X \to Y$, where both $X$ and $Y$ are measurable spaces. For any measurable set $B \subseteq Y$, a measure on $Y$ can tell us how `large' the set $B$ is.
+How large, then, is the set $A = \{ x \in X : f(x) \in B \}$ of points $x$ in $X$ that lead to a value $f(x)$ that lives in $B$?
+That question only has an answer if $A$ is a measurable set!
+We call a function \emph{measurable} if this question has an answer for every set $B$.
+Symbolically, $f$ is measurable iff for every measurable subset $B$ of $Y$, $\{ x \in X : f(x) \in B \}$ is a measurable subset of $X$.
+
+In modern analysis, the standard integral is the Lebesgue integral.
+This is the integral used almost exclusively in economic theory, including these notes.
+The integral of a measurable function $f : X \to \R$ on a measure space $(X,\mathcal{X},\mu)$ is written $\int_X f \dd \mu$.
+The integral over a measurable subset $A \subseteq X$ is defined
+%
+\begin{equation*}
+	\int_A f \dd \mu \coloneqq \int_X f \1_A \dd \mu ,
+\end{equation*}
+%
+where $\1_A(x) \coloneqq 1$ for $x \in A$ and $\coloneqq 0$ for $x \notin A$.
+
+On probability spaces, measurable functions are conventionally called \emph{random variables,}
+and integrals are called \emph{expectations.}
+One writes
+%
+\begin{equation*}
+	\E( f ) \coloneqq \int_X f \dd \mu .
+\end{equation*}
+
+If you have taken introductory calculus, then you may be more familiar with the \emph{Riemann integral.}%
+	\footnote{The Riemann integral of a function $\R \to \R$ is defined as the limit of the areas of increasingly fine rectangles approximating the area under the graph of the function.}
+The Riemann integral has the problem that the integral of some functions simply fail to exist.
+The Lebesgue integral extends the Riemann integral:
+it allows more functions to be integrated,
+while still giving the same result as the Riemann integral whenever the latter exists.
+
+The Lebesgue integral is defined only for functions $f : X \to \R$ that are measurable.
+That is a necessary condition, but it is not sufficient:
+the existence of the integral requires a further condition.
+(If the further condition fails, the definition of the Lebesgue integral yields the expression $\infty - \infty$, which has no meaning; therefore we agree to say that the integral does not exist in such cases.)
+The integral of a function may be infinite (equal to $\infty$ or $-\infty$).
+A function is called \emph{integrable} iff both (a) its integral exists, \emph{and} (b) its integral is finite.
+
+Whereas the Riemann integral is defined only for functions $f : \R \to \R$,
+the Lebesgue integral makes sense for functions $f : X \to \R$
+defined on any space $X$ you like, provided it has measurable structure (i.e. is equipped with a $\sigma$-algebra).
+This is very useful.
+
+
+
+\end{appendices}
+
+
+%______________________________________________________________________________
+
+
+
+
+%    ____  _ _     _ _                             _
+%   | __ )(_) |__ | (_) ___   __ _ _ __ __ _ _ __ | |__  _   _
+%   |  _ \| | '_ \| | |/ _ \ / _` | '__/ _` | '_ \| '_ \| | | |
+%   | |_) | | |_) | | | (_) | (_| | | | (_| | |_) | | | | |_| |
+%   |____/|_|_.__/|_|_|\___/ \__, |_|  \__,_| .__/|_| |_|\__, |
+%                            |___/          |_|          |___/
+
+
+% \pagebreak
+\printbibliography[heading=bibintoc]
+
+
+
+%______________________________________________________________________________
+
+
+
+\end{document}

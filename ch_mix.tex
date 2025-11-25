@@ -1,0 +1,447 @@
+% Copyright (c) 2025 Carl Martin Ludvig Sinander.
+
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+% GNU General Public License for more details.
+
+% You should have received a copy of the GNU General Public License
+% along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this chapter, we introduce some mathematical concepts and results that will later (very easily) deliver the expected-utility representation theorems of \textcite{VonneumannMorgenstern1947} (in \cref{ch_risk}) and \textcite{AnscombeAumann1963} (in \cref{ch_ambi}). In particular, we introduce mixture spaces and affine functions on them, identify conditions under which an affine function admits an additive representation, and identify conditions for a preference to admit an affine utility representation.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Mixture spaces}
+\label{mix:def}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}[\cite{HersteinMilnor1953}]
+	%
+	\label{definition:mix}
+	%
+	A \emph{mixture space} is a set $\Pi$ equipped with an operation $(\pi,\alpha,\rho) \mapsto \pi_\alpha \rho$ that carries $\Pi \times [0,1] \times \Pi$ into $\Pi$ and satisfies, for all $\pi,\rho \in \Pi$,
+
+	\begin{enumerate}[label=(\roman*)]
+	
+		\item \label{mix:id} $\pi_1 \rho = \pi$,
+
+		\item \label{mix:sym} $\pi_\alpha \rho = \rho_{1-\alpha} \pi$ for every $\alpha \in [0,1]$, and
+
+		\item \label{mix:comp} $(\pi_\alpha \rho)_\beta \rho = \pi_{\alpha\beta} \rho$ for all $\alpha,\beta \in [0,1]$.
+	
+	\end{enumerate}
+	%
+	(An `operation' is just a function with more concise notation; in particular, the function $\phi : \Pi \times [0,1] \times \Pi \to \Pi$ given by $\phi(\pi,\alpha,\rho) = \pi_\alpha \rho$ for all $\pi,\rho \in \Pi$ and $\alpha \in [0,1]$.)
+	%
+\end{definition}
+
+Although the definition is abstract, the idea is always that $\pi_\alpha \rho \in \Pi$ is an $\alpha$-weighted `mixture' of $\pi$ and $\rho$, as the following examples illustrate.
+
+\begin{exercise}
+	%
+	\label{exercise:mix_Rn}
+	%
+	Show that $\R_+^n$ (for $n \in \N$) is a mixture space when equipped with the operation given by $x_\alpha y \coloneqq \alpha x + (1-\alpha) y$ for all $x,y \in \R^n$ and $\alpha \in [0,1]$.
+	%
+\end{exercise}
+
+\begin{exercise}
+	%
+	\label{exercise:mix_lottsimple}
+	%
+	Let $X$ be a non-empty set. We consider simple lotteries, meaning (probability mass functions of) finitely supported probability distributions over $X$. Formally, a \emph{simple lottery} is a function $p : X \to [0,1]$ such that $\supp(p) \coloneqq \{ x \in X : p(x) > 0 \}$ is finite and $\sum_{x \in \supp(p)} p(x) = 1$. Show that the set $\Delta^0(X)$ of all simple lotteries is a mixture space when equipped with the operation given by $p_\alpha q \coloneqq \alpha p + (1-\alpha) q$ for all $p,q \in \Delta^0(X)$ and $\alpha \in [0,1]$. (You can interpret this as a compound lottery: an $\alpha$-biased coin is flipped, and if it lands heads then an alternative is drawn from $p$, while if it lands tails then an alternative is instead drawn from $q$.)
+	%
+\end{exercise}
+
+\begin{exercise}
+	%
+	\label{exercise:mix_acts}
+	%
+	Let $S$ and $X$ be finite sets, and let $\Delta(X)$ denote the set of all (probability mass functions of) lotteries over $X$; that is, $\Delta(X)$ is the set of all functions $p : X \to [0,1]$ such that $\sum_{x \in X} p(x)=1$. Show that the set $\Delta(X)^S$ of all maps $S \to \Delta(X)$ is a mixture space when equipped with the operation defined by $f_\alpha g \coloneqq \alpha f + (1-\alpha) g$ for all $f,g \in \Delta(X)^S$ and $\alpha \in [0,1]$. (You can interpret this as lottery compounding: given the state $s \in S$, an $\alpha$-biased coin is flipped. In case of heads, an alternative is drawn from the lottery $f(s)$, and in case of tails an alternative is instead drawn from $g(s)$.)
+	%
+\end{exercise}
+
+\begin{exercise}
+	%
+	\label{exercise:mix_convex}
+	%
+	Show that if $\Pi$ is a convex subset of a real vector space equipped with the operation $(x,\alpha,y) \mapsto \alpha x + (1-\alpha) y$, then $\Pi$ is a mixture space. (This nests \Cref{exercise:mix_Rn,exercise:mix_lottsimple,exercise:mix_acts}.)
+	%
+\end{exercise}
+
+\begin{exercise}
+	%
+	\label{exercise:mix_utility}
+	%
+	Fix $n \in \N$, and recall that a function $f : \R_+^n \to \R_+$ is called \emph{Cobb--Douglas} iff there exist constants $a_1,a_2,\dots,a_n \in [0,1]$ such that $a_1 + a_2 + \cdots + a_n = 1$ and, for every $x \in \R_+^n$, $f(x) = x_1^{a_1} x_2^{a_2} \cdots x_n^{a_n}$. Show that $\Pi$ is a mixture space when equipped with the operation $(f,\alpha,g) \mapsto f^\alpha g^{1-\alpha}$.
+	%
+\end{exercise}
+
+\begin{exercise}
+	%
+	\label{exercise:mix_normals}
+	%
+	Let $\Pi$ be the set of all Normal PDFs on $\R$---that is, the set of all functions $\R \to \R$ given by
+	%
+	\begin{equation*}
+		x \mapsto \left( 2\pi\sigma^2 \right)^{-1/2} \exp\left( -\frac{1}{2} \frac{(x-\mu)^2}{\sigma^2} \right)
+	\end{equation*}
+	%
+	for some mean $\mu \in \R$ and variance $\sigma^2 \in (0,+\infty)$. Equip $\Pi$ with the operation whereby if $f_1,f_2 \in \Pi$ have respective means $\mu_1,\mu_2 \in \R$ and variances $\sigma_1^2,\sigma_2^2 \in (0,+\infty)$, then for any $\alpha \in [0,1]$, $(f_1)_\alpha (f_2)$ is the Normal PDF with mean $\alpha \mu_1 + (1-\alpha) \mu_2$ and variance $\alpha^2 (\sigma_1)^2 + (1-\alpha)^2 (\sigma_2)^2$.
+
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item Interpret this operation.
+
+		\item Is $\Pi$ is a mixture space?
+	
+	\end{enumerate}
+	%
+\end{exercise}
+
+Mixture spaces satisfy the following property, which we shall use later.
+
+\begin{proposition}
+	%
+	\label{proposition:mix_twodistrib}
+	%
+	Let $\Pi$ be a mixture space. For any $\pi,\rho \in \Pi$ and any $\alpha,\beta,\gamma \in [0,1]$, $(\pi_\alpha \rho)_\gamma (\pi_\beta \rho) = \pi_{\gamma \alpha + (1-\gamma) \beta} \rho$.
+	%
+\end{proposition}
+
+\begin{exercise}[hard]
+	%
+	\label{exercise:mix_twodistrib}
+	%
+	Prove it!
+	%
+\end{exercise}
+
+\begin{exercise}[from \cite{Kreps1988}]
+	%
+	\label{exercise:mix_ident}
+	%
+	Let $\Pi$ be a mixture space. Prove that for any $\pi \in \Pi$ and any $\alpha \in [0,1]$, $\pi_\alpha \pi = \pi$.
+	%
+\end{exercise}
+
+\begin{exercise}[inspired by Nemanja Antić]
+	%
+	\label{exercise:mix_nonprop}
+	%
+	Say that a mixture space $\Pi$ is \emph{determinate} iff for all $\pi,\rho,\sigma \in \Pi$ and $\alpha \in (0,1]$, $\pi_\alpha \sigma = \rho_\alpha \sigma$ implies $\pi = \rho$. Say that a mixture space $\Pi$ is \emph{associative} iff for all $\pi,\rho,\sigma \in \Pi$ and $\alpha,\beta \in [0,1]$, $(\pi_\alpha \rho)_\beta \sigma = \pi_{\alpha\beta} ( \rho_{\beta(1-\alpha)/(1-\alpha\beta)} \sigma )$.
+
+	\begin{enumerate}[label=(\alph*)]
+
+		\item Show that the mixture space in \Cref{exercise:mix_convex} is determinate and associative.
+	
+		\item Find an example of a mixture space $\Pi$ that is not determinate.
+
+		\item Find an example of a mixture space $\Pi$ that is not associative.
+	
+	\end{enumerate}
+	%
+\end{exercise}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Affineness and additive representations}
+\label{mix:add}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{definition}
+	%
+	\label{definition:affine}
+	%
+	Let $\Pi$ be a mixture space. A function $U : \Pi \to \R$ is called \emph{affine} if and only if $U(\pi_\alpha \rho) = \alpha U(\pi) + (1-\alpha) U(\rho)$ for all $\pi,\rho \in \Pi$ and $\alpha \in [0,1]$.
+	%
+\end{definition}
+
+\begin{namedthm}[\Cref*{exercise:mix_Rn} {\normalfont (continued).}]
+	%
+	\label{exercise:mix_Rn_affine}
+	%
+	Fix a function $U : \R_+^n \to \R$.
+
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item Show that if there exists a vector $k \in \R^n$ and a constant $\beta \in \R$ such that $U(x) = k \cdot x + \beta$ for every $x \in \R_+^n$, then $U$ is affine.
+
+		\item Prove the converse: if $U$ is affine, then there exists a vector $k \in \R^n$ and a constant $\beta \in \R$ such that $U(x) = k \cdot x + \beta$ for every $x \in \R_+^n$.
+	
+	\end{enumerate}
+	%
+\end{namedthm}
+
+\begin{namedthm}[\Cref*{exercise:mix_lottsimple} {\normalfont (continued).}]
+	%
+	\label{exercise:mix_lottsimple_affine}
+	%
+	Fix a function $U : \Delta^0(X) \to \R$. For a simple lottery $p \in \Delta^0(X)$, `$\int u \dd p$' is shorthand for $\sum_{x \in \supp(p)} p(x) u(x)$.
+
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item Show that if there exists a function $u : X \to \R$ such that $U(p) \coloneqq \int u \dd p$ for each $p \in \Delta^0(X)$, then $U$ is affine.
+
+		\item Prove the converse: if $U$ is affine, then there exists a function $u : X \to \R$ such that $U(p) \coloneqq \int u \dd p$ for each $p \in \Delta^0(X)$.
+	
+	\end{enumerate}
+	%
+\end{namedthm}
+
+\begin{namedthm}[\Cref*{exercise:mix_acts} {\normalfont (continued).}]
+	%
+	\label{exercise:mix_acts_affine}
+	%
+	Fix a function $U : \Delta(X)^S \to \R$. For a lottery $p \in \Delta(X)$, `$\int u \dd p$' is shorthand for $\sum_{x \in X} p(x) u(x)$. (Recall that $X$ is finite.)
+
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item Show that if there exists a collection $(u_s)_{s \in S}$ of functions $X \to \R$ such that $U(f) = \sum_{s \in S} \int u_s \dd[f(s)]$ for each $f \in \Delta(X)^S$, then $U$ is affine.
+
+		\item Prove the converse: if $U$ is affine, then there exists a collection $(u_s)_{s \in S}$ of functions $X \to \R$ such that $U(f) = \sum_{s \in S} \int u_s \dd[f(s)]$ for each $f \in \Delta(X)^S$.
+	
+	\end{enumerate}
+	%
+\end{namedthm}
+
+\begin{exercise}
+	%
+	\label{exercise:mix_lottconts}
+	%
+	Show that the set of all CDFs $\R \to \R$ is a mixture space when equipped with the operation given by $(F,\alpha,G) \mapsto \alpha F + (1-\alpha) G$. Further show that for any bounded and measurable function $u : \R \to \R$, the map $F \mapsto \int u \dd F$ is affine.
+	%
+\end{exercise}
+
+\begin{namedthm}[\Cref*{exercise:mix_utility} {\normalfont (continued).}]
+	%
+	\label{exercise:mix_utility_affine}
+	%
+	Find a non-constant affine map $\Pi \to \R$.
+	%
+\end{namedthm}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The mixture-space theorem}
+\label{mix:mix}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Our question in this section is what properties a preference $\succsim$ on a mixture space $\Pi$ must satisfy in order for $\succsim$ to admit an \emph{affine} utility representation $U$. Of course, if this is the case, then there are also many non-affine utility representations, since any strictly increasing transformation of a representation is itself a representation (\Cref{observation:U_uniqueness} in \cref{ch0}); we ask only that there exist an affine representation, not that there exist no non-affine ones.
+
+\begin{definition}
+	%
+	\label{definition:mix_indep}
+	%
+	Let $\Pi$ be a mixture space. A preference $\succsim$ on $\Pi$ satisfies \emph{independence} iff for all $\pi,\rho,\sigma \in \Pi$ and $\alpha \in [0,1]$, $\pi \sim \rho$ implies $\pi_\alpha \sigma \sim \rho_\alpha \sigma$.
+	%
+\end{definition}
+
+\begin{definition}
+	%
+	\label{definition:mix_continuity}
+	%
+	Let $\Pi$ be a mixture space. A preference $\succsim$ on $\Pi$ satisfies \emph{mixture continuity} iff for all $\pi,\rho,\sigma \in \Pi$ such that $\pi \succsim \rho \succsim \sigma$, the sets $\{ \alpha \in [0,1] : \pi_\alpha \sigma \succsim \rho \}$ and $\{ \alpha \in [0,1] : \pi_\alpha \sigma \precsim \rho \}$ are closed in $[0,1]$.
+	%
+\end{definition}
+
+\begin{namedthm}[Mixture-space theorem {\normalfont (\cite{HersteinMilnor1953})}.]
+	%
+	\label{theorem:mix}
+	%
+	Let $\Pi$ be a mixture space, and let $\succsim$ be a preference on $\Pi$. There exists an affine function $U : \Pi \to \R$ that represents $\succsim$ if and only if $\succsim$ satisfies independence and mixture continuity. Furthermore, if two affine functions $U,V : \Pi \to \R$ both represent $\succsim$, then there exist $a>0$ and $b \in \R$ such that $U = a V + b$.
+	%
+\end{namedthm}
+
+The second (`furthermore') claim asserts that affine utility representations are unique up to positive affine transformations. (A map $\R \to \R$ is called \emph{positive affine} iff it is both affine and strictly increasing.)
+
+In the former claim, mixture continuity plays a merely technical role; the heavy lifting is done by independence, as will be clear from the proof. The \hyperref[theorem:mix]{mixture-space theorem} remains true if independence is modified in various ways, e.g. if it is weakened to `for all $\pi,\rho,\sigma \in \Pi$, $\pi \sim \rho$ implies $\pi_{1/2} \sigma \sim \rho_{1/2} \sigma$'.
+
+\begin{exercise}
+	%
+	\label{exercise:mix_easy}
+	%
+	Prove the `only if' part of the first claim in the \hyperref[theorem:mix]{mixture-space theorem} (namely, that the existence of an affine representation implies independence and mixture continuity).
+	%
+\end{exercise}
+
+\begin{proof}[Sketch proof of the {\hyperref[theorem:mix]{mixture-space theorem}}]
+	%
+	Let $\Pi$ be a mixture space, and let $\succsim$ be a preference on $\Pi$. Since this is a \emph{sketch} proof, we are allowed to add simplifying assumptions. So let's assume there are best and worst elements: that is, there exist $\overline{\pi},\underline{\pi} \in \Pi$ such that $\overline{\pi} \succsim \pi \succsim \underline{\pi}$ for every $\pi \in \Pi$. (There won't be any `sketchiness' apart from our imposition of this assumption.)
+
+	Obviously if $\overline{\pi} \sim \underline{\pi}$, then among affine functions $U : \Pi \to \R$, all and only those that are constant represent $\succsim$, and obviously any two constant functions are positive affine transformations of each other. Assume for the remainder that $\overline{\pi} \succ \underline{\pi}$.
+
+	We prove the second (`furthermore') claim last. For the first claim, the `only if' part was established in \Cref{exercise:mix_easy}, so it remains only to prove the `if' part. So suppose that $\succsim$ satisfies independence and mixture continuity; we must show that it admits an affine utility representation.
+
+	The idea for the proof is this: for each $\pi \in \Pi$, we shall define $U(\pi)$ to be the unique $\alpha \in [0,1]$ such that $\pi \sim \overline{\pi}_\alpha \underline{\pi}$. The existence of such $\alpha$s comes from mixture continuity; uniqueness comes from independence. We will show that $U$ represents $\succsim$, again using independence. And we will show that this $U$ is affine, also by independence. That's it. Start with existence:
+
+	\begin{namedthm}[Solvability claim.]
+		%
+		\label{claim:mix:solv}
+		%
+		For all $\pi,\rho,\sigma \in \Pi$ such that $\pi \succsim \rho \succsim \sigma$, there exists an $\alpha \in [0,1]$ such that $\rho \sim \pi_\alpha \sigma$.
+		%
+	\end{namedthm}
+
+	\begin{proof}[Proof of the {\hyperref[claim:mix:solv]{solvability claim}}]
+		%
+		\renewcommand{\qedsymbol}{$\square$}
+		We must show that the sets
+		%
+		\begin{equation*}
+			B \coloneqq \{ \alpha \in [0,1] : \pi_\alpha \sigma \succsim \rho \}
+			\quad \text{and} \quad
+			W \coloneqq \{ \alpha \in [0,1] : \pi_\alpha \sigma \precsim \rho \} .
+		\end{equation*}
+		%
+		are not disjoint. By inspection, $B$ and $W$ are both non-empty (why?), and satisfy $B \cup W = [0,1]$ (why?). Suppose toward a contradiction that $B$ and $W$ are disjoint, so that $B = [0,1] \setminus W$. Then $B \neq [0,1]$. Furthermore, since $W$ is closed (by mixture continuity), $B$ must be open in $[0,1]$. Finally, $B$ is closed by mixture continuity. To summarise, $B$ is clopen in $[0,1]$ (both open and closed) and satisfies $\varnothing \neq B \neq [0,1]$. This is a contradiction, because $\varnothing$ and $[0,1]$ are the only clopen subsets of $[0,1]$.
+		%
+	\end{proof}%
+	\renewcommand{\qedsymbol}{$\blacksquare$}
+
+	To proceed, we require an intuitive monotonicity claim. And to establish that claim, we need the following intuitive `responsiveness' claim.
+
+	\begin{namedthm}[Responsiveness claim.]
+		%
+		\label{claim:mix:strict}
+		%
+		For any $\pi,\rho \in \Pi$ such that $\pi \succ \rho$ and any $\alpha \in (0,1)$, $\pi \succ \pi_\alpha \rho \succ \rho$.
+		%
+	\end{namedthm}
+
+	\begin{proof}[Proof of the {\hyperref[claim:mix:solv]{responsiveness claim}}]
+		%
+		\renewcommand{\qedsymbol}{$\square$}
+		Fix $\pi,\rho \in \Pi$ such that $\pi \succ \rho$ and an $\alpha \in (0,1)$; we will show that $\pi \succ \pi_\alpha \rho$, omitting the analogous argument for $\pi_\alpha \rho \succ \rho$.
+
+		To that end, suppose toward a contradiction that $\pi_\alpha \rho \succsim \pi$. Then by the \hyperref[claim:mix:solv]{solvability claim} (recalling that $\pi \succ \rho$), there is a $\beta \in [0,1]$ such that $\pi \sim ( \pi_\alpha \rho )_\beta \rho = \pi_{\alpha\beta} \rho$. (The equality holds by property~\ref{mix:comp} in the definition of a mixture space.) In other words, the set
+		%
+		\begin{equation*}
+			\mathcal{B} \coloneqq \left\{ \beta \in [0,1] :
+			\pi \sim \pi_{\alpha\beta} \rho
+			\right\}
+		\end{equation*}
+		%
+		is non-empty. By mixture continuity, $\mathcal{B}$ is closed. Hence $\mathcal{B}$ has a least element, which we denote by $\beta_0$.
+
+		It must be that $\beta_0>0$, since otherwise $\pi \sim \pi_0 \rho = \rho_1 \pi = \rho$, a contradiction with the fact that $\pi \succ \rho$. (The two equalities hold by properties~\ref{mix:sym} and \ref{mix:id} in the definition of a mixture space.)
+
+		Since $\pi \sim \pi_{\alpha \beta_0} \rho$, independence implies that
+		%
+		\begin{equation*}
+			\pi_\alpha \rho
+			\sim ( \pi_{\alpha \beta_0} \rho )_\alpha \rho
+			= \pi_{\alpha^2 \beta_0} \rho .
+		\end{equation*}
+		%
+		Since $\pi_\alpha \rho \succsim \pi \succ \rho$ by hypothesis, it follows by the \hyperref[claim:mix:solv]{solvability claim} that there exists a $\gamma \in [0,1]$ such that
+		%
+		\begin{equation*}
+			\pi
+			\sim \bigl( \pi_{\alpha^2 \beta_0} \rho \bigr)_\gamma \rho
+			= \pi_{\alpha^2 \beta_0 \gamma} \rho .
+		\end{equation*}
+		%
+		Hence $\alpha \beta_0 \gamma$ belongs $\mathcal{B}$. But $\alpha \beta_0 \gamma < \beta_0$, and $\beta_0$ is by definition the least element of $\mathcal{B}$---a contradiction.
+		%
+	\end{proof}%
+	\renewcommand{\qedsymbol}{$\blacksquare$}
+
+	\begin{namedthm}[Monotonicity claim.]
+		%
+		\label{claim:mix:mon}
+		%
+		For any $\alpha,\beta \in [0,1]$, $\overline{\pi}_\alpha \underline{\pi} \succsim \overline{\pi}_\beta \underline{\pi}$ iff $\alpha \geq \beta$.
+		%
+	\end{namedthm}
+
+	\begin{proof}[Proof of the {\hyperref[claim:mix:solv]{monotonicity claim}}]
+		%
+		\renewcommand{\qedsymbol}{$\square$}
+		We must show that $\alpha=\beta$ implies $\overline{\pi}_\alpha \underline{\pi} \sim \overline{\pi}_\beta \underline{\pi}$ and that $\alpha > \beta$ implies $\overline{\pi}_\alpha \underline{\pi} \succ \overline{\pi}_\beta \underline{\pi}$. The former is immediate. For the latter, suppose that $\alpha>\beta$. If $\beta=0$, then by the \hyperref[claim:mix:strict]{responsiveness claim}, $\overline{\pi}_\alpha \underline{\pi} \succ \underline{\pi} = \overline{\pi}_\beta \underline{\pi}$. (Exactly why does the equality hold?) Suppose instead that $\beta>0$. By the \hyperref[claim:mix:strict]{responsiveness claim}, $\overline{\pi}_\alpha \underline{\pi} \succ \underline{\pi}$. Since $\beta/\alpha \in (0,1)$, applying the \hyperref[claim:mix:strict]{responsiveness claim} again yields
+		%
+		\begin{equation*}
+			\overline{\pi}_\alpha \underline{\pi}
+			\succ ( \overline{\pi}_\alpha \underline{\pi} )_{\beta/\alpha} \underline{\pi}
+			= \overline{\pi}_\beta \underline{\pi} .
+			\qedhere
+		\end{equation*}
+		%
+	\end{proof}%
+	\renewcommand{\qedsymbol}{$\blacksquare$}
+
+	The \hyperref[claim:mix:solv]{solvability} and \hyperref[claim:mix:mon]{monotonicity} claims together imply that for every $\pi \in \Pi$, there exists exactly one $\alpha \in [0,1]$ such that $\pi \sim \overline{\pi}_\alpha \underline{\pi}$; we denote this $\alpha$ by $U(\pi)$. The function $U : \Pi \to [0,1]$ represents $\succsim$: for any $\pi,\rho \in \Pi$,
+	%
+	\begin{equation*}
+		\pi \succsim \rho
+		\quad \text{iff} \quad
+		\overline{\pi}_{U(\pi)} \underline{\pi}
+		\succsim \overline{\pi}_{U(\rho)} \underline{\pi}
+		\quad \text{iff} \quad
+		U(\pi) \geq U(\rho) ,
+	\end{equation*}
+	%
+	where the first `iff' holds by definition of $U$, and the second `iff' holds by the \hyperref[claim:mix:mon]{monotonicity claim}.
+
+	It remains only to show that $U$ is affine. To that end, fix any $\pi,\rho \in \Pi$ and $\alpha \in [0,1]$; we must show that $U(\pi_\alpha \rho) = \alpha U(\pi) + (1-\alpha) U(\rho)$. Observe that
+	%
+	\begin{equation*}
+		\pi_\alpha \rho
+		\sim ( \overline{\pi}_{U(\pi)} \underline{\pi} )_\alpha \rho
+		\sim ( \overline{\pi}_{U(\pi)} \underline{\pi} )_\alpha ( \overline{\pi}_{U(\rho)} \underline{\pi} )
+		= \overline{\pi}_{\alpha U(\pi) + (1-\alpha) U(\rho)} \underline{\pi} ,
+	\end{equation*}
+	%
+	where the two `$\sim$'s hold by independence, and the equality holds by \Cref{proposition:mix_twodistrib} (\cpageref{proposition:mix_twodistrib}). Hence $U(\pi_\alpha \rho) = \alpha U(\pi) + (1-\alpha) U(\rho)$ by definition of $U$.
+
+	Finally, to prove the second (`furthermore') claim in the \hyperref[theorem:mix]{mixture-space theorem}, suppose that $U,V : \Pi \to \R$ are both affine and both represent $\succsim$, and define
+	%
+	\begin{equation*}
+		a \coloneqq \frac{ U\left(\overline{\pi}\right) - U\left(\underline{\pi}\right) }{ V\left(\overline{\pi}\right) - V\left(\underline{\pi}\right) }
+		> 0
+		\quad \text{and} \quad
+		b \coloneqq U\left(\underline{\pi}\right) - a V\left(\underline{\pi}\right) ;
+	\end{equation*}
+	%
+	we claim that $U = a V + b$. To that end, fix an arbitrary $\pi \in \Pi$, and let $\alpha$ be the unique $\beta \in [0,1]$ such that $\pi \sim \overline{\pi}_\beta \underline{\pi}$. (Why does $\alpha$ exist? Why is it unique?) Then
+	%
+	\begin{align*}
+		U(\pi)
+		&= U\left( \overline{\pi}_\alpha \underline{\pi} \right)
+		\\
+		&= \alpha U\left(\overline{\pi}\right)
+		+ (1-\alpha) U\left(\underline{\pi}\right)
+		\\
+		&= \alpha \left[ a V\left(\overline{\pi}\right) + b \right]
+		+ (1-\alpha) \left[ a V\left(\underline{\pi}\right) + b \right]
+		\\
+		&= a \left[ \alpha V\left(\overline{\pi}\right)
+		+ (1-\alpha) V\left(\underline{\pi}\right) \right] + b
+		\\
+		&= a V\left( \overline{\pi}_\alpha \underline{\pi} \right) + b
+		\\
+		&= a V(\pi) + b ,
+	\end{align*}
+	%
+	where the first (final) equality holds since $U$ ($V$) represents $\succsim$, the second (penultimate) equality holds since $U$ ($V$) is affine, and the third equality holds since $U\left(\overline{\pi}\right) = a V\left(\overline{\pi}\right) + b$ and $U\left(\underline{\pi}\right) = a V\left(\underline{\pi}\right) + b$ by construction of $a$ and $b$.
+	%
+\end{proof}
+
+The sketch proof above relies on the extra assumption that there are best and worst elements of $\Pi$, $\overline{\pi}$ and $\underline{\pi}$. Without this assumption, we would instead fix an arbitrary pair $\overline{\pi},\underline{\pi} \in \Pi$ such that $\overline{\pi} \succ \underline{\pi}$, and assign utility values $U(\pi)$ as above to all elements $\pi \in \Pi$ such that $\overline{\pi} \succsim \pi \succsim \underline{\pi}$. The only change is that we must now somehow extend this formula to those $\pi \in \Pi$ that are better than $\overline{\pi}$ or worse than $\underline{\pi}$. Doing this is actually pretty straightforward.

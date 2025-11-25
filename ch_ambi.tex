@@ -1,0 +1,250 @@
+% Copyright (c) 2025 Carl Martin Ludvig Sinander.
+
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+% GNU General Public License for more details.
+
+% You should have received a copy of the GNU General Public License
+% along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+In this chapter, we study unquantifiable or `subjective' uncertainty: \emph{ambiguity.} In particular, unlike in \cref{ch_risk,ch_mone}, we do \emph{not} assume that for each uncertain prospect, the decision-maker has a probabilistic belief (`lottery') about how likely various payoff-relevant consequences are to arise; furthermore, even if she does have such a belief, we do not assume that we (the economic modellers) know what it is. Formally, we model prospects as \emph{acts,} meaning maps from states of the world to payoff-relevant consequences, and we study choice among (or preferences over) acts.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Preferences over acts}
+\label{sec:acts}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The \emph{Savage framework} (after \cite{Savage1954}, though really the framework predates him) is the following environment. There is a non-empty set $Z$ of \emph{consequences} (also called `prizes' or `outcomes'). There is also a non-empty finite set $S$ of states of the world. A \emph{(Savage) act} is a map $f : S \to Z$, i.e. an element of $Z^S$. By a standard abuse, the act in $Z^S$ that is constant at $z \in Z$ is denoted simply `$z$'. A \emph{preference} is a complete and transitive binary relation on the set $Z^S$ of all acts.
+
+The idea is that what the decision-maker actually chooses among (i.e. has preferences over) is prospects, that what she actually cares about is consequences, and that she is uncertain about which prospects lead to which consequences. Prospects are modelled as acts, which deliver a state-contingent consequence. The state of the world should be thought of as a summary of all relevant facts which the decision-maker does not know; in particular, it contains all the information required to determine, for each prospect, which consequence will be delivered.
+
+`Subjective expected-utility' preferences are those which can be viewed as arising from maximisation of the expectation of some function $u : Z \to \R$ under some probability $\mu$ on $S$. By `probability on $S$', I mean a function $\mu : S \to [0,1]$ such that $\sum_{s \in S} \mu(s) = 1$.
+
+\begin{definition}[\cite{Ramsey1926}]
+	%
+	\label{definition:seu_savage}
+	%
+	Consider the Savage framework with states $S$ and consequences $Z$, and fix a preference $\succsim$. Given a map $u : Z \to \R$ and a probability $\mu$ on $S$, we say that the pair $(u,\mu)$ is a \emph{subjective expected-utility representation} of $\succsim$ if and only if for any (Savage) acts $f,g : S \to Z$, $f \succsim g$ if and only if $\sum_{s \in S} u(f(s)) \mu(s) \geq \sum_{s \in S} u(g(s)) \mu(s)$.
+	%
+\end{definition}
+
+The function $u : Z \to \R$ is called a \emph{risk attitude} (or `vNM utility function', or `Bernoulli utility function'). The probability $\mu : S \to [0,1]$ is called a \emph{(subjective) belief}.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The Anscombe--Aumann framework}
+\label{sec:acts:aa}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Imagine in addition that there is a non-empty finite set $X$ of `alternatives', with generic elements $x,y,z,w \in X$. A \emph{lottery} is (a probability mass function of) a probability distribution over $X$: formally, a function $p : X \to [0,1]$ such that $\sum_{x \in X} p(x) = 1$. We write $\Delta(X)$ for the set of all lotteries, with generic elements $p,q,r \in \Delta(X)$. By the familiar abuse, the lottery in $\Delta(X)$ that is degenerate at $x \in X$ is denoted simply `$x$'.
+
+The \emph{Anscombe--Aumann framework} \parencite[after][]{AnscombeAumann1963} is the special case of the Savage framework in which it is assumed that there exists a non-empty finite set $X$ of alternatives such that $Z = \Delta(X)$. That is, each consequence is a lottery over a set $X$ of underlying payoff-relevant alternatives (and, conversely, all such lotteries are consequences). In this special case, acts are maps $S \to \Delta(X)$, and are sometimes called `Anscombe--Aumann acts' to disambiguate.
+
+Another way of thinking about the Anscombe--Aumann framework is to imagine starting with the Savage framework with consequences $Z=X$, and then enriching it by allowing for more acts, in particular allowing not only for acts that deliver a sure alternative in each state, but also acts that deliver lotteries over alternatives. Same thing, just a slightly different perspective.
+
+Whatever perspective we adopt, the assumption that we make when moving from the Savage to the Anscombe--Aumann framework is precisely that it is possible in principle for us (as economic modellers) to observe how the decision-maker would choose among acts which deliver a state-contingent \emph{lottery} over underlying payoff-relevant alternatives. This seems a completely reasonable assumption for the purposes of economic modelling; in a laboratory, you would achieve this by flipping coins (or promising to). Nothing funny here.%
+	\footnote{However, some people are interested in the Savage framework for quasi-philosophical rather than economic-modelling reasons; in particular, some believe that the Savage framework holds answers to questions like `what is the true nature of ``probability''?' For answering questions like that, the Anscombe--Aumann framework is certainly unsatisfactory, since something called `probability' is part of the description of the model!}
+
+\begin{definition}[\cite{AnscombeAumann1963}]
+	%
+	\label{definition:seu_aa}
+	%
+	Consider the Anscombe--Aumann framework with states $S$ and alternatives $X$, and fix a preference $\succsim$. Given a map $u : X \to \R$ and a probability $\mu$ on $S$, we say that the pair $(u,\mu)$ is a \emph{subjective expected-utility representation} of $\succsim$ if and only if for any (Anscombe--Aumann) acts $f,g : S \to \Delta(X)$, $f \succsim g$ if and only if $\sum_{s \in S} ( \int u \dd [f(s)] ) \mu(s) \geq \sum_{s \in S} ( \int u \dd [g(s)] ) \mu(s)$. (Given a lottery $p \in \Delta(X)$, `$\int u \dd p$' is shorthand for $\sum_{x \in X} p(x) u(x)$.)
+	%
+\end{definition}
+
+Note that \Cref{definition:seu_aa} is more demanding that \Cref{definition:seu_savage}: like \Cref{definition:seu_savage}, it demands that the uncertainty about the state be evaluated by taking an expectation (under a `subjective' probability $\mu$), but it additionally demands that the uncertainty about which alternative a given lottery will deliver also be evaluated by taking an expectation. Here is another way of saying the same thing: $(u,\mu)$ is a subjective expected-utility representation of $\succsim$ in the sense of \Cref{definition:seu_aa} if and only if $(U,\mu)$ is a subjective expected-utility representation of $\succsim$ in the sense of \Cref{definition:seu_savage}, where $U : \Delta(X) \to \R$ is the affine function given by $U(p) \coloneqq \int u \dd p$ for every $p \in \Delta(X)$.
+
+The value of the Anscombe--Aumann special case of the Savage framework is that it is far more tractable, as we shall see.
+
+Preferences that don't admit a subjective expected-utility representation arise naturally in many contexts. Psychological reasons for this are often emphasised, e.g. the enormous literature about the \textcite{Ellsberg1961} thought experiment. But straightforwardly economic forces also frequently produce behaviour that is inconsistent with subjective expected utility. There are many examples, of which perhaps the most `economic' of all is the following.
+
+\begin{exercise}[compare with \Cref{exercise:eu_choice} in \cref{ch_risk}, \cpageref{exercise:eu_choice}]
+	%
+	\label{exercise:mh}
+	%
+	Consider a decision-maker who must not only choose an Anscombe--Aumann act, but must also choose an action. Imagine, for example, a manager who chooses among projects (risky prospects, modelled as acts) and, after choosing her project, chooses how to operate the project, e.g. what staff to employ on her team and how to organise them. The operational options are modelled as a non-empty set $A$ of actions. Suppose that for each given action $a \in A$, the decision-maker has subjective expected-utility preferences: she evaluates each act $f : S \to \Delta(X)$ at $\sum_{s \in S} ( \int u_a \dd [f(s)] ) \mu(s)$, for some risk attitude $u_a : X \to \R$ and belief $\mu : S \to [0,1]$. Then taking into account optimal action choice, she evaluates each act $f : S \to \Delta(X)$ at $U^{(A,(u_a)_{a \in A},\mu)}(f) \coloneqq \max_{a \in A} \sum_{s \in S} ( \int u_a \dd [f(s)] ) \mu(s)$. (That is: her preference $\succsim$ is such that for any acts $f,g : S \to \Delta(X)$, $f \succsim g$ holds if and only if $U^{(A,(u_a)_{a \in A},\mu)}(f) \geq U^{(A,(u_a)_{a \in A},\mu)}(g)$.)
+
+	\begin{enumerate}[label=(\alph*)]
+	
+		\item Remind yourself of \hyperref[exercise:mix_acts_affine]{\Cref*{exercise:mix_acts}} (\cref{ch_mix}, \cpageref{exercise:mix_acts_affine}), which says that a preference admits a subjective expected-utility representation if and only if it admits a utility representation $U : \Delta(X)^S \to \R$ that is affine.
+
+		\item Show that $U^{(A,(u_a)_{a \in A},\mu)}$ is convex.%
+			\footnote{There is a converse along the lines of \cref{footnote:convex_max} in \cref{ch_risk} (\cpageref{footnote:convex_max}).}
+
+		\item Under what conditions is $U^{(A,(u_a)_{a \in A},\mu)}$ affine?
+	
+	\end{enumerate}
+	%
+\end{exercise}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The Anscombe--Aumann theorem}
+\label{sec:aa}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%r%%%%%%%%%%%%%
+
+\emph{This section draws on \textcite[chapter~7]{Kreps1988}.}
+
+Which preferences over Anscombe--Aumann acts admit a subjective expected-utility representation?
+
+\begin{definition}
+	%
+	\label{definition:aa_indep}
+	%
+	In the Anscombe--Aumann framework with states $S$ and alternatives $X$, a preference $\succsim$ satisfies \emph{independence} iff for all (Anscombe--Aumann) acts $f,g,h : S \to \Delta(X)$ and all $\alpha \in [0,1]$, $f \sim g$ implies $\alpha f + (1-\alpha) h \sim \alpha g + (1-\alpha) h$.
+	%
+\end{definition}
+
+\begin{definition}
+	%
+	\label{definition:aa_continuity}
+	%
+	In the Anscombe--Aumann framework with states $S$ and alternatives $X$, a preference $\succsim$ satisfies \emph{mixture continuity} iff for all acts $f,g,h : S \to \Delta(X)$ such that $f \succ g \succ h$, the sets $\{ \alpha \in [0,1] : \alpha f + (1-\alpha) h \succsim g \}$ and $\{ \alpha \in [0,1] : \alpha f + (1-\alpha) h \precsim g \}$ are closed in $[0,1]$.
+	%
+\end{definition}
+
+Independence and mixture continuity are plainly exactly the concepts bearing those names in the general mixture-space context of \cref{ch_mix}, specialised to the particular mixture space $\Delta(X)^S$ equipped with the mixture operation $(f,\alpha,g) \mapsto \alpha f + (1-\alpha) g$.
+
+To state the next property, we need a piece of notation: for an act $f : S \to \Delta(X)$, a lottery $p \in \Delta(X)$, and a state $s \in S$, we write $f_s p : S \to \Delta(X)$ for the act given by
+%
+\begin{equation*}
+	(f_s p)(t) \coloneqq
+	\begin{cases}
+		p & \text{if $t=s$} \\
+		f(t) & \text{otherwise.}
+	\end{cases}
+\end{equation*}
+
+\begin{definition}
+	%
+	\label{definition:aa_sub}
+	%
+	In the Anscombe--Aumann framework with states $S$ and alternatives $X$, a preference $\succsim$ satisfies \emph{state-separability} iff for any act $f : S \to \Delta(X)$, any lotteries $p,q \in \Delta(X)$ and any states $s,t \in S$, $f_s p \succsim f_s q$ implies $f_t p \succsim f_t q$.
+	%
+\end{definition}
+
+(How would you interpret state-separability?)
+
+\begin{definition}
+	%
+	\label{definition:aa_nondegen}
+	%
+	In the Anscombe--Aumann framework with states $S$ and alternatives $X$, a preference $\succsim$ satisfies \emph{non-degeneracy} iff there exist $f,g : S \to \Delta(X)$ such that $f \succ g$.
+	%
+\end{definition}
+
+Say that a subjective expected-utility representation $(u,\mu)$ is non-de\-ge\-ne\-rate if and only if $u$ is non-constant.
+
+\begin{namedthm}[Anscombe--Aumann theorem {\normalfont \parencite{AnscombeAumann1963}}.]
+	%
+	\label{theorem:aa}
+	%
+	Consider the Anscombe--Aumann framework with states $S$ and alternatives $X$, and let $\succsim$ be a preference. $\succsim$ admits a non-degenerate subjective expected-utility representation if and only if it satisfies independence, mixture continuity, state-separability, and non-degeneracy. Furthermore, if $(u,\mu)$ and $(v,\nu)$ are both subjective expected-utility representations of $\succsim$, then $\mu=\nu$, and there exist $a>0$ and $b \in \R$ such that $u = a v + b$.
+	%
+\end{namedthm}
+
+In other words, independence, mixture continuity, state-separability, and non-degeneracy together characterise non-degenerate subjective expected-utility preferences, the belief is unique, and the risk attitude is unique up to positive affine transformations.
+
+The theorem remains true if the axioms are modified in various small ways: independence can be weakened or altered as in the mixture-space theorem, mixture continuity can be replaced with any one of a number of alternative notions of `continuity', and state-separability can also be replaced.%
+	\footnote{Non-degeneracy is very weak, but dropping it does have some consequences. You can work these out for yourself if you're interested.}
+In fact, the most commonly-stated version of the \hyperref[theorem:aa]{Anscombe--Aumann theorem} features a `monotonicity' property in place of state-separability;%
+	\footnote{A preference $\succsim$ satisfies \emph{monotonicity} iff for all $f,g : S \to \Delta(X)$, if $f(s) \succsim g(s)$ for every $s \in S$, then $f \succsim g$.}
+the version above with state-separability is from \textcite{Kreps1988}.
+
+\begin{exercise}
+	%
+	\label{exercise:aa_easy}
+	%
+	Prove the `only if' part of the first claim in the \hyperref[theorem:aa]{Anscombe--Aumann theorem} (namely, that a preference which admits a non-degenerate subjective expected-utility representation must satisfy independence, mixture continuity, state-separability, and non-degeneracy).
+	%
+\end{exercise}
+
+\begin{proof}[Proof of the `if' part of the first claim in the {\hyperref[theorem:aa]{Anscombe--Aumann theorem}}]
+	%
+	Let $\succsim$ satisfy independence, mixture continuity, state-separability, and non-degeneracy; we will show that it admits a non-degenerate subjective expected-utility representation $(u,\mu)$.
+
+	Since $\succsim$ satisfies independence and mixture continuity, the \hyperref[theorem:mix]{mixture-space theorem} (\cref{ch_mix}, \cpageref{theorem:mix}) implies that there exists an affine $U : \Delta(X)^S \to \R$ that represents $\succsim$. By \hyperref[exercise:mix_acts_affine]{\Cref*{exercise:mix_acts}} (\cpageref{exercise:mix_acts_affine}), it follows that there exists a collection $(u_s)_{s \in S}$ of functions $X \to \R$ such that $U(f) = \sum_{s \in S} \int u_s \dd[f(s)]$ for each act $f : S \to \Delta(X)$.
+
+	Call a state $s \in S$ \emph{non-null} iff there exist an act $f : S \to \Delta(X)$ and a lottery $p \in \Delta(X)$ such that $f_s p \succ f$. (In other words, the decision-maker cares what happens in state $s$.) It is easy to see that for each state $s \in S$, $u_s$ is non-constant if and only if $s$ is non-null. By non-degeneracy, there must be at least one non-null state; let $s^\star \in S$ be one such.
+
+	Since $\succsim$ is represented by $U$ and $U(g) = \sum_{t \in S} \int u_t \dd[g(t)]$ for each act $g : S \to \Delta(X)$, it holds for any act $f : S \to \Delta(X)$, any lotteries $p,q \in \Delta(X)$ and any non-null state $s \in S$ that
+	%
+	\begin{align*}
+		&\int u_s \dd p \geq \int u_s \dd q
+		\\
+		\text{iff} \quad
+		&\sum_{t \in S} \int u_t \dd [f_s p] \geq \sum_{t \in S} \int u_t \dd [f_s q]
+		\\
+		\text{iff} \quad
+		&f_s p \succsim f_s q
+		\\
+		\text{iff} \quad
+		&f_{s^\star} p \succsim f_{s^\star} q
+		\\
+		\text{iff} \quad
+		&\sum_{t \in S} \int u_t \dd [f_{s^\star} p] \geq \sum_{t \in S} \int u_t \dd [f_{s^\star} q]
+		\\
+		\text{iff} \quad
+		&\int u_{s^\star} \dd p \geq \int u_{s^\star} \dd q
+	\end{align*}
+	%
+	where the third `iff' holds by state-separability. This shows that $u_s$ and $u_{s^\star}$ represent the same preference over lotteries $\Delta(X)$. Hence by the \hyperref[theorem:vNM]{von Neumann--Morgenstern theorem} (\cref{ch_risk}, \cpageref{theorem:vNM}), there exist $a_s > 0$ and $b_s \in \R$ such that $u_s = a_s u_{s^\star} + b_s$. For any null state $s \in S$, since $u_s$ is constant, we have $u_s = a_s u_{s^\star} + b_s$ where $a_s=0$ and $b_s \in \R$. Let $a_{s^\star} \coloneqq 1$ and $b_{s^\star} \coloneqq 0$.
+
+	Let $a \coloneqq \sum_{s \in S} a_s$ and $b \coloneqq \sum_{s \in S} b_s$. Let $u \coloneqq a u_{s^\star} + b$, and define $\mu : S \to \R$ by $\mu(s) \coloneqq a_s/a$ for each $s \in S$. Then $\mu$ is a probability on $S$, $u$ is non-constant since $s^\star$ is non-null, and for each act $f : S \to \Delta(X)$,
+	%
+	\begin{multline*}
+		U(f)
+		= \sum_{s \in S} \int u_s \dd[f(s)]
+		= \sum_{s \in S} \int (a_s u_{s^\star} + b_s) \dd[f(s)]
+		\\
+		= a \left[ \sum_{s \in S} \left( \int  u_{s^\star} \dd[f(s)] \right) \frac{a_s}{a} \right] + b
+		= \sum_{s \in S} \left( \int u \dd[f(s)] \right) \mu(s) .
+	\end{multline*}
+	%
+	Hence $(u,\mu)$ is a non-degenerate subjective expected-utility representation of $\succsim$.
+	%
+\end{proof}
+
+\begin{exercise}
+	%
+	\label{exercise:aa_uniqueness}
+	%
+	Prove the second (`furthermore') claim in the \hyperref[theorem:aa]{Anscombe--Aumann theorem} (namely, the uniqueness of the belief and the uniqueness up to positive affine transformations of the risk attitude).
+	%
+\end{exercise}
+
+\begin{namedthm}[\Cref*{exercise:mh} {\normalfont (continued; based on \cite{Sinander2025})}.]
+	%
+	\label{exercise:mh_axioms}
+	%
+	Read \textcite{MaccheroniMarinacciRustichini2006}. Characterise the behavioural content of the subjective-expected-utility-with-choice model: that is, identify a set of properties such that a preference $\succsim$ satisfies these properties if and only if there exists a non-empty set $A$, a collection $(u_a)_{a \in A}$ of maps $X \to \R$, and a probability $\mu$ on $S$ such that $U^{(A,(u_a)_{a \in A},\mu)}$ represents $\succsim$ (that is, for any acts $f,g : S \to \Delta(X)$, $f \succsim g$ holds if and only if $U^{(A,(u_a)_{a \in A},\mu)}(f) \geq U^{(A,(u_a)_{a \in A},\mu)}(g)$).
+	%
+\end{namedthm}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[Savage's theorem \emph{(not yet written)}]{Savage's theorem}
+\label{ambi:savage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\emph{See chapters~8 and 9 in \textcite{Kreps1988} or section~8.2 in \textcite{Strzalecki2023}. The theorem is due to \textcite{Savage1954}.}
