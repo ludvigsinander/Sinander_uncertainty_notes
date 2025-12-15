@@ -88,6 +88,22 @@ Each prior belief $p \in \interior(\Delta(\Theta))$ and signal structure $\langl
 %
 This is simply the total probability (according to the joint distribution $(\theta,s) \mapsto p(\theta) \pi(s|\theta)$ of the state and signal) that the state and signal are drawn in such a way that the posterior belief is equal to $q$.
 
+\begin{exercise}
+	%
+	\label{exercise:fullnoinfo}
+	%
+	Fix a (prior) belief $p \in \interior(\Delta(\Theta))$.
+
+	\begin{enumerate}[label=(\alph*)]
+
+		\item Let $\tau_\star \in \Delta^0(\Delta(\Theta))$ be the (unique) posterior-belief distribution which assigns probability~1 to $p$: that is, $\tau_\star(p)=1$. Show that if a signal structure $\langle S, \pi \rangle $ is uninformative, i.e. $\pi(\cdot|\theta) = \pi(\cdot|\theta')$ for all $\theta,\theta' \in \Theta$, then $p$ and $\langle S, \pi \rangle $ together induce $\tau_\star$.
+	
+		\item Let $\tau^\star \in \Delta^0(\Delta(\Theta))$ be the (unique) posterior-belief distribution which assigns probability~1 to the vertices of $\Delta(\Theta)$: that is, $\tau^\star\bigl(\1_{\{\theta\}}\bigr)=p(\theta)$ for each $\theta \in \Theta$. Show that if a signal structure $\langle S, \pi \rangle $ is fully informative, i.e. $\pi(s|\theta)>0$ implies $\pi(s|\theta')=0$ for all $s \in S$ and $\theta \neq \theta'$ in $\Theta$, then $p$ and $\langle S, \pi \rangle $ together induce $\tau^\star$.
+	
+	\end{enumerate}
+	%
+\end{exercise}
+
 The following result characterises inducible distributions of posterior beliefs.
 
 \begin{namedthm}[Splitting lemma {\normalfont \parencite{Blackwell1951}}.\footnotemark]
@@ -180,7 +196,7 @@ A fourth and final name for property~\ref{split:bary} is `Bayes plausibility', a
 	%
 \end{proof}
 
-The signal structure $\langle S, \pi \rangle $ constructed in the proof that \ref{split:bary} implies \ref{split:induc} is one in which each signal realisation $s=q$ is itself a belief, and (given prior belief $p$) the Bayesian posterior belief after observing signal $s=q$ is this selfsame belief $q$. We could call this an `obedient direct signal structure': it simply tells the decision-maker what to believe, and is constructed in such a way that the decision-maker always believes what she is told to believe.
+The signal structure $\langle S, \pi \rangle $ constructed in the proof that \ref{split:bary} implies \ref{split:induc} is one in which each signal realisation $s=q$ is itself a belief, and (given prior belief $p$) the Bayesian posterior belief after observing signal $s=q$ is this selfsame belief $q$. We could call this a `plausible direct signal structure': it simply tells the decision-maker what to believe, and is constructed in such a way that the decision-maker always believes what she is told to believe.
 
 \begin{remark}
 	%
@@ -217,7 +233,7 @@ In this section, we study the (instrumental) value of information. In particular
 	\left( \sum_{\theta \in \Theta} \pi(s|\theta) p(\theta) \right) .
 \end{equation*}
 
-Our language so far has described the decision-maker's problem via the pair $(A,u)$; in other words, we have been distinguishing between actions $a \in A$ and their payoff consequences, captured by the vector $( u(a,\theta) )_{\theta \in \Theta} \in \R^\Theta$ of real numbers that the payoffs of action $a \in A$ in each state. (We could write $\R^{\abs*{\Theta}}$ instead of $\R^\Theta$, if you prefer.) All that matters about an action is its payoff vector. For the rest of this section, we will therefore identify each action $a$ with its payoff vector $b = (u(a,\theta))_{\theta \in \Theta} \in \R^\Theta$. The decision-maker's problem is then to choose an `action' $b \in B$ from a non-empty finite set $B \subseteq \R^\Theta$, with the payoff in state $\theta$ of choosing action $b \in B$ being $b(\theta) \in \R$ (the $\theta$th entry of the vector $b$).%
+Our language so far has described the decision-maker's problem via the pair $(A,u)$; in other words, we have been distinguishing between actions $a \in A$ and their payoff consequences, captured by the vector $( u(a,\theta) )_{\theta \in \Theta} \in \R^\Theta$ of real numbers that the payoffs of action $a \in A$ in each state. (We could write $\R^{\abs*{\Theta}}$ instead of $\R^\Theta$, if you prefer.) All that matters about an action is its payoff vector. We henceforth identify each action $a$ with its payoff vector $b = (u(a,\theta))_{\theta \in \Theta} \in \R^\Theta$. The decision-maker's problem is then to choose an `action' $b \in B$ from a non-empty finite set $B \subseteq \R^\Theta$, with the payoff in state $\theta$ of choosing action $b \in B$ being $b(\theta) \in \R$ (the $\theta$th entry of the vector $b$).%
 	\footnote{This parsimonious formalism is due to \textcite{Blackwell1951,Blackwell1953}. So if you like mnemonics, think of `$b$' and `$B$' as standing for `Blackwell' (just as `$a$' and `$A$' stand for `action').}
 
 In this more compact language, the decision-maker's interim payoff as a function of her posterior belief $q \in \Delta(\Theta)$ is
@@ -237,7 +253,7 @@ Her ex-ante expected payoff as a function of the distribution $\tau \in \Delta^0
 \end{equation*}
 
 
-Although I have talked as if the decision problem $B$ were given, we shall in fact consider all possible $B$s. The set of all possible decision problems is, recall, the set of all non-empty finite subsets of $\R^\Theta$. We call a signal structure \emph{(Blackwell) more informative} than another iff the former yields a higher expected payoff in \emph{every} decision problem:
+Although I have talked as if the decision problem $B$ were given, we shall in fact consider all possible $B$s. The set of all possible decision problems is, recall, the set of all non-empty finite subsets of $\R^\Theta$. We call a signal structure \emph{(Blackwell) less informative} than another iff the former yields a lower expected payoff in \emph{every} decision problem:
 
 \begin{definition}[\cite{Blackwell1951,Blackwell1953}]
 	%
@@ -253,19 +269,51 @@ This is a comparative notion of the \emph{instrumental} value of information: th
 	%
 	\label{remark:blackwell_priors}
 	%
-	\Cref{definition:moreinfo} compares signal structures while holding fixed an (arbitrary) prior belief $p \in \interior(\Delta(\Theta))$. One could alternatively define `Blackwell less informative than' in a more demanding way, by requiring that $\int V_B \dd \tau_p \leq \int V_B \dd \tau'_p$ for every non-empty finite $B \subseteq \R^\Theta$ \emph{and every (prior) belief $p \in \Delta(\Theta)$}, where $\tau_p$ ($\tau_p'$) denotes the distribution of posterior beliefs induced by $\langle S, \pi \rangle $ and $p$ ($\langle S', \pi' \rangle $ and $p$). This stronger definition is in fact equivalent to \Cref{definition:moreinfo}; this follows from \hyperref[theorem:blackwell]{Blackwell's theorem} below.
+	\Cref{definition:moreinfo} compares signal structures while holding fixed an (arbitrary) prior belief $p \in \interior(\Delta(\Theta))$. One could alternatively define `Blackwell less informative than' in a more demanding way, by requiring that $\int V_B \dd \tau_p \leq \int V_B \dd \tau'_p$ for every non-empty finite $B \subseteq \R^\Theta$ \emph{and every (prior) belief $p \in \interior(\Delta(\Theta))$}, where $\tau_p$ ($\tau_p'$) denotes the distribution of posterior beliefs induced by $\langle S, \pi \rangle $ and $p$ ($\langle S', \pi' \rangle $ and $p$). This stronger definition is in fact equivalent to \Cref{definition:moreinfo}; this follows from \hyperref[theorem:blackwell]{Blackwell's theorem} below.
 	%
 \end{remark}
+
+\begin{namedthm}[\Cref*{exercise:fullnoinfo} {\normalfont (continued).}]
+	%
+	\label{exercise:fullnoinfo_lessinfo}
+	%
+	Fix a belief $p \in \interior(\Delta(\Theta))$. Show the following.
+
+	\begin{enumerate}[label=(\alph*)]
+
+		\item If a signal structure $\langle S, \pi \rangle $ is uninformative, then $\langle S, \pi \rangle $ is Blackwell less informative than every other signal structure $\langle S', \pi' \rangle $ (given $p$).
+	
+		\item If a signal structure $\langle S', \pi' \rangle $ is fully informative, then every other signal structure $\langle S, \pi \rangle $ is Blackwell less informative than $\langle S', \pi' \rangle $ (given $p$).
+	
+	\end{enumerate}
+	%
+\end{namedthm}
 
 \begin{definition}[\cite{Blackwell1951,Blackwell1953}]
 	%
 	\label{definition:garbling}
 	%
-	Let $\Theta$ be non-empty and finite, and let $\langle S, \pi \rangle $ and $\langle S', \pi' \rangle $ be signal structures. A \emph{garbling kernel from $\langle S', \pi' \rangle $ to $\langle S, \pi \rangle $} is a map $g : S \times S' \to [0,1]$ satisfying $\sum_{s \in S} g(s|s') = 1$ for each $s' \in S'$ such that $\pi(s|\theta) = \sum_{s' \in S} g(s|s') \pi'(s'|\theta)$ for each $\theta \in \Theta$ and $s \in S$. We say that $\langle S, \pi \rangle $ is a \emph{garbling} of $\langle S', \pi' \rangle $ if and only if there exists a garbling kernel from $\langle S', \pi' \rangle $ to $\langle S, \pi \rangle $.
+	Let $\Theta$ be non-empty and finite, and let $\langle S, \pi \rangle $ and $\langle S', \pi' \rangle $ be signal structures. A \emph{Markov kernel from $\langle S', \pi' \rangle $ to $\langle S, \pi \rangle $} is a map $g : S' \to \Delta(S)$ such that $\pi(s|\theta) = \sum_{s' \in S} g(s|s') \pi'(s'|\theta)$ for each $\theta \in \Theta$ and $s \in S$. We say that $\langle S, \pi \rangle $ is a \emph{garbling} of $\langle S', \pi' \rangle $ if and only if there exists a Markov kernel from $\langle S', \pi' \rangle $ to $\langle S, \pi \rangle $.
 	%
 \end{definition}
 
 Garbling is a purely statistical notion of `less informative than', making no reference to decisions or payoffs, quite unlike \Cref{definition:moreinfo}.
+
+\begin{namedthm}[\Cref*{exercise:fullnoinfo} {\normalfont (continued).}]
+	%
+	\label{exercise:fullnoinfo_garb}
+	%
+	Show the following.
+
+	\begin{enumerate}[label=(\alph*)]
+
+		\item If a signal structure $\langle S, \pi \rangle $ is uninformative, then for any other signal structure $\langle S', \pi' \rangle $, $\langle S, \pi \rangle $ is a garbling of $\langle S', \pi' \rangle $.
+	
+		\item If a signal structure $\langle S', \pi' \rangle $ is fully informative, then for any other signal structure $\langle S, \pi \rangle $, $\langle S, \pi \rangle $ is a garbling of $\langle S', \pi' \rangle $.
+	
+	\end{enumerate}
+	%
+\end{namedthm}
 
 Another purely statistical sense in which one signal structure may be `less informative' than another is for the posterior-belief distribution induced by the former signal structure to be less dispersed, meaning that beliefs `move less'. The following is a standard notion of `less dispersed than'.
 
@@ -278,6 +326,14 @@ Another purely statistical sense in which one signal structure may be `less info
 \end{definition}
 
 This is the multi-dimensional version of the convex order discussed in \cref{mone:stoch_high} above; the definition is exactly the same, but the domain $\Delta(\Theta)$ is now a convex subset of $\R^\Theta$ rather than of $\R$. The `embedding' characterisation of the convex order carries over to the multi-dimensional case: $\tau \lesssim_{\text{cvx}} \tau'$ holds if and only if there exists a two-period $\Delta(\Theta)$-valued martingale $(\boldsymbol{q},\boldsymbol{q'})$ such that $\boldsymbol{q} \sim \tau$ and $\boldsymbol{q'} \sim \tau'$. However, the characterisation of the one-dimensional convex order in terms of pointwise inequality of integrated CDFs does \emph{not} extend to the multi-dimensional case.
+
+\begin{namedthm}[\Cref*{exercise:fullnoinfo} {\normalfont (continued).}]
+	%
+	\label{exercise:fullnoinfo_cvx}
+	%
+	Fix a belief $p \in \interior(\Delta(\Theta))$ and a finite-support posterior-mean distribution $\tau \in \Delta^0(\Delta(\Theta))$, and recall from \cpageref{exercise:fullnoinfo} the definitions of $\tau_\star$ and $\tau^\star$. Show that there exists a signal structure $\langle S, \pi \rangle $ such that $p$ and $\langle S, \pi \rangle $ together induce $\tau$ if and only if $\tau_\star \lesssim_{\text{cvx}} \tau$ if and only if $\tau \lesssim_{\text{cvx}} \tau^\star$.
+	%
+\end{namedthm}
 
 \begin{namedthm}[Blackwell's theorem {\normalfont \parencite{Blackwell1951,Blackwell1953}}.]
 	%
@@ -299,7 +355,7 @@ This is the multi-dimensional version of the convex order discussed in \cref{mon
 
 `Blackwell's theorem proper' is the equivalence of properties~\ref{blackwell:info} and \ref{blackwell:garb}.
 
-\begin{proof}[Proof that properties~\ref{blackwell:info} and \ref{blackwell:cvx} are equivalent]
+\begin{proof}[Proof that \ref{blackwell:info} and \ref{blackwell:cvx} are equivalent]
 	%
 	Recall that for any non-empty finite $B \subseteq \R^\Theta$, $V_B$ denotes the function $\Delta(\Theta) \to \R$ given by $V_B(q) = \max_{b \in B} b \cdot q$ for each $q \in \Delta(\Theta)$. For any $b \in \R^\Theta$, $q \mapsto b \cdot q$ is affine, hence convex. Since the maximum of convex functions is convex (why?), it follows that for any non-empty finite $B \subseteq \R^\Theta$, $V_B$ is convex. Furthermore, for any non-empty finite $B \subseteq \R^\Theta$, $V_B$ is continuous (why?). Hence if property~\ref{blackwell:cvx} holds, then $\int V_B \dd \tau \leq \int V_B \dd \tau'$ for every non-empty finite $B \subseteq \R^\Theta$, which is to say that property~\ref{blackwell:info} holds.
 
@@ -315,8 +371,111 @@ This is the multi-dimensional version of the convex order discussed in \cref{mon
 	%
 	\label{exercise:blackwell_easy}
 	%
-	Prove that property~\ref{blackwell:garb} implies property~\ref{blackwell:info} in \hyperref[theorem:blackwell]{Blackwell's theorem}. 
+	Prove that \ref{blackwell:garb} implies \ref{blackwell:info} in \hyperref[theorem:blackwell]{Blackwell's theorem}. 
 	%
 \end{exercise}
 
-For a (very nice) proof that \ref{blackwell:info} implies \ref{blackwell:garb}, see section~4.4 in \textcite{Liang2023}, which is based on \textcite{Deoliveira2018}. The key step is an invocation of the separating hyperplane theorem.
+To prove that \ref{blackwell:info} implies \ref{blackwell:garb} in {\hyperref[theorem:blackwell]{Blackwell's theorem}}, we employ an argument due to \textcite{Deoliveira2018}, which I learned from Annie Liang (\citeyear{Liang2023}). This requires some additional concepts and notation. It will be useful to return to our original formalism $(A,u)$ for describing a decision problem, where $A$ is an arbitrary non-empty finite set (of actions) and $u : A \times \Theta \to \R$ is a (payoff) function.%
+	\footnote{The relationship with our `$B$' notation is, recall, $B = \{ (u(a,\theta))_{\theta \in \Theta} : a \in A \} \subseteq \R^\Theta$.}
+Given a signal structure $\langle S, \pi \rangle $, the decision-maker's (possibly random) choice from $A$ contingent on the realised signal $s \in S$ is described by a map $\alpha : S \to \Delta(A)$, called a \emph{decision rule,} and the composition $\alpha \circ \pi : \Theta \to \Delta(A)$ is defined in the natural way:
+%
+\begin{equation*}
+	(\alpha \circ \pi)(\theta)
+	\coloneqq \sum_{s \in S} \sum_{a \in A} \alpha(a|s) \pi(s|\theta)
+	\quad \text{for each $\theta \in \Theta$.}
+\end{equation*}
+%
+The map $\alpha \circ \pi$ describes the distribution of actions conditional on the state when decision rule $\alpha \in \Delta(A)^S$ is employed. For each signal structure $\langle S, \pi \rangle $ and non-empty finite set $A$, we write $\mathcal{D}(\langle S, \pi \rangle ,A) \subseteq \Delta(A)^\Theta$ for the set of all attainable conditional distributions:
+%
+\begin{equation*}
+	\mathcal{D}(\langle S, \pi \rangle ,A)
+	\coloneqq \left\{
+	\alpha \circ \pi : \alpha \in \Delta(A)^S
+	\right\} .
+\end{equation*}
+
+\begin{namedthm}[\Cref*{exercise:fullnoinfo} {\normalfont (continued).}]
+	%
+	\label{exercise:fullnoinfo_feas}
+	%
+	Fix a non-empty finite set $A$. Show the following.
+
+	\begin{enumerate}[label=(\alph*),resume]
+
+		\item If a signal structure $\langle S, \pi \rangle $ is uninformative, then $\mathcal{D}(\langle S, \pi \rangle ,A)$ contains all and only those maps $\Theta \to \Delta(A)$ that are constant.
+	
+		\item If a signal structure $\langle S', \pi' \rangle $ is fully informative, then $\mathcal{D}(\langle S', \pi' \rangle ,A) = \Delta(A)^\Theta$.
+	
+	\end{enumerate}
+	%
+\end{namedthm}
+
+Given a prior belief $p \in \interior(\Delta(\Theta))$ and a payoff function $u : A \times \Theta \to \R$, the decision-maker's expected payoff can be expressed in terms of the conditional distribution $d \in \Delta(A)^\Theta$, as $\sum_{a \in A} \sum_{\theta \in \Theta} u(a,\theta) d(a|\theta) p(\theta)$. This implies the following characterisation of `Blackwell less informative than':
+
+\begin{observation}
+	%
+	\label{observation:info_actiondistn}
+	%
+	Fix a (prior) belief $p \in \interior(\Delta(\Theta))$. For two signal structures $\langle S, \pi \rangle $ and $\langle S', \pi' \rangle $, the former is Blackwell less informative than the latter given $p$ if and only if 
+	%
+	\begin{equation*}
+		\max_{d \in \mathcal{D}(\langle S, \pi \rangle ,A)}
+		\sum_{a \in A} \sum_{\theta \in \Theta}
+		u(a,\theta) d(a|\theta) p(\theta)
+		\leq \max_{d \in \mathcal{D}(\langle S', \pi' \rangle ,A)}
+		\sum_{a \in A} \sum_{\theta \in \Theta}
+		u(a,\theta) d(a|\theta) p(\theta)
+	\end{equation*}
+	%
+	for every non-empty finite (action) set $A$ and every (payoff) function $u : A \times \Theta \to \R$.
+	%
+\end{observation}
+
+\begin{exercise}[easy]
+	%
+	\label{exercise:blackwell_priors}
+	%
+	Using \Cref{observation:info_actiondistn}, show that for any $p,q \in \interior(\Delta(\Theta))$, `Blackwell less informative given $p$' implies `Blackwell less informative given $q$'. (This directly establishes the claim made in \Cref{remark:blackwell_priors} above.)
+	%
+\end{exercise}
+
+\begin{proof}[Proof of {\hyperref[theorem:blackwell]{Blackwell's theorem}}: \ref{blackwell:info} implies \ref{blackwell:garb}]
+	%
+	Consider the following property:
+	%
+	\begin{enumerate}[label=(\alph*)]
+
+		\setcounter{enumi}{3}
+	
+		\item \label{blackwell:feas} For every non-empty finite set $A$, $\mathcal{D}(\langle S, \pi \rangle ,A) \subseteq \mathcal{D}(\langle S', \pi' \rangle ,A)$.
+	
+	\end{enumerate}
+	%
+	(This means that $\langle S, \pi \rangle $ affords the decision-maker less flexibility than does $\langle S', \pi' \rangle $: fewer conditional distributions are attainable.) We will show that property~\ref{blackwell:info} implies property~\ref{blackwell:feas}, and that property~\ref{blackwell:feas} implies property~\ref{blackwell:garb}.
+
+	Begin with the latter implication. Suppose that property~\ref{blackwell:feas} holds; we will deduce \ref{blackwell:garb}. One decision rule for the signal structure $\langle S, \pi \rangle $ and the non-empty finite (action) set $A \coloneqq S$ is $\alpha : S \to \Delta(S)$ given by $\alpha(s|s)=1$ for every $s \in S$. By construction, $\pi = \alpha \circ \pi \in \mathcal{D}(\langle S, \pi \rangle ,S)$. Since property~\ref{blackwell:feas} holds, it follows there exists a decision rule for the signal structure $\langle S', \pi' \rangle $ and the action set $S$, call it $\alpha' : S' \to \Delta(S)$, such that $\alpha' \circ \pi' = \pi$. Then $\alpha'$ is a Markov kernel from $\langle S', \pi' \rangle $ to $\langle S, \pi \rangle $, so property~\ref{blackwell:garb} holds.
+
+	It remains to show that property~\ref{blackwell:info} implies property~\ref{blackwell:feas}. We prove the contra-positive. To that end, suppose that there exists a non-empty finite (action) set $A$ and a conditional distribution $d^\star : \Theta \to \Delta(A)$ such that $d^\star \in \mathcal{D}(\langle S, \pi \rangle ,A)$ but $d^\star \notin \mathcal{D}(\langle S', \pi' \rangle ,A)$; we will show that $\langle S, \pi \rangle $ is not Blackwell less informative than $\langle S', \pi' \rangle $ given $p$. When $\Delta(A)$ is viewed a subset of $\R^A$, the conditional distribution $d^\star$ is an element of $\R^{A \times \Theta}$, and $\mathcal{D}(\langle S', \pi' \rangle ,A)$ is a closed and convex subset of $\R^{A \times \Theta}$. Since $d^\star \notin \mathcal{D}(\langle S', \pi' \rangle ,A)$, it follows by the separating hyperplane theorem%
+		\footnote{See e.g. Theorem~M.G.2 in \textcite[][p.~948]{MascolellWhinstonGreen1995}. For a fuller treatment, consider \textcite{Border2016}.}
+	that there exist $v \in \R^{A \times \Theta}$ and $k \in \R$ such that
+	%
+	\begin{equation*}
+		\sum_{a \in A} \sum_{\theta \in \Theta} v(a,\theta) d^\star(a,\theta)
+		> k
+		> \sum_{a \in A} \sum_{\theta \in \Theta} v(a,\theta) d(a,\theta)
+	\end{equation*}
+	%
+	for every $d \in \mathcal{D}(\langle S', \pi' \rangle ,A)$. Define $u : A \times \Theta \to \R$ by $u(a,\theta) \coloneqq v(a,\theta)/p(\theta)$ for each $a \in A$ and $\theta \in \Theta$; it is well-defined since $p$ belongs to $\interior(\Delta(\Theta))$. Then since $d^\star \in \mathcal{D}(\langle S, \pi \rangle ,A)$, we have
+	%
+	\begin{multline*}
+		\max_{d \in \mathcal{D}(\langle S, \pi \rangle ,A)}
+		\sum_{a \in A} \sum_{\theta \in \Theta} u(a,\theta) d(a|\theta) p(\theta)
+		\\
+		\geq \sum_{a \in A} \sum_{\theta \in \Theta} u(a,\theta) d^\star(a|\theta) p(\theta)
+		> k \geq \max_{d \in \mathcal{D}(\langle S', \pi' \rangle ,A)} \sum_{a \in A} \sum_{\theta \in \Theta}
+		u(a,\theta) d(a|\theta) p(\theta) .
+	\end{multline*}
+	%
+	Hence by \Cref{observation:info_actiondistn}, $\langle S, \pi \rangle $ is not Blackwell less informative than $\langle S', \pi' \rangle $ given $p$.
+	%
+\end{proof}
