@@ -1,4 +1,4 @@
-% Copyright (c) 2025 Carl Martin Ludvig Sinander.
+% Copyright (c) 2026 Carl Martin Ludvig Sinander.
 
 % This program is free software: you can redistribute it and/or modify
 % it under the terms of the GNU General Public License as published by
@@ -298,11 +298,10 @@ Given a non-empty convex subset $X$ of $\R$, a simple lottery $p \in \Delta^0(X)
 	= \PP\left( \lambda \boldsymbol{X} + (1-\lambda) x = y \right)
 	\\
 	= \PP\left( \boldsymbol{X} = \frac{ y - (1-\lambda) x }{ \lambda } \right)
-	= p\left( \frac{ y - (1-\lambda) x }{ \lambda } \right) 
-	\quad \text{for each $y \in X$.}
+	= p\left( \frac{ y - (1-\lambda) x }{ \lambda } \right)
 \end{multline*}
 %
-It's a mouthful, but all it says is that $p^\lambda x$ is the lottery which delivers $\lambda$ exposure to the lottery $p$ and $1-\lambda$ exposure to the sure thing $x$.
+for each $y \in X$ such that $[ y - (1-\lambda) x ]/\lambda \in X$ and $\bigl( p^\lambda x \bigr)(y) = 0$ for each $y \in X$ such that $[ y - (1-\lambda) x ]/\lambda \notin X$. It's a mouthful, but all it says is that $p^\lambda x$ is the lottery which delivers $\lambda$ exposure to the lottery $p$ and $1-\lambda$ exposure to the sure thing $x$.
 
 \begin{definition}
 	%

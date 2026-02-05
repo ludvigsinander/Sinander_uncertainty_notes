@@ -1,4 +1,4 @@
-% Copyright (c) 2025 Carl Martin Ludvig Sinander.
+% Copyright (c) 2026 Carl Martin Ludvig Sinander.
 
 % This program is free software: you can redistribute it and/or modify
 % it under the terms of the GNU General Public License as published by
@@ -123,16 +123,16 @@ The following result characterises inducible distributions of posterior beliefs.
 	%
 \end{namedthm}
 
-As in previous chapters, `$\int q \tau( \dd q )$' is shorthand for $\sum_{q \in \supp(\tau)} q \tau(q)$. And this object (i.e. the function $\theta \mapsto \sum_{q \in \supp(\tau)} q(\theta) \tau(q)$) is an element of $\Delta(X)$.
+As in previous chapters, `$\int q \tau( \dd q )$' is shorthand for $\sum_{q \in \supp(\tau)} q \tau(q)$. And this object (i.e. the function $\theta \mapsto \sum_{q \in \supp(\tau)} q(\theta) \tau(q)$) is an element of $\Delta(\Theta)$.
 
-Property~\ref{split:induc} says that given the prior belief $p \in \interior(\Delta(\Theta))$, it is possible to induce the posterior-belief distribution $\tau \in \Delta^0(\Delta(X))$, by judiciously designing a signal structure $\langle S, \pi \rangle $. In short, it says that $\tau$ is `inducible' when the prior belief is $p$.
+Property~\ref{split:induc} says that given the prior belief $p \in \interior(\Delta(\Theta))$, it is possible to induce the posterior-belief distribution $\tau \in \Delta^0(\Delta(\Theta))$, by judiciously designing a signal structure $\langle S, \pi \rangle $. In short, it says that $\tau$ is `inducible' when the prior belief is $p$.
 
 Property~\ref{split:bary} says that the mean (or `average' or `expectation') of the distribution $\tau$ is equal to $p$. Since $\tau$ is a distribution over vectors (or, if you prefer, functions), this equality is really a finite collection of (moment) equalities, viz. $\int q(\theta) \tau( \dd q ) = p(\theta)$ for each $\theta \in \Theta$. A `vector mean' of this sort is sometimes called a \emph{barycentre;} property~\ref{split:bary} says $\tau$ has barycentre $p$.
 
-Another way of talking about property~\ref{split:bary} is in terms of belief `splits'. We can think of each $\tau \in \Delta^0(\Delta(X))$ that satisfies property~\ref{split:bary} as a `split' of the prior belief $p$, whereby probability mass is taken from $p$ and distributed `outwards' in such a way that the mean (or barycentre) remains equal to $p$. In this language, the \hyperref[lemma:split]{splitting lemma} says that all and only mean-preserving belief splits are inducible.
+Another way of talking about property~\ref{split:bary} is in terms of belief `splits'. We can think of each $\tau \in \Delta^0(\Delta(\Theta))$ that satisfies property~\ref{split:bary} as a `split' of the prior belief $p$, whereby probability mass is taken from $p$ and distributed `outwards' in such a way that the mean (or barycentre) remains equal to $p$. In this language, the \hyperref[lemma:split]{splitting lemma} says that all and only mean-preserving belief splits are inducible.
 
 Yet another language for property~\ref{split:bary} is that of martingales. In particular, property~\ref{split:bary} holds if and only if for any $\Delta(\Theta)$-valued random variables $\boldsymbol{p}$ and $\boldsymbol{q})$ such that $\boldsymbol{p}=p$ a.s. and $\boldsymbol{q} \sim \tau$, the pair $(\boldsymbol{p},\boldsymbol{q})$ constitutes a (two-period, $\Delta(\Theta)$-valued) martingale.%
-	\footnote{Given $N \in \N \cup \{+\infty\}$ and a non-empty convex subset $Y$ of a vector space, a sequence $(\boldsymbol{y}_n)_{n=1}^N$ of $Y$-valued random variables constitutes an ($N$-period, $Y$-valued) \emph{martingale} iff $\E( \boldsymbol{y}_{n+1} | \boldsymbol{y}_n ) = \boldsymbol{y}_n$ a.s. for every $n \in \{1,2,\dots,N-1\}$.}
+	\footnote{Given $N \in \N \cup \{+\infty\}$ and a non-empty convex subset $Y$ of a vector space, a sequence $(\boldsymbol{y}_n)_{n=1}^N$ of $Y$-valued random variables constitutes an ($N$-period, $Y$-valued) \emph{martingale} iff $\E( \boldsymbol{y}_{n+1} | \boldsymbol{y}_1, \dots, \boldsymbol{y}_n ) = \boldsymbol{y}_n$ a.s. for every $n \in \{1,2,\dots,N-1\}$.}
 The interpretation of $(\boldsymbol{p},\boldsymbol{q})$ is that it is the stochastic process representing the decision-maker's belief as it (randomly) evolves over time: her prior belief (before information arrived) is $\boldsymbol{p}$ ($=p$ a.s.), and her posterior belief (after information arrived) is $\boldsymbol{q}$. For this reason, property~\ref{split:bary} is often called the `martingale property (of beliefs)'.
 
 A fourth and final name for property~\ref{split:bary} is `Bayes plausibility', as in `$\tau$ is Bayes plausible (given $p$)'.
@@ -202,7 +202,7 @@ The signal structure $\langle S, \pi \rangle $ constructed in the proof that \re
 	%
 	\label{remark:split_infinite}
 	
-	The \hyperref[lemma:split]{splitting lemma} can of course be extended from the finite-support posterior-belief distributions $\Delta^0(\Delta(X))$ to the set $\Delta(\Delta(X))$ of all probability measures on (the Borel $\sigma$-algebra on) $\Delta(X)$. This requires relaxing the definition of a signal structure $\langle S, \pi \rangle $ by allowing $S$ to have infinitely many elements.
+	The \hyperref[lemma:split]{splitting lemma} can of course be extended from the finite-support posterior-belief distributions $\Delta^0(\Delta(\Theta))$ to the set $\Delta(\Delta(\Theta))$ of all probability measures on (the Borel $\sigma$-algebra on) $\Delta(\Theta)$. This requires relaxing the definition of a signal structure $\langle S, \pi \rangle $ by allowing $S$ to have infinitely many elements.
 	%
 \end{remark}
 
@@ -359,11 +359,11 @@ This is the multi-dimensional version of the convex order discussed in \cref{mon
 	%
 	Recall that for any non-empty finite $B \subseteq \R^\Theta$, $V_B$ denotes the function $\Delta(\Theta) \to \R$ given by $V_B(q) = \max_{b \in B} b \cdot q$ for each $q \in \Delta(\Theta)$. For any $b \in \R^\Theta$, $q \mapsto b \cdot q$ is affine, hence convex. Since the maximum of convex functions is convex (why?), it follows that for any non-empty finite $B \subseteq \R^\Theta$, $V_B$ is convex. Furthermore, for any non-empty finite $B \subseteq \R^\Theta$, $V_B$ is continuous (why?). Hence if property~\ref{blackwell:cvx} holds, then $\int V_B \dd \tau \leq \int V_B \dd \tau'$ for every non-empty finite $B \subseteq \R^\Theta$, which is to say that property~\ref{blackwell:info} holds.
 
-	For the converse, note that any continuous convex function $\phi : \Delta(\Theta) \to \R$ can be approximated arbitrarily well by $V_B$ for some non-empty finite $B \subseteq \R^\Theta$: precisely, for any continuous convex $\phi : \Delta(\Theta) \to \R$ and any non-empty finite set $Q \subseteq \Delta(\Theta)$, there exists a non-empty finite $B \subseteq \R^\Theta$ such that $V_B=\phi$ on $Q$. In particular, for each $q \in Q$, let $b_q \in \R^\Theta$ be a(n arbitrary) subgradient of $\phi$ at $q$;%
-		\footnote{A vector $b \in \R^\Theta$ is a \emph{subgradient} of $\phi$ at $q \in \Delta(X)$ iff the affine function $q' \mapsto b \cdot (q'-q) + \phi(q)$ lies pointwise below $\phi$: that is, iff $b \cdot (q'-q) \leq \phi(q')-\phi(q)$ for every $q' \in \Delta(\Theta)$. $\phi$ admits a subgradient at every $q \in \Delta(X)$ since it is continuous and convex.}
-	then $B \coloneqq \{ b_q : q \in Q \}$ has the property that $V_B=\phi$ on $Q$ (convince yourself).
+	For the converse, note that any continuous convex function $\phi : \Delta(\Theta) \to \R$ can be approximated arbitrarily well by $V_B$ for some non-empty finite $B \subseteq \R^\Theta$. To be precise, for any continuous convex $\phi : \Delta(\Theta) \to \R$ and any non-empty finite set $Q \subseteq \interior(\Delta(\Theta))$, there exists a non-empty finite $B \subseteq \R^\Theta$ such that $V_B=\phi$ on $Q$. In particular, for each $q \in Q$, let $v_q \in \R^\Theta$ be a(n arbitrary) subgradient of $\phi$ at $q$,%
+		\footnote{$v \in \R^\Theta$ is a \emph{subgradient} of $\phi$ at $q \in \Delta(\Theta)$ iff the affine function $q' \mapsto v \cdot (q'-q) + \phi(q)$ lies pointwise below $\phi$: that is, iff $v \cdot (q'-q) \leq \phi(q')-\phi(q)$ for every $q' \in \Delta(\Theta)$. $\phi$ admits a subgradient at every $q \in \interior(\Delta(\Theta))$ since it is continuous and convex.}
+	and let $b_q \coloneqq v_q + [ \phi(q) - v_q \cdot q ]$; then $B \coloneqq \{ b_q : q \in Q \}$ has the property that $V_B=\phi$ on $Q$ (convince yourself). By a simple limit argument, it follows that for any continuous convex $\phi : \Delta(\Theta) \to \R$, any non-empty finite set $Q \subseteq \Delta(\Theta)$, and any $\eps>0$, there exists a non-empty finite $B \subseteq \R^\Theta$ such that $\sup_{q \in Q} \abs*{V_B(q)-\phi(q)} < \eps$.
 
-	Now, suppose that property~\ref{blackwell:info} holds, and fix an arbitrary continuous convex function $\phi : \Delta(\Theta) \to \R$; we must show that $\int \phi \dd \tau \leq \int \phi \dd \tau'$. Let $Q \coloneqq \supp(\tau) \cup \supp(\tau')$, and note that it is finite. Hence by the preceding paragraph, there exists a non-empty finite $B \subseteq \R^\Theta$ such that $V_B=\phi$ on $Q$, whence $\int \phi \dd \tau = \int V_B \dd \tau \leq \int V_B \dd \tau' = \int \phi \dd \tau'$.
+	Now, suppose that property~\ref{blackwell:info} holds, and fix an arbitrary continuous convex function $\phi : \Delta(\Theta) \to \R$; we must show that $\int \phi \dd \tau \leq \int \phi \dd \tau'$. Let $Q \coloneqq \supp(\tau) \cup \supp(\tau')$, and note that it is finite. By the preceding paragraph, there exists a sequence $(B^\eps)_{\eps>0}$ of subsets of $\R^\Theta$ such that $\int V_{B^\eps} \dd (\tau'-\tau) \to \int \phi \dd (\tau'-\tau)$. Since $\int V_{B^\eps} \dd (\tau'-\tau) \geq 0$ for every $\eps>0$ by property~\ref{blackwell:info}, it follows that $\int \phi \dd (\tau'-\tau) \geq 0$.
 	%
 \end{proof}
 
@@ -380,9 +380,9 @@ To prove that \ref{blackwell:info} implies \ref{blackwell:garb} in {\hyperref[th
 Given a signal structure $\langle S, \pi \rangle $, the decision-maker's (possibly random) choice from $A$ contingent on the realised signal $s \in S$ is described by a map $\alpha : S \to \Delta(A)$, called a \emph{decision rule,} and the composition $\alpha \circ \pi : \Theta \to \Delta(A)$ is defined in the natural way:
 %
 \begin{equation*}
-	(\alpha \circ \pi)(\theta)
-	\coloneqq \sum_{s \in S} \sum_{a \in A} \alpha(a|s) \pi(s|\theta)
-	\quad \text{for each $\theta \in \Theta$.}
+	(\alpha \circ \pi)(a|\theta)
+	\coloneqq \sum_{s \in S} \alpha(a|s) \pi(s|\theta)
+	\quad \text{for all $a \in A$ and $\theta \in \Theta$.}
 \end{equation*}
 %
 The map $\alpha \circ \pi$ describes the distribution of actions conditional on the state when decision rule $\alpha \in \Delta(A)^S$ is employed. For each signal structure $\langle S, \pi \rangle $ and non-empty finite set $A$, we write $\mathcal{D}(\langle S, \pi \rangle ,A) \subseteq \Delta(A)^\Theta$ for the set of all attainable conditional distributions:

@@ -1,4 +1,4 @@
-% Copyright (c) 2025 Carl Martin Ludvig Sinander.
+% Copyright (c) 2026 Carl Martin Ludvig Sinander.
 
 % This program is free software: you can redistribute it and/or modify
 % it under the terms of the GNU General Public License as published by
@@ -131,12 +131,14 @@ To state the next property, we need a piece of notation: for an act $f : S \to \
 		f(t) & \text{otherwise.}
 	\end{cases}
 \end{equation*}
+%
+Given a preference $\succsim$, we call a state $s \in S$ \emph{$\succsim$-non-null} iff there exist an act $f : S \to \Delta(X)$ and a lottery $p \in \Delta(X)$ such that $f_s p \succ f$. (In other words, the decision-maker cares what happens in state $s$.)
 
 \begin{definition}
 	%
 	\label{definition:aa_sub}
 	%
-	In the Anscombe--Aumann framework with states $S$ and alternatives $X$, a preference $\succsim$ satisfies \emph{state-separability} iff for any act $f : S \to \Delta(X)$, any lotteries $p,q \in \Delta(X)$ and any states $s,t \in S$, $f_s p \succsim f_s q$ implies $f_t p \succsim f_t q$.
+	In the Anscombe--Aumann framework with states $S$ and alternatives $X$, a preference $\succsim$ satisfies \emph{state-separability} iff for any act $f : S \to \Delta(X)$ and any lotteries $p,q \in \Delta(X)$, if $f_s p \succsim f_s q$ for some state $s \in S$, then $f_t p \succsim f_t q$ for every $\succsim$-non-null state $t \in S$.
 	%
 \end{definition}
 
@@ -182,9 +184,9 @@ the version above with state-separability is from \textcite{Kreps1988}.
 
 	Since $\succsim$ satisfies independence and mixture continuity, the \hyperref[theorem:mix]{mixture-space theorem} (\cref{ch_mix}, \cpageref{theorem:mix}) implies that there exists an affine $U : \Delta(X)^S \to \R$ that represents $\succsim$. By \hyperref[exercise:mix_acts_affine]{\Cref*{exercise:mix_acts}} (\cpageref{exercise:mix_acts_affine}), it follows that there exists a collection $(u_s)_{s \in S}$ of functions $X \to \R$ such that $U(f) = \sum_{s \in S} \int u_s \dd[f(s)]$ for each act $f : S \to \Delta(X)$.
 
-	Call a state $s \in S$ \emph{non-null} iff there exist an act $f : S \to \Delta(X)$ and a lottery $p \in \Delta(X)$ such that $f_s p \succ f$. (In other words, the decision-maker cares what happens in state $s$.) It is easy to see that for each state $s \in S$, $u_s$ is non-constant if and only if $s$ is non-null. By non-degeneracy, there must be at least one non-null state; let $s^\star \in S$ be one such.
+	It is easy to see that for each state $s \in S$, $u_s$ is non-constant if and only if $s$ is $\succsim$-non-null. By non-degeneracy, there must be at least one $\succsim$-non-null state; let $s^\star \in S$ be one such.
 
-	Since $\succsim$ is represented by $U$ and $U(g) = \sum_{t \in S} \int u_t \dd[g(t)]$ for each act $g : S \to \Delta(X)$, it holds for any act $f : S \to \Delta(X)$, any lotteries $p,q \in \Delta(X)$ and any non-null state $s \in S$ that
+	Since $\succsim$ is represented by $U$ and $U(g) = \sum_{t \in S} \int u_t \dd[g(t)]$ for each act $g : S \to \Delta(X)$, it holds for any act $f : S \to \Delta(X)$, any lotteries $p,q \in \Delta(X)$ and any $\succsim$-non-null state $s \in S$ that
 	%
 	\begin{align*}
 		&\int u_s \dd p \geq \int u_s \dd q
@@ -207,7 +209,7 @@ the version above with state-separability is from \textcite{Kreps1988}.
 	%
 	where the third `iff' holds by state-separability. This shows that $u_s$ and $u_{s^\star}$ represent the same preference over lotteries $\Delta(X)$. Hence by the \hyperref[theorem:vNM]{von Neumann--Morgenstern theorem} (\cref{ch_risk}, \cpageref{theorem:vNM}), there exist $a_s > 0$ and $b_s \in \R$ such that $u_s = a_s u_{s^\star} + b_s$. For any null state $s \in S$, since $u_s$ is constant, we have $u_s = a_s u_{s^\star} + b_s$ where $a_s=0$ and $b_s \in \R$. Let $a_{s^\star} \coloneqq 1$ and $b_{s^\star} \coloneqq 0$.
 
-	Let $a \coloneqq \sum_{s \in S} a_s$ and $b \coloneqq \sum_{s \in S} b_s$. Let $u \coloneqq a u_{s^\star} + b$, and define $\mu : S \to \R$ by $\mu(s) \coloneqq a_s/a$ for each $s \in S$. Then $\mu$ is a probability on $S$, $u$ is non-constant since $s^\star$ is non-null, and for each act $f : S \to \Delta(X)$,
+	Let $a \coloneqq \sum_{s \in S} a_s$ and $b \coloneqq \sum_{s \in S} b_s$. Let $u \coloneqq a u_{s^\star} + b$, and define $\mu : S \to \R$ by $\mu(s) \coloneqq a_s/a$ for each $s \in S$. Then $\mu$ is a probability on $S$, $u$ is non-constant since $s^\star$ is $\succsim$-non-null, and for each act $f : S \to \Delta(X)$,
 	%
 	\begin{multline*}
 		U(f)
