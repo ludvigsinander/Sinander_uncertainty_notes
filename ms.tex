@@ -71,7 +71,7 @@
 \author{Ludvig Sinander \\
 University of Oxford}
 
-\date{\small This version: 5 February 2026}
+\date{\small This version: 17 November 2026}
 
 % \date{\emph{version:} {\datestyle\today} at {\currenttime} \\ \hspace{0pt} \\ \hspace{0pt} \\ \bfseries please report typos!}
 
@@ -126,7 +126,7 @@ Visit \href{https://www.gnu.org/licenses/copyleft}{gnu.org/licenses/copyleft} to
 %%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%
 
-These are the notes for the uncertainty component of the first-year graduate microeconomics sequence at Oxford, which I first taught in autumn 2025. A few parts of these notes are drawn pretty much verbatim from \textcite{oo}; thanks to my co-authors acquiescing to this. Thanks to Malayvardhan Prajapati for expert proofreading, and to Oscar Calvert, Pakorn Nunta-aree, Augustus Smith and Kiisa Uusitalo for reporting typos.
+These are the notes for the uncertainty component of the first-year graduate microeconomics sequence at Oxford, which I first taught in autumn 2025. A few parts of these notes are drawn pretty much verbatim from \textcite{oo}; thanks to my co-authors acquiescing to this. Thanks to Malayvardhan Prajapati for expert proofreading, and to Oscar Calvert, Pakorn Nunta-aree, Luke McWatters, Augustus Smith, Mukund Soni and Kiisa Uusitalo for reporting typos.
 
 
 
@@ -153,7 +153,7 @@ These are the notes for the uncertainty component of the first-year graduate mic
 %%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%
 
-These notes cover some of the essentials of choice and learning under uncertainty, at the graduate level. The focus is on economic questions. (Rather than on psychological experiments, whether in thought, lab, or field. Or functional analysis.) The topics are risk (e.g. expected utility, risk attitude, stochastic orders), ambiguity (in particular, subjective expected utility), and information (in especially its value). These topics are introduced in \cref{ch0:overview} below.
+These notes cover some of the essentials of choice and learning under uncertainty, at the graduate level. The focus is on economic questions. (Rather than on psychological experiments, whether in thought, lab, or field. Or philosophical questions, or functional analysis.) The topics are risk (e.g. expected utility, risk attitude, stochastic orders), ambiguity (in particular, subjective expected utility), and information (especially its value). These topics are introduced in \cref{ch0:overview} below.
 
 The mathematical prerequisites are relatively slight: some basic real analysis (limits, continuity) is presumed, as well as the separating hyperplane theorem. Some useful mathematical background is reviewed in \cref{math}.
 
@@ -175,9 +175,9 @@ Most economic decisions are made under uncertainty. For example, when choosing b
 An alternative is a complete description of whatever the decision-maker ultimately cares about (in the stylised economic model at hand). Often, each alternative is a real number, interpreted as a monetary amount; this captures a decision-maker who cares (only) about money, or more generally a decision-maker whose preferences are additively separable between money and everything else of interest to her (which can therefore be ignored for our purposes). In consumer-choice contexts, alternatives are bundles of commodities; in matching, alternatives are potential match partners; in public finance, alternatives might be income or wealth distributions.
 
 \emph{Prospects} are the actual objects of choice, which the decision-maker must compare and ultimately choose between. Examples of prospects include projects, insurance policies, portfolios, spouses, occupations, and locations. Each prospect, if chosen, produces a certain alternative, and what the decision-maker ultimately cares about is not which prospect was chosen per se, but rather which alternative was produced.%
-	\footnote{\label{footnote:consequentialism}This property of `caring only about which alternative was produced' is sometimes called \emph{consequentialism} by decision theorists. The way I've introduced things, consequentialism holds by definition of the alternatives: the whole point (to an economist) of introducing the concept of `alternatives' in the first place (as distinct from the prospects) is to guarantee consequentialism. Decision theorists often think of consequentialism more like an assumption; rather than letting the alternatives be whatever the decision-maker cares about as here, a decision theorist may fix the alternatives to be something or other (monetary prizes, say) and then assume, or not assume, that consequentialism is satisfied. From the perspective of economic modelling, this is conceptually confused and unhelpful. However, decision theorists are often in the business of \emph{psychological} modelling (studying behavioural quirks motivated by experiments), and for this it is arguably desirable to allow for conceptual confusion (`violating consequentialism' is one kind of quirk).}
+	\footnote{\label{footnote:consequentialism}This property of `caring only about which alternative was produced' is sometimes called \emph{consequentialism} by decision theorists. The way I've introduced things, consequentialism holds by definition of the alternatives: the whole point (to an economist) of introducing the concept of `alternatives' in the first place (as distinct from the prospects) is to guarantee consequentialism. Decision theorists often think of consequentialism more like an assumption; rather than letting the alternatives be whatever the decision-maker cares about as here, a decision theorist may fix the alternatives to be something or other (monetary prizes, say) and then assume, or not assume, that consequentialism is satisfied. From the perspective of economic modelling, this is conceptually confused and unhelpful. However, decision theorists are often in the business of \emph{psychological} modelling (studying behavioural quirks motivated by experiments or thought experiments), and for this it is arguably desirable to allow for conceptual confusion (`violating consequentialism' is one kind of quirk).}
 
-The key point is that the map from prospects to alternatives it not known to the decision-maker. This may be due to the decision-maker's ignorance, or due to inherent randomness/uncertainty in which alternative will ultimately arise if a given prospect is chosen, or a combination of the two; since the decision-maker cannot distinguish between the two, this distinction will be irrelevant for our purposes.
+The key point is that the map from prospects to alternatives is not known to the decision-maker. This may be due to the decision-maker's ignorance, or due to inherent randomness/uncertainty in which alternative will ultimately arise if a given prospect is chosen, or a combination of the two; since the decision-maker cannot distinguish between the two, this distinction will be irrelevant for our purposes.
 
 The simple way of modelling the decision-maker's uncertainty about how prospects map into alternatives is to assume that each prospect is associated with a \emph{lottery,} meaning a probability distribution over alternatives (if prospect $p$ is chosen, then alternative $x$ arises with probability $p(x)$, alternative $y$ arises with probability $p(y)$, and so on), and to further assume that these probabilities are known both to the decision-maker and to us (the economic modellers).%
 	\footnote{It is common to describe this assumption as meaning that the probabilities are `objective', but that is misleading: they can be `subjective' assessments by the decision-maker. What matters is, rather, that we (the economic modellers) know which lottery corresponds (in the decision-maker's opinion) to which prospect.}
@@ -209,18 +209,18 @@ A binary relation $\succsim$ on $A$ is called \emph{complete} iff for all $a,b \
 
 A \emph{preference} on $A$ is a complete and transitive binary relation on $A$. (It would perhaps be better to say `rational preference' or some such, since it is perfectly possible to imagine a decision-maker who is indecisive or exhibits cyclic choice patterns.) Given a preference $\succsim$ on $A$ and alternatives $a,b, \in A$, we interpret $a \succsim b$ as `the decision-maker weakly prefers $a$ to $b$', $a \succ b$ as `the decision-maker strictly prefers $a$ to $b$', and $a \sim b$ as `the decision-maker is indifferent between $a$ and $b$'.
 
-The orthodox economist's interpretation of $\succsim$ is that it is not some psychological thing, but rather a description how a decision-maker actually \emph{chooses.}%
+The orthodox economist's interpretation of $\succsim$ is that it is not some psychological thing, but rather a description of how a decision-maker actually \emph{chooses.}%
 	\footnote{This is the party line. However, economists do frequently rely on `thicker' concepts of preference, often unwittingly. In utilitarian calculations, for example.}
 We ought really to say `hypothetical' instead of `actual', since to learn the entire binary relation $\succsim$ from observing choices, one would need to observe the decision-maker's choice from every possible binary menu $\{a,b\} \subseteq A$, which is a lot of data except if $A$ is small.%
 	\footnote{A further difficulty is that it is not obvious how indifference $a \sim b$ should be interpreted in choice terms.}
 
-The `decision-maker' whose choices are captured by $\succsim$ may be an individual, but in economic models is it frequently an organisation, such as a firm or a committee.
+The `decision-maker' whose choices are captured by $\succsim$ may be an individual, but in economic models it is frequently an organisation, such as a firm or a committee.
 
 \begin{exercise}
 	%
 	\label{exercise:condorcet}
 	%
-	Assume that $\abs*{A} \geq 3$. There is a committee comprised of three voters. Each voter $i \in \{1,2,3\}$ has a preference $\succsim_i$ with no indifferences (that is, $a \nsim_i b$ for all $a \neq b$ in $A$). Let $\succsim$ denote the majority relation: that is, for any alternatives $a,b \in A$, we have $a \succsim b$ if and only $\abs*{ 
+	Assume that $\abs*{A} \geq 3$. There is a committee comprised of three voters. Each voter $i \in \{1,2,3\}$ has a preference $\succsim_i$ with no indifferences (that is, $a \nsim_i b$ for all $a \neq b$ in $A$). Let $\succsim$ denote the majority relation: that is, for any alternatives $a,b \in A$, we have $a \succsim b$ if and only if $\abs*{ 
 	\{ i \in \{1,2,3\} : a \succ_i b \} } \geq 2$.
 
 	\begin{enumerate}[label=(\alph*)]
@@ -241,7 +241,7 @@ The `decision-maker' whose choices are captured by $\succsim$ may be an individu
 	%
 \end{definition}
 
-Such a function $U$ is called a \emph{utility function,} or \emph{utility representation of $\succsim$.} A decision-maker with preference $\succsim$ with utility representation $U$ behaves, when making decisions, as if she were maximising $U$: her choice from any non-empty menu $M \subseteq A$ will be (an element of) $\argmax_{a \in M} U(a)$. In principle, there is nothing that we (as analysts) can do with a utility function that cannot be done using the the `primitive' binary relation $\succsim$, but in practice maximising a real-valued function is mathematically more tractable than working with a binary relation. This tractability is the (only) reason why we typically work with utility functions.
+Such a function $U$ is called a \emph{utility function,} or \emph{utility representation of $\succsim$.} A decision-maker with preference $\succsim$ with utility representation $U$ behaves, when making decisions, as if she were maximising $U$: her choice from any non-empty menu $M \subseteq A$ will be (an element of) $\argmax_{a \in M} U(a)$. In principle, there is nothing that we (as analysts) can do with a utility function that cannot be done using the `primitive' binary relation $\succsim$, but in practice maximising a real-valued function is mathematically more tractable than working with a binary relation. This tractability is the (only) reason why we typically work with utility functions.
 
 \begin{exercise}
 	%
@@ -273,7 +273,7 @@ In practice, the usual way of ensuring the existence of a utility representation
 	%
 	\label{theorem:debreu}
 	%
-	Let $A$ be a non-empty set, and $\succsim$ a preference on $A$. Suppose that $A$ is a convex subset of $\R^n$ (where $n \in \N$) and that for every $a \in A$, the upper and lower contour sets $\{ b \in A : b \precsim a \}$ and $\{ b \in A : b \succsim a \}$ are closed. Then $\succsim$ admits a utility representation.
+	Let $A$ be a non-empty set, and $\succsim$ a preference on $A$. Suppose that $A$ is a convex subset of $\R^n$ (where $n \in \N$) and that for every $a \in A$, the upper and lower contour sets $\{ b \in A : b \succsim a \}$ and $\{ b \in A : b \precsim a \}$ are closed. Then $\succsim$ admits a utility representation.
 	%
 \end{theorem}
 

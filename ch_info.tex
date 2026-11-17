@@ -28,7 +28,7 @@ Relative to the previous chapter, we slightly change notation by writing $\Theta
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\emph{This text of this section draws somewhat on \textcite{disc}.}
+\emph{The text of this section draws somewhat on \textcite{disc}.}
 
 There is a non-empty finite set $\Theta$ of states of the world. The state $\theta \in \Theta$ summarises all payoff-relevant matters of fact; in particular, it fully pins down the payoff consequences of any prospect available to the decision-maker. (We will study choice among prospects/acts in \cref{info:blackwell} below.)
 
@@ -39,7 +39,7 @@ where $\Delta(\Theta)$ denotes the set of all probabilities on $\Theta$ (functio
 The distribution $p$ is called the decision-maker's \emph{prior belief} (or simply `prior'). The word `prior' is meant to emphasise that this is the decision-maker's belief \emph{before} she receives information.
 
 Information is modelled as follows. A \emph{signal structure} is a pair $\langle S, \pi \rangle $, where $S$ is a non-empty finite set and $\pi : S \times \Theta \to [0,1]$ satisfies $\sum_{s \in S} \pi(s|\theta) = 1$ for each state $\theta \in \Theta$.%
-	\footnote{Signal structures are also called `information structures or `(Blackwell) experiments.'}
+	\footnote{Signal structures are also called `information structures' or `(Blackwell) experiments.'}
 The interpretation is that $S$ is the set of possible signals $s$, and that $\pi(s|\theta)$ is the probability that signal $s$ will be observed conditional on the state being $\theta$. We assume that for every signal $s \in S$, there is at least one state $\theta \in \Theta$ such that $\pi(s|\theta)>0$.%
 	\footnote{This assumption is without loss of generality, because if there were a signal $s \in S$ with $\pi(s|\theta)=0$ for every $\theta \in \Theta$, then we could neglect $s$ entirely, by deleting it from $S$.}
 
@@ -110,7 +110,7 @@ The following result characterises inducible distributions of posterior beliefs.
 	%
 	\label{lemma:split}
 	%
-	\footnotetext{A version of this result appears already in \textcite{HardyLittlewoodPolya1934}. In the literature, you will often see the \hyperref[lemma:split]{splitting lemma} attributed either to \textcite{AumannMaschler1995} or to \textcite{KamenicaGentzkow2011}.}
+	\footnotetext{A version of this result appears already in \textcite{HardyLittlewoodPolya1929,HardyLittlewoodPolya1934}. In the literature, you will often see the \hyperref[lemma:split]{splitting lemma} attributed either to \textcite{AumannMaschler1995} or to \textcite{KamenicaGentzkow2011}.}
 	Fix a non-empty finite set $\Theta$. For a (prior) belief $p \in \interior(\Delta(\Theta))$ and a finite-support distribution $\tau \in \Delta^0(\Delta(\Theta))$ of (posterior) beliefs, the following are equivalent:
 
 	\begin{enumerate}[label=(\alph*)]
@@ -131,7 +131,7 @@ Property~\ref{split:bary} says that the mean (or `average' or `expectation') of 
 
 Another way of talking about property~\ref{split:bary} is in terms of belief `splits'. We can think of each $\tau \in \Delta^0(\Delta(\Theta))$ that satisfies property~\ref{split:bary} as a `split' of the prior belief $p$, whereby probability mass is taken from $p$ and distributed `outwards' in such a way that the mean (or barycentre) remains equal to $p$. In this language, the \hyperref[lemma:split]{splitting lemma} says that all and only mean-preserving belief splits are inducible.
 
-Yet another language for property~\ref{split:bary} is that of martingales. In particular, property~\ref{split:bary} holds if and only if for any $\Delta(\Theta)$-valued random variables $\boldsymbol{p}$ and $\boldsymbol{q})$ such that $\boldsymbol{p}=p$ a.s. and $\boldsymbol{q} \sim \tau$, the pair $(\boldsymbol{p},\boldsymbol{q})$ constitutes a (two-period, $\Delta(\Theta)$-valued) martingale.%
+Yet another language for property~\ref{split:bary} is that of martingales. In particular, property~\ref{split:bary} holds if and only if for any $\Delta(\Theta)$-valued random variables $\boldsymbol{p}$ and $\boldsymbol{q}$ such that $\boldsymbol{p}=p$ a.s. and $\boldsymbol{q} \sim \tau$, the pair $(\boldsymbol{p},\boldsymbol{q})$ constitutes a (two-period, $\Delta(\Theta)$-valued) martingale.%
 	\footnote{Given $N \in \N \cup \{+\infty\}$ and a non-empty convex subset $Y$ of a vector space, a sequence $(\boldsymbol{y}_n)_{n=1}^N$ of $Y$-valued random variables constitutes an ($N$-period, $Y$-valued) \emph{martingale} iff $\E( \boldsymbol{y}_{n+1} | \boldsymbol{y}_1, \dots, \boldsymbol{y}_n ) = \boldsymbol{y}_n$ a.s. for every $n \in \{1,2,\dots,N-1\}$.}
 The interpretation of $(\boldsymbol{p},\boldsymbol{q})$ is that it is the stochastic process representing the decision-maker's belief as it (randomly) evolves over time: her prior belief (before information arrived) is $\boldsymbol{p}$ ($=p$ a.s.), and her posterior belief (after information arrived) is $\boldsymbol{q}$. For this reason, property~\ref{split:bary} is often called the `martingale property (of beliefs)'.
 
@@ -185,7 +185,7 @@ A fourth and final name for property~\ref{split:bary} is `Bayes plausibility', a
 	Hence $p$ and $\langle S, \pi \rangle $ together induce $\tau$: for each $q \in \Delta(\Theta)$,
 	%
 	\begin{align*}
-		\sum_{\substack{(\theta,q') \in \Theta \times S :\\ p_{\langle S, \pi \rangle }(\theta|q') = q}} p(\theta) \pi(q'|\theta)
+		\sum_{\substack{(\theta,q') \in \Theta \times S :\\ p_{\langle S, \pi \rangle }(\cdot|q') = q}} p(\theta) \pi(q'|\theta)
 		&= \sum_{\substack{(\theta,q') \in \Theta \times S :\\ q' = q}} p(\theta) \pi(q'|\theta)
 		\\
 		&= \sum_{\theta \in \Theta} p(\theta) \pi(q|\theta)
@@ -207,14 +207,14 @@ The signal structure $\langle S, \pi \rangle $ constructed in the proof that \re
 \end{remark}
 
 The importance of the \hyperref[lemma:split]{splitting lemma} comes from the fact that in standard economic models (without things like framing effects), all that matters about a signal structure $\langle S, \pi \rangle $ is which distribution $\tau$ of posterior beliefs it (together with the prior belief $p$) induces. Concretely, a typical model features a (subjective-)expected-utility decision-maker choosing an action $a$ from a non-empty finite set $A$ to maximise $\sum_{\theta \in \Theta} u(a,\theta) q(\theta)$, where $q \in \interior(\Delta(\Theta))$ is her belief.%
-	\footnote{In the language and notation of the Savage framework (\cref{ch_ambi}), the set of payoff-relevant consequences as $Z \coloneqq A \times \Theta$, the risk attitude $u$ is a map $Z \to \R$, and each action $a \in A$ corresponds to the Savage act $f_a : \Theta \to Z$ given by $f_a(\theta) \coloneqq (a,\theta)$ for each $\theta \in \Theta$.}
+	\footnote{In the language and notation of the Savage framework (\cref{ch_ambi}), the set of payoff-relevant consequences is $Z \coloneqq A \times \Theta$, the risk attitude $u$ is a map $Z \to \R$, and each action $a \in A$ corresponds to the Savage act $f_a : \Theta \to Z$ given by $f_a(\theta) \coloneqq (a,\theta)$ for each $\theta \in \Theta$.}
 Then letting $a : \Delta(\Theta) \to \R$ be an optimal decision rule,%
 	\footnote{That is, one which satisfies $a(q) \in \argmax_{a \in A} \sum_{\theta \in \Theta} u(a,\theta) q(\theta)$ for each $q \in \Delta(\Theta)$.}
 the decision-maker's expected payoff is $U(q) \coloneqq \sum_{\theta \in \Theta} u(a(q),\theta) q(\theta)$, i.e. it is a function of the belief $q \in \Delta(\Theta)$ alone. Her ex-ante expected utility then depends only on the distribution $\tau \in \Delta^0(\Delta(\Theta))$ of posterior beliefs: it is $\mathcal{U}(\tau) \coloneqq \int U \dd \tau$.
 
 The same goes for the payoff of any other party, e.g. other decision-makers or a `principal': if their payoff function is $v : \Theta \times A \to \R$, then their interim expected payoff depends only on the posterior belief $q \in \Delta(\Theta)$, via $V(q) \coloneqq \sum_{\theta \in \Theta} v(a(q),\theta) q(\theta)$ for each $q \in \Delta(\Theta)$, so their ex-ante expected payoff depends only on the distribution $\tau$ of posterior beliefs, via $\mathcal{V}(\tau) \coloneqq \int V \dd \tau$. Similar remarks apply if there are multiple decision-makers taking actions; in that case, $A$ is a set of action profiles, and $a(q)$ is an equilibrium given belief $q \in \Delta(\Theta)$ (where in case of multiple equilibria, some selection is made).
 
-This was all just to say that all what matters about a signal structure $\langle S, \pi \rangle $ is which distribution $\tau$ of posterior beliefs it (together with the prior belief $p$) induces. This is useful because working with distributions of posterior beliefs is much more tractable than signal structures. This tractability is what has made the literatures on information design and on costly information acquisition (a.k.a. `rational inattention') take off, for example. However, if we are to move from working with signal structures to working with distributions of beliefs, we must first identify which are the feasible distributions, i.e. which distributions are actually induced by some signal structure (and the prior belief $p$). The \hyperref[lemma:split]{splitting lemma} answers this question, and the answer is furthermore very simple: property~\ref{split:bary} describes a constraint that is mathematically very tractable.
+This was all just to say that all that matters about a signal structure $\langle S, \pi \rangle $ is which distribution $\tau$ of posterior beliefs it (together with the prior belief $p$) induces. This is useful because working with distributions of posterior beliefs is much more tractable than signal structures. This tractability is what has made the literatures on information design and on costly information acquisition (a.k.a. `rational inattention') take off, for example. However, if we are to move from working with signal structures to working with distributions of beliefs, we must first identify which are the feasible distributions, i.e. which distributions are actually induced by some signal structure (and the prior belief $p$). The \hyperref[lemma:split]{splitting lemma} answers this question, and the answer is furthermore very simple: property~\ref{split:bary} describes a constraint that is mathematically very tractable.
 
 
 
@@ -233,7 +233,7 @@ In this section, we study the (instrumental) value of information. In particular
 	\left( \sum_{\theta \in \Theta} \pi(s|\theta) p(\theta) \right) .
 \end{equation*}
 
-Our language so far has described the decision-maker's problem via the pair $(A,u)$; in other words, we have been distinguishing between actions $a \in A$ and their payoff consequences, captured by the vector $( u(a,\theta) )_{\theta \in \Theta} \in \R^\Theta$ of real numbers that the payoffs of action $a \in A$ in each state. (We could write $\R^{\abs*{\Theta}}$ instead of $\R^\Theta$, if you prefer.) All that matters about an action is its payoff vector. We henceforth identify each action $a$ with its payoff vector $b = (u(a,\theta))_{\theta \in \Theta} \in \R^\Theta$. The decision-maker's problem is then to choose an `action' $b \in B$ from a non-empty finite set $B \subseteq \R^\Theta$, with the payoff in state $\theta$ of choosing action $b \in B$ being $b(\theta) \in \R$ (the $\theta$th entry of the vector $b$).%
+Our language so far has described the decision-maker's problem via the pair $(A,u)$; in other words, we have been distinguishing between actions $a \in A$ and their payoff consequences, captured by the vector $( u(a,\theta) )_{\theta \in \Theta} \in \R^\Theta$ of payoffs of action $a \in A$ in each state. (We could write $\R^{\abs*{\Theta}}$ instead of $\R^\Theta$, if you prefer.) All that matters about an action is its payoff vector. We henceforth identify each action $a$ with its payoff vector $b = (u(a,\theta))_{\theta \in \Theta} \in \R^\Theta$. The decision-maker's problem is then to choose an `action' $b \in B$ from a non-empty finite set $B \subseteq \R^\Theta$, with the payoff in state $\theta$ of choosing action $b \in B$ being $b(\theta) \in \R$ (the $\theta$th entry of the vector $b$).%
 	\footnote{This parsimonious formalism is due to \textcite{Blackwell1951,Blackwell1953}. So if you like mnemonics, think of `$b$' and `$B$' as standing for `Blackwell' (just as `$a$' and `$A$' stand for `action').}
 
 In this more compact language, the decision-maker's interim payoff as a function of her posterior belief $q \in \Delta(\Theta)$ is
@@ -259,7 +259,7 @@ Although I have talked as if the decision problem $B$ were given, we shall in fa
 	%
 	\label{definition:moreinfo}
 	%
-	Let $\Theta$ be non-empty and finite, let $\langle S, \pi \rangle $ and $\langle S', \pi' \rangle $ be signal structures, and fix a (prior) belief $p \in \interior(\Delta(\Theta))$. Write $\tau,\tau' \in \Delta^0(\Delta(\Theta))$ for the distributions of posterior beliefs induced by $\langle S, \pi \rangle $ and $p$ and by $\langle S', \pi' \rangle $ and $p$, respectively. We say that $\langle S, \pi \rangle $ is \emph{Blackwell less informative than} $\langle S', \pi' \rangle $ (given $p$) if and only $\int V_B \dd \tau \leq \int V_B \dd \tau'$ for every non-empty finite $B \subseteq \R^\Theta$.
+	Let $\Theta$ be non-empty and finite, let $\langle S, \pi \rangle $ and $\langle S', \pi' \rangle $ be signal structures, and fix a (prior) belief $p \in \interior(\Delta(\Theta))$. Write $\tau,\tau' \in \Delta^0(\Delta(\Theta))$ for the distributions of posterior beliefs induced by $\langle S, \pi \rangle $ and $p$ and by $\langle S', \pi' \rangle $ and $p$, respectively. We say that $\langle S, \pi \rangle $ is \emph{Blackwell less informative than} $\langle S', \pi' \rangle $ (given $p$) if and only if $\int V_B \dd \tau \leq \int V_B \dd \tau'$ for every non-empty finite $B \subseteq \R^\Theta$.
 	%
 \end{definition}
 
@@ -293,7 +293,7 @@ This is a comparative notion of the \emph{instrumental} value of information: th
 	%
 	\label{definition:garbling}
 	%
-	Let $\Theta$ be non-empty and finite, and let $\langle S, \pi \rangle $ and $\langle S', \pi' \rangle $ be signal structures. A \emph{Markov kernel from $\langle S', \pi' \rangle $ to $\langle S, \pi \rangle $} is a map $g : S' \to \Delta(S)$ such that $\pi(s|\theta) = \sum_{s' \in S} g(s|s') \pi'(s'|\theta)$ for each $\theta \in \Theta$ and $s \in S$. We say that $\langle S, \pi \rangle $ is a \emph{garbling} of $\langle S', \pi' \rangle $ if and only if there exists a Markov kernel from $\langle S', \pi' \rangle $ to $\langle S, \pi \rangle $.
+	Let $\Theta$ be non-empty and finite, and let $\langle S, \pi \rangle $ and $\langle S', \pi' \rangle $ be signal structures. A \emph{Markov kernel from $\langle S', \pi' \rangle $ to $\langle S, \pi \rangle $} is a map $g : S' \to \Delta(S)$ such that $\pi(s|\theta) = \sum_{s' \in S'} g(s|s') \pi'(s'|\theta)$ for each $\theta \in \Theta$ and $s \in S$. We say that $\langle S, \pi \rangle $ is a \emph{garbling} of $\langle S', \pi' \rangle $ if and only if there exists a Markov kernel from $\langle S', \pi' \rangle $ to $\langle S, \pi \rangle $.
 	%
 \end{definition}
 
@@ -317,7 +317,7 @@ Garbling is a purely statistical notion of `less informative than', making no re
 
 Another purely statistical sense in which one signal structure may be `less informative' than another is for the posterior-belief distribution induced by the former signal structure to be less dispersed, meaning that beliefs `move less'. The following is a standard notion of `less dispersed than'.
 
-\begin{definition}[\cite{HardyLittlewoodPolya1934}]
+\begin{definition}[\cite{HardyLittlewoodPolya1929,HardyLittlewoodPolya1934}]
 	%
 	\label{definition:belief_dispersed}
 	%
@@ -331,7 +331,7 @@ This is the multi-dimensional version of the convex order discussed in \cref{mon
 	%
 	\label{exercise:fullnoinfo_cvx}
 	%
-	Fix a belief $p \in \interior(\Delta(\Theta))$ and a finite-support posterior-mean distribution $\tau \in \Delta^0(\Delta(\Theta))$, and recall from \cpageref{exercise:fullnoinfo} the definitions of $\tau_\star$ and $\tau^\star$. Show that there exists a signal structure $\langle S, \pi \rangle $ such that $p$ and $\langle S, \pi \rangle $ together induce $\tau$ if and only if $\tau_\star \lesssim_{\text{cvx}} \tau$ if and only if $\tau \lesssim_{\text{cvx}} \tau^\star$.
+	Fix a belief $p \in \interior(\Delta(\Theta))$ and a finite-support posterior-belief distribution $\tau \in \Delta^0(\Delta(\Theta))$, and recall from \cpageref{exercise:fullnoinfo} the definitions of $\tau_\star$ and $\tau^\star$. Show that there exists a signal structure $\langle S, \pi \rangle $ such that $p$ and $\langle S, \pi \rangle $ together induce $\tau$ if and only if $\tau_\star \lesssim_{\text{cvx}} \tau$ if and only if $\tau \lesssim_{\text{cvx}} \tau^\star$.
 	%
 \end{namedthm}
 
@@ -453,16 +453,16 @@ Given a prior belief $p \in \interior(\Delta(\Theta))$ and a payoff function $u 
 	%
 	(This means that $\langle S, \pi \rangle $ affords the decision-maker less flexibility than does $\langle S', \pi' \rangle $: fewer conditional distributions are attainable.) We will show that property~\ref{blackwell:info} implies property~\ref{blackwell:feas}, and that property~\ref{blackwell:feas} implies property~\ref{blackwell:garb}.
 
-	Begin with the latter implication. Suppose that property~\ref{blackwell:feas} holds; we will deduce \ref{blackwell:garb}. One decision rule for the signal structure $\langle S, \pi \rangle $ and the non-empty finite (action) set $A \coloneqq S$ is $\alpha : S \to \Delta(S)$ given by $\alpha(s|s)=1$ for every $s \in S$. By construction, $\pi = \alpha \circ \pi \in \mathcal{D}(\langle S, \pi \rangle ,S)$. Since property~\ref{blackwell:feas} holds, it follows there exists a decision rule for the signal structure $\langle S', \pi' \rangle $ and the action set $S$, call it $\alpha' : S' \to \Delta(S)$, such that $\alpha' \circ \pi' = \pi$. Then $\alpha'$ is a Markov kernel from $\langle S', \pi' \rangle $ to $\langle S, \pi \rangle $, so property~\ref{blackwell:garb} holds.
+	Begin with the latter implication. Suppose that property~\ref{blackwell:feas} holds; we will deduce \ref{blackwell:garb}. One decision rule for the signal structure $\langle S, \pi \rangle $ and the non-empty finite (action) set $A \coloneqq S$ is $\alpha : S \to \Delta(S)$ given by $\alpha(s|s)=1$ for every $s \in S$. By construction, $\pi = \alpha \circ \pi \in \mathcal{D}(\langle S, \pi \rangle ,S)$. Since property~\ref{blackwell:feas} holds, it follows that there exists a decision rule for the signal structure $\langle S', \pi' \rangle $ and the action set $S$, call it $\alpha' : S' \to \Delta(S)$, such that $\alpha' \circ \pi' = \pi$. Then $\alpha'$ is a Markov kernel from $\langle S', \pi' \rangle $ to $\langle S, \pi \rangle $, so property~\ref{blackwell:garb} holds.
 
 	It remains to show that property~\ref{blackwell:info} implies property~\ref{blackwell:feas}. We prove the contra-positive. To that end, suppose that there exists a non-empty finite (action) set $A$ and a conditional distribution $d^\star : \Theta \to \Delta(A)$ such that $d^\star \in \mathcal{D}(\langle S, \pi \rangle ,A)$ but $d^\star \notin \mathcal{D}(\langle S', \pi' \rangle ,A)$; we will show that $\langle S, \pi \rangle $ is not Blackwell less informative than $\langle S', \pi' \rangle $ given $p$. When $\Delta(A)$ is viewed a subset of $\R^A$, the conditional distribution $d^\star$ is an element of $\R^{A \times \Theta}$, and $\mathcal{D}(\langle S', \pi' \rangle ,A)$ is a closed and convex subset of $\R^{A \times \Theta}$. Since $d^\star \notin \mathcal{D}(\langle S', \pi' \rangle ,A)$, it follows by the separating hyperplane theorem%
 		\footnote{See e.g. Theorem~M.G.2 in \textcite[][p.~948]{MascolellWhinstonGreen1995}. For a fuller treatment, consider \textcite{Border2016}.}
 	that there exist $v \in \R^{A \times \Theta}$ and $k \in \R$ such that
 	%
 	\begin{equation*}
-		\sum_{a \in A} \sum_{\theta \in \Theta} v(a,\theta) d^\star(a,\theta)
+		\sum_{a \in A} \sum_{\theta \in \Theta} v(a,\theta) d^\star(a|\theta)
 		> k
-		> \sum_{a \in A} \sum_{\theta \in \Theta} v(a,\theta) d(a,\theta)
+		> \sum_{a \in A} \sum_{\theta \in \Theta} v(a,\theta) d(a|\theta)
 	\end{equation*}
 	%
 	for every $d \in \mathcal{D}(\langle S', \pi' \rangle ,A)$. Define $u : A \times \Theta \to \R$ by $u(a,\theta) \coloneqq v(a,\theta)/p(\theta)$ for each $a \in A$ and $\theta \in \Theta$; it is well-defined since $p$ belongs to $\interior(\Delta(\Theta))$. Then since $d^\star \in \mathcal{D}(\langle S, \pi \rangle ,A)$, we have

@@ -175,7 +175,7 @@ The quantity $u^{-1}\left( \int u \dd p \right)$ is called the \emph{certainty e
 
 		\item (hard) Find an example of simple lotteries $\overline{p},p \in \Delta^0(\R)$, an alternative $x \in \R$ and risk attitudes $v_1,v_2 : \R \to \R$ such that $v_1$ is strictly less risk-averse than $v_2$,%
 			\footnote{That is, $v_1$ is less risk averse than $v_2$, and $v_2$ is not less risk-averse than $v_1$.}
-		and yet there exist $p \in \Delta^0(\R)$ and $x \in \R$ such that
+		and yet
 		%
 		\begin{align*}
 			\int v_1(x+w) \overline{p}(\dd w)
@@ -212,7 +212,7 @@ When alternatives are monetary, there is a natural benchmark risk attitude: \emp
 	%
 \end{definition}
 
-In other words, a risk-neutral decision-maker is one who is always indifferent between receiving a lottery $p$ and receiving a sure payment equal to the expectation of $p$. Note that this definition makes sense (only) because $X \subseteq \R$; if $X$ were are arbitrary set (as in the previous chapter), then the expectation `$\int x p(\dd x)$' would be meaningless.
+In other words, a risk-neutral decision-maker is one who is always indifferent between receiving a lottery $p$ and receiving a sure payment equal to the expectation of $p$. Note that this definition makes sense (only) because $X \subseteq \R$; if $X$ were an arbitrary set (as in the previous chapter), then the expectation `$\int x p(\dd x)$' would be meaningless.
 
 \begin{exercise}[easy]
 	%
@@ -261,7 +261,7 @@ Note that a risk-averse preference need not be expected-utility. For expected-ut
 	%
 	\label{exercise:time}
 	%
-	Consider a decision-maker with a preference $\succsim$ over $\Delta^0(\R_+)$, where alternatives $x \in \R_+$ are interpreted as \emph{dates} rather than monetary amounts. In other words, each $p \in \Delta^0(X)$ is a probability distribution describing \emph{when} something will happen. Assume that $\succsim$ has the standard form assumed e.g. in macroeconomics: there is an $r>0$ such that for all simple lotteries $p,q \in \Delta^0(\R_+)$, $p \succsim q$ if and only if $\int e^{-rt} p(\dd t) \geq \int e^{-rt} q(\dd t)$. The interpretation is that the decision-maker earns a positive payoff (normalised to one) when the event takes place, and that these payoffs are discounted at rate $r$.
+	Consider a decision-maker with a preference $\succsim$ over $\Delta^0(\R_+)$, where alternatives $x \in \R_+$ are interpreted as \emph{dates} rather than monetary amounts. In other words, each $p \in \Delta^0(\R_+)$ is a probability distribution describing \emph{when} something will happen. Assume that $\succsim$ has the standard form assumed e.g. in macroeconomics: there is an $r>0$ such that for all simple lotteries $p,q \in \Delta^0(\R_+)$, $p \succsim q$ if and only if $\int e^{-rt} p(\dd t) \geq \int e^{-rt} q(\dd t)$. The interpretation is that the decision-maker earns a positive payoff (normalised to one) when the event takes place, and that these payoffs are discounted at rate $r$.
 
 	\begin{enumerate}[label=(\alph*)]
 	
@@ -329,7 +329,7 @@ In particular, $a=u'(x)$ and $b=u(x)-u'(x)x$.
 
 \begin{proof}
 	%
-	Let $X \subseteq \R$ be non-empty, open and convex, and let $\succsim$ be an expected-utility preference on $\Delta^0(X)$ with risk attitude $u : X \to \R$ which is continuously differentiable with $u'>0$. Fix a simple lottery $p \in \Delta^0(X)$ and an alternative $x \in X$ such that $\int y p(\dd y) > x$, and define $V : [0,1] \to \R$ by
+	Let $X \subseteq \R$ be non-empty, open and convex, and let $\succsim$ be an expected-utility preference on $\Delta^0(X)$ with risk attitude $u : X \to \R$ which is differentiable with $u'>0$. Fix a simple lottery $p \in \Delta^0(X)$ and an alternative $x \in X$ such that $\int y p(\dd y) > x$, and define $V : [0,1] \to \R$ by
 	%
 	\begin{equation*}
 		V(\lambda)
@@ -379,7 +379,7 @@ In particular, $a=u'(x)$ and $b=u(x)-u'(x)x$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section[Notions of `better' \emph{(not yet written)}]{Notions of `better'}
+\section[Notions of \texorpdfstring{`better'}{'better'} \emph{(not yet written)}]{Notions of `better'}
 \label{mone:stoch_high}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -392,11 +392,11 @@ In particular, $a=u'(x)$ and $b=u(x)-u'(x)x$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section[Notions of `riskier' \emph{(not yet written)}]{Notions of `riskier'}
+\section[Notions of \texorpdfstring{`riskier'}{'riskier'} \emph{(not yet written)}]{Notions of `riskier'}
 \label{mone:stoch_risk}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\emph{See section~4.3 in \textcite{Sarver2023}. For (encyclopædic) further reading, see chapter~3 (especially section~3.A) in \textcite{ShakedShanthikumar2007}. The convex order and some characterisations of it were introduced to economics by \textcite{RotschildStiglitz1970}, but can be traced back at least to \textcite{HardyLittlewoodPolya1934}.}
+\emph{See section~4.3 in \textcite{Sarver2023}. For (encyclopædic) further reading, see chapter~3 (especially section~3.A) in \textcite{ShakedShanthikumar2007}. The convex order and some characterisations of it were introduced to economics by \textcite{RotschildStiglitz1970}, but can be traced back at least to \textcite{HardyLittlewoodPolya1929,HardyLittlewoodPolya1934}.}
 
 % {\color{blue}weak notion from before: less dispersed iff constant; convex order (equiv of convex order, pointwise integrals, embedding; see Sarver 4.3); Rotschild--Stiglitz 1976 / Ross 1981 / Diamond--Stiglitz; maybe Aumann--Serrano, Hart}

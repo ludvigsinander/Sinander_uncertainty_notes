@@ -60,11 +60,11 @@ Non-expected-utility preferences arise naturally in many contexts. Psychological
 	%
 	\label{exercise:eu_choice}
 	%
-	Consider a decision-maker who must not only choose a lottery, but must also choose an action. Imagine, for example, a manager who chooses among projects (risky prospects, modelled as lotteries) and, after choosing her project, chooses how to operate the project, e.g. what staff to employ on her team and how to organise them. The operational options are modelled as a non-empty set $A$ of actions. Suppose that for each given action $a \in A$, the decision-maker has expected-utility preferences: she evaluates each simple lottery $p \in \Delta^0(X)$ at $\int u_a \dd p$, for some risk attitude $u_a : X \to \R$. Then taking into account optimal action choice, she evaluates each lottery $p \in \Delta^0(X)$ at $U^{(A,(u_a)_{a \in A})}(p) \coloneqq \max_{a \in A} \int u_a \dd p$. (That is: her preference $\succsim$ is such that for any simple lotteries $p,q \in \Delta^0(X)$, $p \succsim q$ holds if and only if $U^{(A,(u_a)_{a \in A})}(p) \geq U^{(A,(u_a)_{a \in A})}(q)$.)
+	Consider a decision-maker who must not only choose a lottery, but must also choose an action. Imagine, for example, a manager who chooses among projects (uncertain prospects, modelled as lotteries) and, after choosing her project, chooses how to operate the project, e.g. what staff to employ on her team and how to organise them. The operational options are modelled as a non-empty set $A$ of actions. Suppose that for each given action $a \in A$, the decision-maker has expected-utility preferences: she evaluates each simple lottery $p \in \Delta^0(X)$ at $\int u_a \dd p$, for some risk attitude $u_a : X \to \R$. Then taking into account optimal action choice, she evaluates each lottery $p \in \Delta^0(X)$ at $U^{(A,(u_a)_{a \in A})}(p) \coloneqq \max_{a \in A} \int u_a \dd p$. (That is: her preference $\succsim$ is such that for any simple lotteries $p,q \in \Delta^0(X)$, $p \succsim q$ holds if and only if $U^{(A,(u_a)_{a \in A})}(p) \geq U^{(A,(u_a)_{a \in A})}(q)$.)
 
 	\begin{enumerate}[label=(\alph*)]
 	
-		\item Remind yourself of \hyperref[exercise:mix_lottsimple_affine]{\Cref*{exercise:mix_lottsimple}} (\cref{ch_mix}, \cpageref{exercise:mix_lottsimple_affine}), which a preference is expected-utility if and only if it admits a representation $U : \Delta^0(X) \to \R$ that is affine.
+		\item Remind yourself of \hyperref[exercise:mix_lottsimple_affine]{\Cref*{exercise:mix_lottsimple}} (\cref{ch_mix}, \cpageref{exercise:mix_lottsimple_affine}), which says that a preference is expected-utility if and only if it admits a representation $U : \Delta^0(X) \to \R$ that is affine.
 
 		\item Show that $U^{(A,(u_a)_{a \in A})}$ is convex.%
 			\footnote{\label{footnote:convex_max}There is a converse: any continuous convex function $\Delta^0(X) \to \R$ may be approximated arbitrarily well by $U^{(A,(u_a)_{a \in A})}$ for some non-empty set $A$ and family $(u_a)_{a \in A}$ of functions $X \to \R$. See the proof of \hyperref[theorem:blackwell]{Blackwell's theorem} in \cref{info:blackwell} below.}
@@ -164,7 +164,7 @@ As in the \hyperref[theorem:mix]{mixture-space theorem} (\cpageref{theorem:mix},
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\emph{This section is drawn pretty much verbatim from one of my papers \parencite{oo}.}
+\emph{This section is drawn in part from \parencite{oo}.}
 
 The following theorem characterises `less risk-averse than' (defined on \cpageref{definition:lra} above) for expected-utility preferences:
 
@@ -217,89 +217,14 @@ Property~\ref{item:pratt:trans} asserts strict monotonicity of $\phi$ only on $v
 	%
 \end{example}
 
-\Cref{example:pratt_str} shows that the strict monotonicity of $\phi$ on $v(X)$ in property~\ref{item:pratt:trans} in \hyperref[theorem:pratt]{Pratt's theorem} cannot be strengthened to strict monotonicity on $\co(v(X))$. It can, however, be strengthened to strict monotonicity on a large subset of $\co(v(X))$, as the next result shows.
+\Cref{example:pratt_str} shows that the strict monotonicity of $\phi$ on $v(X)$ in property~\ref{item:pratt:trans} in \hyperref[theorem:pratt]{Pratt's theorem} cannot be strengthened to strict monotonicity on $\co(v(X))$. Of course this matters only if $v(X)$ fails to be convex.
 
-\begin{definition}
+\begin{proof}[Sketch proof of {\hyperref[theorem:pratt]{Pratt's theorem (part~1)}}]
 	%
-	\label{definition:cotwo}
-	%
-	For any set $A \subseteq \R$, define $\cotwo(A) \subseteq A$ and $\inftwo A \in \cl(A)$ by
-	%
-	\begin{align*}
-		&\begin{aligned}
-			\cotwo(A) &\coloneqq \co( A \setminus \{\inf A\} ) \cup \{\inf A\}
-			\\
-			\inftwo A &\coloneqq \inf ( A \setminus \{\inf A\} )
-		\end{aligned}
-		&&\Biggr\} \quad \text{if $\inf A < \inf( A \setminus \{\inf A\} ) \notin A$}
-		\\
-		&\begin{aligned}
-			\cotwo(A) &\coloneqq \co(A)
-			\\
-			\inftwo A &\coloneqq \inf A
-		\end{aligned}
-		&&\Biggr\} \quad \text{otherwise.}
-	\end{align*}
-	%
-\end{definition}
+	We shall prove that \ref{item:pratt:trans} implies \ref{item:pratt:lra} implies \ref{item:pratt:curv} implies \ref{item:pratt:trans}. Since this is a \emph{sketch} proof, we can add a simplifying assumption, and we shall: we shall assume that $v(X)$ is convex, so that $\co(v(X)) = v(X)$.%
+		\footnote{For a full proof (without this extra assumption), see \textcite{oo}.}
 
-Evidently $A \subseteq \cotwo(A) \subseteq \co(A)$ and $\co(A) \setminus \cotwo(A) = (\inf A,\inftwo A]$. If $A$ is convex, then $A = \cotwo(A) = \co(A)$.
-
-\begin{lemma}[\cite{oo}]
-	%
-	\label{lemma:greatest_phi}
-	%
-	Fix a non-empty set $X$ and functions $u,v : X \to \R$, and let $\Phi$ be the set of all increasing convex functions $\phi : \co(v(X)) \to \R$ that are strictly increasing on $v(X)$ and satisfy $u = \phi \circ v$. If $\Phi$ is not empty, then it has a pointwise greatest element, which is strictly increasing on $\cotwo(v(X))$ and affine on each maximal interval of $\co(v(X)) \setminus v(X)$.
-	%
-\end{lemma}
-
-\begin{proof}
-	%
-	Assume that $\Phi$ is non-empty. Note that there is exactly one function $\phi_0 : v(X) \to \R$ such that $u = \phi_0 \circ v$, and that this $\phi_0$ is strictly increasing. Define $\phi : \co(v(X)) \to \R$ by $\phi(k) \coloneqq \sup_{\psi \in \Phi} \psi(k)$ for each $k \in \co(v(X))$. By inspection, $\phi$ is increasing and convex, and is strictly increasing on $v(X)$ since $\phi=\phi_0$ on $v(X)$; thus $\phi \in \Phi$. Obviously $\phi \geq \psi$ for every $\psi \in \Phi$. Since each $\psi \in \Phi$ is convex and satisfies $\psi = \phi_0$ on $v(X)$, $\phi$ is affine on each maximal interval of $\co(v(X)) \setminus v(X)$.
-
-	To show that $\phi$ is strictly increasing on $\cotwo(v(X))$, fix any $k'<\ell'$ in $\cotwo(v(X))$; we must show that $\phi(k') < \phi(\ell')$. It suffices to find $k<\ell$ in $\co(v(X))$ such that $k \leq k'$, $\ell \leq \ell'$, and $\phi(k)<\phi(\ell)$, since then
-	%
-	\begin{equation*}
-		\phi(\ell') - \phi(k')
-		\geq (\ell'-k') \frac{\phi(\ell) - \phi(k)}{\ell-k}
-		> 0 ,
-	\end{equation*}
-	%
-	where the weak inequality holds since $\phi$ is convex. Write $m_1 \coloneqq \inf v(X)$ and $m_2 \coloneqq \inf( v(X) \setminus \{m_1\} )$, and note that $k' \geq m_1 < \ell' \geq m_2$.
-
-	We consider four cases. In the first three, we find $k<\ell$ in $v(X)$ such that $k \leq k'$ and $\ell \leq \ell'$; then $\phi(k)<\phi(\ell)$ since $\phi$ is strictly increasing on $v(X)$. In the final case, we directly choose $k<\ell$ in $\co(v(X))$ to satisfy $\phi(k)<\phi(\ell)$.
-
-	\smallskip
-
-	\noindent
-	\emph{Case~1: $m_1 \notin v(X)$.} Here $k' > m_1$ and $\ell' > m_1 = m_2$, so choosing $k<\ell$ in $v(X)$ sufficiently close to $m_1$ ensures that $k \leq k'$ and $\ell \leq \ell'$.
-
-	\smallskip
-
-	\noindent
-	\emph{Case~2: $v(X) \ni m_1 = m_2$.} 
-	Here $m_1 \in \cl( v(X) \setminus \{m_1\} )$, so choosing $k \coloneqq m_1$ and $\ell \in v(X) \setminus \{m_1\}$ sufficiently close to $m_1$ ensures that $k \leq k'$ and $\ell \leq \ell'$.
-
-	\smallskip
-
-	\noindent
-	\emph{Case~3: $m_1 < m_2 \notin v(X)$.}
-	Here $\varnothing \neq \co(v(X)) \setminus \cotwo(v(X)) = (m_1,m_2]$, whence $m_1 \in v(X)$ and $\ell'>m_2$, so choosing $k \coloneqq m_1$ and $\ell \in v(X) \setminus [m_1,m_2]$ sufficiently close to $m_2$ ensures that $k \leq k'$ and $\ell \leq \ell'$.
-
-	\smallskip
-
-	\noindent
-	\emph{Case~4: $m_1 < m_2 \in v(X)$.}
-	Here $m_1 \in v(X)$, so $\phi(m_1)<\phi(m_2)$, which since $\phi$ is affine on $[m_1,m_2]$ implies that $\phi$ is strictly increasing on $[m_1,m_2]$, so that $k \coloneqq m_1$ and $\ell \coloneqq \min\{\ell',m_2\}$ satisfy $\phi(k)<\phi(\ell)$.
-	%
-\end{proof}
-
-
-\begin{proof}[Proof of {\hyperref[theorem:pratt]{Pratt's theorem (part~1)}}]
-	%
-	We shall prove that \ref{item:pratt:trans} implies \ref{item:pratt:lra} implies \ref{item:pratt:curv} implies \ref{item:pratt:trans}.
-
-	To prove that \ref{item:pratt:trans} implies \ref{item:pratt:lra}, suppose there exists an increasing convex function $\psi : \co(v(X)) \to \R$ that is strictly increasing on $v(X)$ and satisfies $u = \psi \circ v$. Then by \Cref{lemma:greatest_phi}, there exists an increasing convex function $\phi : \co(v(X)) \to \R$ that is strictly increasing on $\cotwo(v(X))$ and satisfies $u = \phi \circ v$. Fix an alternative $x \in X$ and a simple lottery $p \in \Delta^0(X)$, and suppose that $\int v \dd p \geq \mathrel{(>)} v(x)$; we must show that $\int u \dd p \geq \mathrel{(>)} u(x)$. If $\int v \dd p \in \cotwo(v(X))$, then
+	To prove that \ref{item:pratt:trans} implies \ref{item:pratt:lra}, suppose there exists a strictly increasing and convex function $\phi : v(X) \to \R$ such that $u = \phi \circ v$. Fix an alternative $x \in X$ and a simple lottery $p \in \Delta^0(X)$, and suppose that $\int v \dd p \geq \mathrel{(>)} v(x)$; then
 	%
 	\begin{equation*}
 		\int u \dd p
@@ -309,27 +234,7 @@ Evidently $A \subseteq \cotwo(A) \subseteq \co(A)$ and $\co(A) \setminus \cotwo(
 		= u(x) ,
 	\end{equation*}
 	%
-	where the first inequality holds (by Jensen's inequality) since $\phi$ is convex, and the second holds since $\phi$ is strictly increasing on $\cotwo(v(X)) \supseteq v(X) \ni v(x)$. If instead $\int v \dd p \notin \cotwo(v(X))$, then
-	%
-	\begin{equation*}
-		\int v \dd p
-		\in \co(v(X)) \setminus \cotwo(v(X))
-		= \bigl( \inf v(X), \inf\bigl( v(X) \setminus \{\inf v(X)\} \bigr) \bigr] ,
-	\end{equation*}
-	%
-	so writing $Y \coloneqq \{ y \in X : v(y) = \inf v(X) \}$, we see that $\int v \dd p \geq \mathrel{(>)} v(x)$ implies $x \in Y$ (and $p(X \setminus Y)>0$), whence
-	%
-	\begin{align*}
-		\int u \dd p
-		={}& p(Y) \phi(v(x)) 
-		+ \int_{X \setminus Y} (\phi \circ v) \dd p
-		\\
-		\geq \mathrel{(>)}{}& p(Y) \phi(v(x))
-		+ p(X \setminus Y) \phi(v(x))
-		= u(x) 
-	\end{align*}
-	%
-	since $\phi$ is strictly increasing on $v(X)$.
+	where the first inequality holds (by Jensen's inequality) since $\phi$ is convex, and the second holds since $\phi$ is strictly increasing.
 
 	To prove that \ref{item:pratt:lra} implies \ref{item:pratt:curv}, suppose that $u$ is less risk-averse than $v$. It follows immediately (by considering degenerate lotteries $p \in \Delta^0(X)$) that property~\ref{item:pratt:curv}\ref{item:pratt:curv:ordequiv} holds.
 	To show that property~\ref{item:pratt:curv}\ref{item:pratt:curv:compress} holds, suppose toward a contradiction that it does not: there are $x,y,z \in X$ such that $u(x) < u(y) < u(z)$ and
@@ -353,32 +258,13 @@ Evidently $A \subseteq \cotwo(A) \subseteq \co(A)$ and $\co(A) \setminus \cotwo(
 	%
 	a contradiction with the fact that $u$ is less risk-averse than $v$.
 
-	To prove that \ref{item:pratt:curv} implies \ref{item:pratt:trans}, suppose that $u$ satisfies properties~\ref{item:pratt:curv}\ref{item:pratt:curv:ordequiv} and \ref{item:pratt:curv}\ref{item:pratt:curv:compress}; we must identify an increasing convex function $\phi : \co(v(X)) \to \R$ that is strictly increasing on $v(X)$ and satisfies $u = \phi \circ v$. By property~\ref{item:pratt:curv}\ref{item:pratt:curv:ordequiv}, there exists a strictly increasing $\psi : v(X) \to \R$ such that $u = \psi \circ v$.
-	Define $\overline{\psi} : \cl(v(X)) \cap \co(v(X)) \to \R$ by
-	%
-	\begin{equation*}
-		\overline{\psi}(k)
-		\coloneqq
-		\begin{cases}
-			\psi(k) & \text{if $k \in v(X)$} \\
-			\lim_{\ell \to k} \psi(\ell) & \text{if $k \in [ \cl(v(X)) \cap \co(v(X)) ] \setminus v(X)$,} 
-		\end{cases}
-	\end{equation*}
-	%
-	where the limit exists (in $\R$) by the monotonicity of $\psi$ and property~\ref{item:pratt:curv}\ref{item:pratt:curv:compress}.%
-		\footnote{Fix any $k \in [ \cl(v(X)) \cap \co(v(X)) ] \setminus v(X)$. Since $k \in \cl(v(X))$, there is a monotone sequence in $v(X)$ that converges to $k$, which since $\psi$ is increasing implies that either the left-hand limit $\psi(k-)$ or the right-hand limit $\psi(k+)$ must exist in $\R \cup \{-\infty,+\infty\}$. Since $k \in \co(v(X))$, there are $m_0,m_1 \in v(X)$ such that $m_0 \leq k \leq m_1$. Since $\psi$ is increasing, it is bounded on $[m_0,m_1] \intersect v(X)$. Hence $\psi(k-)$ is finite if it exists, and likewise for $\psi(k+)$.
-
-		It remains only to show that if $\psi(k-)$ and $\psi(k+)$ both exist, then they are equal. We have $\psi(k-) \leq \psi(k+)$ since $\psi$ is increasing. To show that $\psi(k-) \geq \psi(k+)$, suppose toward a contradiction that $\psi(k-) < \psi(k+)$, and fix an $m \in v(X)$ such that $k<m$. Then we can choose $\ell,k' \in v(X)$ arbitrarily close to $k$ and satisfying $\ell<k<k'<m$, and by doing so we may make $[ \psi(k') - \psi(\ell) ] / [k'-\ell]$ arbitrarily large. Since $\psi$ is increasing, it is bounded on a neighbourhood of $k$, so $\ell,k' \in v(X)$ can be chosen so that $[ \psi(m) - \psi(k') ] / [m-k']$ is bounded. Hence $\ell,k' \in v(X)$ can be chosen so that $[ \psi(k') - \psi(\ell) ] / [k'-\ell] > [ \psi(m) - \psi(k') ] / [m-k']$, a contradiction with property~\ref{item:pratt:curv}\ref{item:pratt:curv:compress}.}
-	Let $\phi$ be the (unique) function $\co(v(X)) \to \R$ that matches $\overline{\psi}$ on $\cl(v(X)) \cap \co(v(X))$ and is affine on the closure of each maximal interval of $\co(v(X)) \setminus v(X)$.
-	Evidently $\phi$ is increasing, and $\phi$ is convex since by property~\ref{item:pratt:curv}\ref{item:pratt:curv:compress},
+	To prove that \ref{item:pratt:curv} implies \ref{item:pratt:trans}, suppose that properties~\ref{item:pratt:curv}\ref{item:pratt:curv:ordequiv} and \ref{item:pratt:curv}\ref{item:pratt:curv:compress} hold. By property~\ref{item:pratt:curv}\ref{item:pratt:curv:ordequiv}, there exists a strictly increasing $\phi : v(X) \to \R$ such that $u = \phi \circ v$. And it is convex since by property~\ref{item:pratt:curv}\ref{item:pratt:curv:compress},
 	%
 	\begin{equation*}
 		\frac{\phi(\ell)-\phi(k)}{\ell-k}
 		\leq \frac{\phi(m)-\phi(\ell)}{m-\ell}
-		\quad \text{for all $k < \ell < m$ in $\co(v(X))$.}
+		\quad \text{for all $k < \ell < m$ in $v(X)$.} \qedhere
 	\end{equation*}
-	%
-	Since $\phi=\psi$ on $v(X)$, $\phi$ is strictly increasing on $v(X)$, and $u = \phi \circ v$.
 	%
 \end{proof}
 

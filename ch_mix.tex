@@ -82,9 +82,26 @@ Although the definition is abstract, the idea is always that $\pi_\alpha \rho \i
 
 \begin{exercise}
 	%
+	\label{exercise:sets}
+	%
+	Fix a non-empty set $X$, and let $2^X$ be the set of all subsets of $X$. Show that $2^X$ is a mixture space when equipped with the operation $(A,\alpha,B) \mapsto A_\alpha B$ defined by
+	%
+	\begin{equation*}
+		A_\alpha B \coloneqq
+		\begin{cases}
+			B & \text{if $\alpha=0$} \\
+			A \cup B & \text{if $\alpha \in (0,1)$} \\
+			A & \text{if $\alpha=1$.} 
+		\end{cases}
+	\end{equation*}
+	%
+\end{exercise}
+
+\begin{exercise}
+	%
 	\label{exercise:mix_utility}
 	%
-	Fix $n \in \N$, and recall that a function $f : \R_+^n \to \R_+$ is called \emph{Cobb--Douglas} iff there exist constants $a_1,a_2,\dots,a_n \in [0,1]$ such that $a_1 + a_2 + \cdots + a_n = 1$ and, for every $x \in \R_+^n$, $f(x) = x_1^{a_1} x_2^{a_2} \cdots x_n^{a_n}$. Show that $\Pi$ is a mixture space when equipped with the operation $(f,\alpha,g) \mapsto f^\alpha g^{1-\alpha}$.
+	Fix $n \in \N$, and recall that a function $f : \R_+^n \to \R_+$ is called \emph{Cobb--Douglas} iff there exist constants $a_1,a_2,\dots,a_n \in [0,1]$ such that $a_1 + a_2 + \cdots + a_n = 1$ and, for every $x \in \R_+^n$, $f(x) = x_1^{a_1} x_2^{a_2} \cdots x_n^{a_n}$. Let $\Pi$ be the set of all Cobb--Douglas functions $\R_+^n \to \R_+$. Show that $\Pi$ is a mixture space when equipped with the operation $(f,\alpha,g) \mapsto f^\alpha g^{1-\alpha}$.
 	%
 \end{exercise}
 
@@ -104,7 +121,7 @@ Although the definition is abstract, the idea is always that $\pi_\alpha \rho \i
 	
 		\item Interpret this operation.
 
-		\item Is $\Pi$ is a mixture space?
+		\item Is $\Pi$ a mixture space?
 	
 	\end{enumerate}
 	%
@@ -359,7 +376,7 @@ In the former claim, mixture continuity plays a merely technical role; the heavy
 			= \pi_{\alpha^2 \beta_0 \gamma} \rho .
 		\end{equation*}
 		%
-		Hence $\alpha \beta_0 \gamma$ belongs $\mathcal{B}$. But $\alpha \beta_0 \gamma < \beta_0$, and $\beta_0$ is by definition the least element of $\mathcal{B}$---a contradiction.
+		Hence $\alpha \beta_0 \gamma$ belongs to $\mathcal{B}$. But $\alpha \beta_0 \gamma < \beta_0$, and $\beta_0$ is by definition the least element of $\mathcal{B}$---a contradiction.
 		%
 	\end{proof}%
 	\renewcommand{\qedsymbol}{$\blacksquare$}
